@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-export default function testModule() {
+const TestModules = () => {
+
+    console.log('test page rendering');
   const [numCircles, setNumCircles] = useState(Math.floor(Math.random() * 10));
   const [timeOffset, setTimeOffset] = useState(Math.random());
 
@@ -20,7 +22,10 @@ export default function testModule() {
     circles.push(<circle cx={100 + (i * 10)} cy={250} r={Math.sin(time + (i * timeOffset)) * 40 + 40} stroke="white" />)
   }
 
-  return <div>
+  return (
+  <div>
+    do you render this page?
+
     <svg width="500" height="500" style={{backgroundColor: '#211'}}>
       {circles}
     </svg>
@@ -28,5 +33,8 @@ export default function testModule() {
     Number of circles: <input type="number" value={numCircles} onChange={(e) => setNumCircles(e.target.value)} />
     Time offset: <input type="number" value={timeOffset} onChange={(e) => setTimeOffset(e.target.value)} />
 
-  </div>;
-}
+  </div>
+  );
+};
+
+export default TestModules;

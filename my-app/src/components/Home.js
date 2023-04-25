@@ -3,6 +3,7 @@ import '../styles/home.css'
 import logo from '../images/shapeshifter.gif';
 
 const Home = () => {
+    console.log('homepage rendering')
     return (
       <div className="App">
         <header className="App-header">

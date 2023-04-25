@@ -4,12 +4,14 @@
   "description": "testing sandbox for canvas svgs",
   "main": "index.js",
   "scripts": {
+    "start": "react-scripts start",
     "test": "test"
   },
   "author": "tom parker",
   "license": "ISC",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1"
   }
 }

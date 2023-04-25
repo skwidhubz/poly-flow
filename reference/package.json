@@ -1,0 +1,15 @@
+{
+  "name": "reference",
+  "version": "1.0.0",
+  "description": "testing sandbox for canvas svgs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "tom parker",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

@@ -1,10 +1,11 @@
 :root {
-  /* CSS HEX */
---darker: #3f7cacff;
---dark: #95afbaff;
---neutral: #bdc4a7ff;
---light: #d5e1a3ff;
---lighter: #e2f89cff;
+/* CSS HEX */
+--royal-blue-web-color: #4169e1ff;
+--aquamarine: #47e5bcff;
+--tiffany-blue: #81e4daff;
+--columbia-blue: #aecfdfff;
+--coquelicot: #f15025ff;
+
 }
 
 body {

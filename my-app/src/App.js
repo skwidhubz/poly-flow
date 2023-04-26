@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
 import Home from './components/Home';
-import Header from './components/Header';
-import TestModule from './components/TestModule';
+// import Header from './components/Header';
+import TestModules from './components/TestModules';
+import Nav from './components/Nav';
+import Why from './components/Why';
 // import each component
 // import each components css file
+
+// TODO: Test modules page is not rendering
 
 
 // dynamic rendering of pages:
@@ -14,11 +18,11 @@ const App = () => {
   return (
     <div className="App">
       {/* <Header  /> */}
-      <Header activeSection={activeSection} setActiveSection={setActiveSection} />
+      <Nav activeSection={activeSection} setActiveSection={setActiveSection} />
       {activeSection === 'home' && <Home />}
-      {activeSection === 'test-module' && <TestModule />}
-      { /* {activeSection === 'contact' && <Contact />}
-      {activeSection === 'resume' && <Resume />} */}
+      {activeSection === 'test-module' && <TestModules />}
+      {activeSection === 'why' && <Why />}
+      {/*activeSection === 'resume' && <Resume />} */}
       {/* <Footer /> */}
     </div>
   );

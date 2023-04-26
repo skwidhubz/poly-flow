@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function testModule() {
+export default function TestModule() {
   const [numCircles, setNumCircles] = useState(Math.floor(Math.random() * 10));
   const [timeOffset, setTimeOffset] = useState(Math.random());
 

@@ -16,6 +16,7 @@ const Nav = ({ activeSection, setActiveSection }) => {
         <li className={activeSection === 'save' ? 'active' : ''} onClick={() => navigateTo('save')}>Save</li>
         <li className={activeSection === 'library' ? 'active' : ''} onClick={() => navigateTo('library')}>Library</li>
         <li className={activeSection === 'login' ? 'active' : ''} onClick={() => navigateTo('login')}>Login/Signup</li>
+        <li className={activeSection === 'test-module' ? 'test-module' : ''} onClick={() => navigateTo('test-module')}>TestModule</li>
       </ul>
     </nav>
   );

@@ -1,0 +1,27 @@
+string type - parameters on typeDef
+stores a 'blob' of json data
+
+model.
+
+username
+title
+params (object json data) -> read by the front end and not queried.
+
+client side logic to flush/verify correct data for paramaters. 
+> defensive programming
+
+
+check distance between objects
+
+box2d.js npm package
+box2d.org
+vector math
+- finding angles and distance between / to objects.
+
+matterJS
+
+save / delete are two mutations. 
+> create user / delete user 
+
+https://brm.io/matter-js/demo/#mixed
+

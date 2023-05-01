@@ -10,9 +10,9 @@
 
 <body>
     <div id="svg-container">
-        <svg width="500" height="500">
+        <svg id="svg-main" width="500" height="500">
             <circle id="circle1" cx="50" cy="250" r="40"/>
-            <circle id="circle2" cx="80" cy="150" r="40"/>
+            <!-- <circle id="circle2" cx="80" cy="150" r="40"/> -->
             <!-- <circle id="circle3" cx="100" cy="50" r="40"/>
             <circle id="circle4" cx="20" cy="80" r="40"/> -->
         </svg>
@@ -23,14 +23,16 @@
 
     <script>
 
-
         // TODO: Add action for when passes boundry of SVG
-
+        const circleEl1 = document.getElementById("circle1");
+        const cx = circleEl1.getAttribute('cx');
+        const cy = circleEl1.getAttribute('cy');
+        const svg = document.getElementById("svg-main");
+        const svgW = svg.getAttribute('width');
+        const svgH = svg.getAttribute('height');
 
         let screenLog = document.getElementById("logger");
-        let circleEl1 = document.getElementById("circle1");
-        let circleEl2 = document.getElementById("circle2");
-
+        // let circleEl2 = document.getElementById("circle2");
         document.addEventListener("mousemove", logKey);
 
         let offset = 1;
@@ -38,7 +40,6 @@
         let zeroTime = 0;
         let sineWave = 1;
         // let zeroConstant = Math.sin(timeConstant + (0 + offset) * 40 + 40);  
-
         let circleSpeed = 1;
 
         const addTime = () => {
@@ -49,17 +50,28 @@
 
         setInterval(addTime, 1000/30);
 
-
         function logKey(e) {
 
-            console.log(circleEl1.id, circleEl2.id);
+            console.log(circleEl1.id);
             screenLog.innerText = `
                 Screen X/Y: ${e.screenX}, ${e.screenY}
                 Client X/Y: ${e.clientX}, ${e.clientY}`;
             circleEl1.setAttribute("cx", e.clientX);
             circleEl1.setAttribute("cy", e.clientY);
-            circleEl2.setAttribute("cx", e.clientX + 50);
-            circleEl2.setAttribute("cy", e.clientY - 50);
+            // circleEl2.setAttribute("cx", e.clientX + 50);
+            // circleEl2.setAttribute("cy", e.clientY - 50);
+            if (cx >= svgW - 40) {
+                cx = svgW - 40
+                };
+            if (cy >= svgH - 40) {
+                cy = svgH - 40
+                }  ;
+            if (cx <= 40) {
+                cx = 40
+                };
+            if (cy <= 40) {
+                cy = 40
+                };
         };
 
     </script>
@@ -77,6 +89,8 @@
             const phaseShift = 0; // phase shift of the wave
 
             ctx.beginPath();
+
+
 
             for (let x = 0; x <= canvas.width; x++) {
             // Calculate the y-coordinate of the sine wave at the current x-coordinate

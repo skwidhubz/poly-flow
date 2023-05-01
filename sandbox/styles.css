@@ -1,0 +1,40 @@
+* {
+    font-family: monospace;
+}
+
+/* svg main container  */
+#svg-container {
+    width: 500px;
+    height: 500px;
+    background-color: yellowgreen;
+    border-width: 5px;
+    border-color: aqua;
+    border-style: solid;
+}
+
+/* all circle elements */
+#circle1 {
+    stroke: black;
+    stroke-width: 1;
+    fill: red;
+}
+
+#circle2 {
+    stroke: black;
+    stroke-width: 1;
+    fill: rgb(0, 17, 255);
+}
+
+#circle3 {
+    stroke: black;
+    stroke-width: 1;
+    fill: rgb(0, 251, 117);
+}
+
+#circle4 {
+    stroke: black;
+    stroke-width: 1;
+    fill: rgb(221, 255, 0);
+}
+
+

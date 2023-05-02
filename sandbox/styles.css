@@ -17,11 +17,15 @@
 }
 
 /* all circle elements */
-circle {
+#circle1 {
     /* stroke: black; */
     /* stroke-width: 1; */
     fill: var(--primary-color);
     opacity: 0.6;    
+}
+
+circle {
+    background-color: blue;
 }
 
 #logger {

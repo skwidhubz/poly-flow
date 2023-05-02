@@ -13,9 +13,6 @@
     <div id="svg-container">
         <svg id="svg-main" width="500" height="500">
             <circle id="circle1" cx="50" cy="250" r="40"/>
-            <!-- <circle id="circle2" cx="80" cy="150" r="40"/> -->
-            <!-- <circle id="circle3" cx="100" cy="50" r="40"/>
-            <circle id="circle4" cx="20" cy="80" r="40"/> -->
         </svg>
     </div>
     <br>
@@ -153,22 +150,26 @@
         addCircleButton.addEventListener("click", addCircle);
         removeCircleButton.addEventListener("click", removeCircle);
 
+
         function addCircle () {
             circlesArray.push(1);
             console.log(circlesArray);
 
             for (let i = 0; i < circlesArray.length; i++) {
             let circleEl = document.createElement('circle');
-            circleEl.setAttribute("cy", 250 );
-            circleEl.setAttribute("cx", 250 );
-            svg.appendChild(circleEl);   
+            circleEl.setAttribute("cx", 250);
+            circleEl.setAttribute("cy", 250);
+            circleEl.setAttribute("r", 40);
+            circleEl.setAttribute("id", "circle"+[i]);
+            svg.appendChild(circleEl);
         }};
-        };
+
 
         function removeCircle () {
             circlesArray.pop();
             console.log(circlesArray);
         };
+        }; // end circleDOM function
 
 
 

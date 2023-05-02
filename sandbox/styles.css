@@ -1,4 +1,7 @@
 * {
+    --primary-color: rgb(255, 0, 0); /* a light shade of pink */
+    --secondary-color: rgb(0, 0, 255); /* a light shade of peach */
+    --tertiary-color: rgb(0, 255, 0); /* a light shade of blue */
     font-family: monospace;
 }
 
@@ -6,35 +9,27 @@
 #svg-container {
     width: 500px;
     height: 500px;
-    background-color: yellowgreen;
-    border-width: 5px;
-    border-color: aqua;
+    background-color: rgb(149, 205, 205);
+    opacity: 1;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
     border-style: solid;
 }
 
 /* all circle elements */
-#circle1 {
-    stroke: black;
-    stroke-width: 1;
-    fill: red;
+circle {
+    /* stroke: black; */
+    /* stroke-width: 1; */
+    fill: var(--primary-color);
+    opacity: 0.6;    
 }
 
-#circle2 {
-    stroke: black;
-    stroke-width: 1;
-    fill: rgb(0, 17, 255);
-}
+#logger {
+    color: black;
+    border: 1px solid black;
+    width: 200px;
+    padding: 10px;
 
-#circle3 {
-    stroke: black;
-    stroke-width: 1;
-    fill: rgb(0, 251, 117);
-}
-
-#circle4 {
-    stroke: black;
-    stroke-width: 1;
-    fill: rgb(221, 255, 0);
 }
 
 

@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/sandbox/styles.css" />
 </head>
 
+
 <body>
     <div id="svg-container">
         <svg id="svg-main" width="500" height="500">
@@ -17,66 +18,191 @@
             <circle id="circle4" cx="20" cy="80" r="40"/> -->
         </svg>
     </div>
+    <br>
     <div>
-        <h2 id="logger"></h2>
+        <button id="add-circle">+ circle</button>
+        <button id="remove-circle">- circle</button>
+        min = 1 circle
+        max = 5 circles
+    </div><br>
+    <div>
+        <button id="vUp">velocity increase</button>
+        <button id="vDown">velocity decrease</button>
+    <div>
+        <h4 id="logger"></h4>
+        <h4 id="velLog"></h4>
     </div>
 
     <script>
 
-        // TODO: Add action for when passes boundry of SVG
+        // ⚠️= critical program infrastructure.
+        // 🧪 = testing/experimental components.
+        // 🧰 = global variables/constants
+
+        console.log('script executed');        
+
+
+        // 🧰 DOCUMENT VARIABLES 🧰
         const circleEl1 = document.getElementById("circle1");
-        const cx = circleEl1.getAttribute('cx');
-        const cy = circleEl1.getAttribute('cy');
+        const velInc = document.getElementById("vUp");
+        const velDec = document.getElementById("vDown");
         const svg = document.getElementById("svg-main");
         const svgW = svg.getAttribute('width');
         const svgH = svg.getAttribute('height');
-
         let screenLog = document.getElementById("logger");
-        // let circleEl2 = document.getElementById("circle2");
-        document.addEventListener("mousemove", logKey);
+        let velLog = document.getElementById("velLog");
+        const addCircleButton = document.getElementById("add-circle");
+        const removeCircleButton = document.getElementById("remove-circle");
 
-        let offset = 1;
-        // let randomMath = Math.floor(Math.random() * 3);
-        let zeroTime = 0;
-        let sineWave = 1;
-        // let zeroConstant = Math.sin(timeConstant + (0 + offset) * 40 + 40);  
-        let circleSpeed = 1;
+        // 🧰 PHYSICS VARIABLES 🧰
+        let cx;// = circleEl1.getAttribute('cx');
+        let cy; //= circleEl1.getAttribute('cy');
+        var t = 0;
+        let mouseX;
+        let mouseY;
+        let circle; // make extra param to treat all cirlces as one to engage FOR
 
-        const addTime = () => {
-            zeroTime ++;
-            console.log(zeroTime);
-            // circleEl2.setAttribute("r", zeroConstant);
+
+        // ⚠️ Set circle position function
+        const setCirclePos = (_cx, _cy) => {
+            // console.log(_cx, _cy);
+            circleEl1.setAttribute('cx', _cx);
+            circleEl1.setAttribute('cy', _cy);
         };
 
-        setInterval(addTime, 1000/30);
+        // ⚠️ PHYSICS PARAMETERS AND PROPERTYS ⚠️
+        //position
+        let pX = 250, pY = 250;
+        //velocity
+        let vX = 1, vY = 2;
+        //acceleration
+        let aX, aY; // (keep as zero for now)
+
+        // display default velocity values
+        velLog.innerHTML = `
+                velocityX: ${vX}
+                velocityY: ${vY}`;
+
+        // updates velocity/position thru main time loop. 
+        function updatePhysics(){
+            //if set velocity from slider, etc, dont have these two
+            // vX += aX;
+            // vY += aY;
+            pX += vX;
+            pY += vY;
+        };
+
+        const velocityIncrease = () => {
+            vY*=1.5;
+            vX*=1.5;
+            console.log(vX, vY);
+            velLog.innerHTML = `
+                velocityX: ${vX}
+                velocityY: ${vY}`;
+
+        };
+        const velocityDecrease = () => {
+            vX/=1.5;
+            vY/=1.5;
+            console.log(vX, vY);
+            velLog.innerHTML = `
+                velocityX: ${vX}
+                velocityY: ${vY}`;
+        }
+
+        // event handlers for velocity increase & decrease
+        velInc.addEventListener("click", velocityIncrease)
+        velDec.addEventListener("click", velocityDecrease)
+
+        // Add action for when passes boundry of SVG
+        function physicsConditions(circle){
+
+            // if circle is past rhs of screen
+            if (pX >= svgW - 40) {
+                // cx = svgW - 40;
+                vX = -Math.abs(vX);
+                //if circle is past lhs of screen
+                } else if (pX <= 40) {
+                // cx = 40;
+                //make sure circle isnt moving left
+                    vX = Math.abs(vX);
+                };
+
+            if (pY >= svgH - 40) {
+                // cy = svgH - 40;
+                vY = -Math.abs(vY);
+                } else if (pY <= 40) {
+                // cy = 40;
+                vY = Math.abs(vY);
+                };
+        };
+
+
+        // 🧪 !!EXPERIEMENT!! 🧪
+        // FORloop to create circles dependant on user input.
+
+        const circleDOM = () => {
+        // array for amount of circles 
+        circlesArray = [];
+
+        // event handlers to add / remove circles
+        addCircleButton.addEventListener("click", addCircle);
+        removeCircleButton.addEventListener("click", removeCircle);
+
+        function addCircle () {
+            circlesArray.push(1);
+            console.log(circlesArray);
+        };
+
+        function removeCircle () {
+            circlesArray.pop();
+            console.log(circlesArray);
+        };
+
+        for (let i = 0; i < circlesArray.length; i++) {
+            let circleEl = document.createElement('circle');
+            circleEl.setAttribute("cx", 250 + [i]);
+            circleEl.setAttribute("cy", 250 + [i]);
+            svg.appendChild(circleEl);   
+        }};
+
+
+        // ⚠️ MAIN TIME LOOP TO RUN SVG APPLICATION ⚠️
+        const mainLoop = () => {
+            // t++;
+
+            // cx = mouseX;
+            // cy = mouseY;
+            
+            physicsConditions();
+
+            updatePhysics();
+
+            circleDOM();
+
+            // func to set x and y values
+            setCirclePos(pX,pY)
+
+            requestAnimationFrame(mainLoop);
+        }
+
 
         function logKey(e) {
-
-            console.log(circleEl1.id);
             screenLog.innerText = `
                 Screen X/Y: ${e.screenX}, ${e.screenY}
                 Client X/Y: ${e.clientX}, ${e.clientY}`;
-            circleEl1.setAttribute("cx", e.clientX);
-            circleEl1.setAttribute("cy", e.clientY);
-            // circleEl2.setAttribute("cx", e.clientX + 50);
-            // circleEl2.setAttribute("cy", e.clientY - 50);
-            if (cx >= svgW - 40) {
-                cx = svgW - 40
-                };
-            if (cy >= svgH - 40) {
-                cy = svgH - 40
-                }  ;
-            if (cx <= 40) {
-                cx = 40
-                };
-            if (cy <= 40) {
-                cy = 40
-                };
-        };
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            };
+
+        document.addEventListener("mousemove", logKey);
+
+        requestAnimationFrame(mainLoop);
+
 
     </script>
 
-    <div id="test-container">
+    <!-- <div id="test-container">
 
         <canvas id="myCanvas" width="500" height="200"></canvas>
 
@@ -108,6 +234,6 @@
 
         </script>
 
-    </div>
+    </div> -->
 </body>
 </html>

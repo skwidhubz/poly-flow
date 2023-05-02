@@ -136,15 +136,14 @@
         };
 
 
-
-
         // 🧪 !!EXPERIEMENT!! 🧪
         // FORloop to create circles dependant on user input.
 
         // array for amount of circles 
-        circlesArray = [];
+        // circlesArray = [];
+        // for (let i = 0; i < circlesArray.length; i++) { };
 
-        const circleDOM = () => {
+        const circleManager = () => {
         
         // event handlers to add / remove circles
         addCircleButton.addEventListener("click", addCircle);
@@ -152,28 +151,26 @@
 
 
         function addCircle () {
-            circlesArray.push(1);
-            console.log(circlesArray);
-
-            for (let i = 0; i < circlesArray.length; i++) {
+            // circlesArray.push(1);
             let circleEl = document.createElement('circle');
             circleEl.setAttribute("cx", 250);
             circleEl.setAttribute("cy", 250);
             circleEl.setAttribute("r", 40);
-            circleEl.setAttribute("id", "circle"+[i]);
+            circleEl.setAttribute("id", "circle-element");
             svg.appendChild(circleEl);
-        }};
+        };
 
-
+    
         function removeCircle () {
-            circlesArray.pop();
-            console.log(circlesArray);
+            let cirleEl = document.getElementById("circle-element");
+            // circlesArray.pop();
+            svg.removeChild(circleEl);
         };
         }; // end circleDOM function
 
 
 
-        circleDOM();
+        circleManager();
         
 
 
@@ -212,38 +209,5 @@
 
     </script>
 
-    <!-- <div id="test-container">
-
-        <canvas id="myCanvas" width="500" height="200"></canvas>
-
-        <script>
-            const canvas = document.getElementById("myCanvas");
-            const ctx = canvas.getContext("2d");
-
-            const amplitude = 50; // amplitude of the wave
-            const frequency = 0.05; // frequency of the wave
-            const phaseShift = 0; // phase shift of the wave
-
-            ctx.beginPath();
-
-
-
-            for (let x = 0; x <= canvas.width; x++) {
-            // Calculate the y-coordinate of the sine wave at the current x-coordinate
-            const y = amplitude * Math.sin(2 * Math.PI * frequency * x + phaseShift);
-
-            // Draw a line segment from the previous point to the current point
-            if (x === 0) {
-                ctx.moveTo(x, canvas.height / 2 + y);
-            } else {
-                ctx.lineTo(x, canvas.height / 2 + y);
-            }
-            }
-
-            ctx.stroke();
-
-        </script>
-
-    </div> -->
 </body>
 </html>

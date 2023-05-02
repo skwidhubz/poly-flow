@@ -140,16 +140,15 @@
 
 
 
-        // 🐛 run the code and check the console for when you click add/remove cirle.. the array behavoir is weird. 🐛
-        // 🐛 also the circle element isn't being added. 🐛
 
         // 🧪 !!EXPERIEMENT!! 🧪
         // FORloop to create circles dependant on user input.
 
-        const circleDOM = () => {
         // array for amount of circles 
         circlesArray = [];
 
+        const circleDOM = () => {
+        
         // event handlers to add / remove circles
         addCircleButton.addEventListener("click", addCircle);
         removeCircleButton.addEventListener("click", removeCircle);
@@ -157,6 +156,13 @@
         function addCircle () {
             circlesArray.push(1);
             console.log(circlesArray);
+
+            for (let i = 0; i < circlesArray.length; i++) {
+            let circleEl = document.createElement('circle');
+            circleEl.setAttribute("cy", 250 );
+            circleEl.setAttribute("cx", 250 );
+            svg.appendChild(circleEl);   
+        }};
         };
 
         function removeCircle () {
@@ -164,12 +170,10 @@
             console.log(circlesArray);
         };
 
-        for (let i = 0; i < circlesArray.length; i++) {
-            let circleEl = document.createElement('circle');
-            circleEl.setAttribute("cx", 250 + [i]);
-            circleEl.setAttribute("cy", 250 + [i]);
-            svg.appendChild(circleEl);   
-        }};
+
+
+        circleDOM();
+        
 
 
         // ⚠️ MAIN TIME LOOP TO RUN SVG APPLICATION ⚠️
@@ -183,21 +187,21 @@
 
             updatePhysics();
 
-            circleDOM();
+
 
             // func to set x and y values
             setCirclePos(pX,pY)
 
             requestAnimationFrame(mainLoop);
-        }
+        };
 
 
         function logKey(e) {
             screenLog.innerText = `
                 Screen X/Y: ${e.screenX}, ${e.screenY}
                 Client X/Y: ${e.clientX}, ${e.clientY}`;
-                mouseX = e.clientX;
-                mouseY = e.clientY;
+                // mouseX = e.clientX;
+                // mouseY = e.clientY;
             };
 
         document.addEventListener("mousemove", logKey);

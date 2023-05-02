@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const userSchema = require('./User');
 
-const canvasSchema = new  Schema(
+const canvasSchema = new Schema(
     {
         title: {
             type: String,
@@ -12,7 +12,8 @@ const canvasSchema = new  Schema(
             required: true,
         },
         // access user details to save params to
-        username: [userSchema],
+        // use REF to user ID 
+        username: [userSchema], 
     },
 );
 

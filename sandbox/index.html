@@ -12,7 +12,7 @@
 <body>
     <div id="svg-container">
         <svg id="svg-main" width="500" height="500">
-            <circle id="circle1" cx="50" cy="250" r="40"/>
+            <!-- <circle id="circle1" cx="50" cy="250" r="40"/> -->
         </svg>
     </div>
     <br>
@@ -41,7 +41,7 @@
 
 
         // 🧰 DOCUMENT VARIABLES 🧰
-        const circleEl1 = document.getElementById("circle1");
+        // const circleEl1 = document.getElementById("circle1");
         const velInc = document.getElementById("vUp");
         const velDec = document.getElementById("vDown");
         const svg = document.getElementById("svg-main");
@@ -58,54 +58,64 @@
         var t = 0;
         let mouseX;
         let mouseY;
-        let circle; // make extra param to treat all cirlces as one to engage FOR
+        // let circle; // make extra param to treat all cirlces as one to engage FOR 
 
 
         // ⚠️ Set circle position function
-        const setCirclePos = (_cx, _cy) => {
+        const setCirclePos = (circle) => {
             // console.log(_cx, _cy);
-            circleEl1.setAttribute('cx', _cx);
-            circleEl1.setAttribute('cy', _cy);
+            let circleEl = circle.circleElement;
+            circleEl.setAttribute('cx', circle.pX);
+            circleEl.setAttribute('cy', circle.pY);
         };
 
         // ⚠️ PHYSICS PARAMETERS AND PROPERTYS ⚠️
         //position
-        let pX = 250, pY = 250;
-        //velocity
-        let vX = 1, vY = 2;
-        //acceleration
-        let aX, aY; // (keep as zero for now)
+        // const circleParams = {
+        //     pX: 250,
+        //     pY: 250,
+        //     vX: 1, 
+        //     vY: 2,
+            // aX: ,
+            // aY // (keep as zero for now)
+        // }
+
+        // let pX = 250, pY = 250;
+        // //velocity
+        // let vX = 1, vY = 2;
+        // //acceleration
+        // let aX, aY; // (keep as zero for now)
 
         // display default velocity values
-        velLog.innerHTML = `
-                velocityX: ${vX}
-                velocityY: ${vY}`;
+        // velLog.innerHTML = `
+        //         velocityX: ${circle.vX}
+        //         velocityY: ${circle.vY}`;
 
         // updates velocity/position thru main time loop. 
-        function updatePhysics(){
+        function updatePhysics(circle){
             //if set velocity from slider, etc, dont have these two
             // vX += aX;
             // vY += aY;
-            pX += vX;
-            pY += vY;
+            circle.pX += circle.vX;
+            circle.pY += circle.vY;
         };
 
-        const velocityIncrease = () => {
-            vY*=1.5;
-            vX*=1.5;
-            console.log(vX, vY);
+        const velocityIncrease = (circle) => {
+            circle.vY*=1.5;
+            circle.vX*=1.5;
+            console.log(circle.vX, circle.vY);
             velLog.innerHTML = `
-                velocityX: ${vX}
-                velocityY: ${vY}`;
+                velocityX: ${circle.vX}
+                velocityY: ${circle.vY}`;
 
         };
-        const velocityDecrease = () => {
-            vX/=1.5;
-            vY/=1.5;
-            console.log(vX, vY);
+        const velocityDecrease = (circle) => {
+            circle.vX/=1.5;
+            circle.vY/=1.5;
+            console.log(circle.vX, circle.vY);
             velLog.innerHTML = `
-                velocityX: ${vX}
-                velocityY: ${vY}`;
+                velocityX: ${circle.vX}
+                velocityY: ${circle.vY}`;
         }
 
         // event handlers for velocity increase & decrease
@@ -116,80 +126,94 @@
         function physicsConditions(circle){
 
             // if circle is past rhs of screen
-            if (pX >= svgW - 40) {
+            if (circle.pX >= svgW - 40) {
                 // cx = svgW - 40;
-                vX = -Math.abs(vX);
+                circle.vX = -Math.abs(circle.vX);
                 //if circle is past lhs of screen
-                } else if (pX <= 40) {
+                } else if (circle.pX <= 40) {
                 // cx = 40;
                 //make sure circle isnt moving left
-                    vX = Math.abs(vX);
+                circle.vX = Math.abs(circle.vX);
                 };
 
-            if (pY >= svgH - 40) {
+            if (circle.pY >= svgH - 40) {
                 // cy = svgH - 40;
-                vY = -Math.abs(vY);
-                } else if (pY <= 40) {
+                circle.vY = -Math.abs(circle.vY);
+                } else if (circle.pY <= 40) {
                 // cy = 40;
-                vY = Math.abs(vY);
+                circle.vY = Math.abs(circle.vY);
                 };
+            // return vY, vX;
         };
 
 
         // 🧪 !!EXPERIEMENT!! 🧪
-        // FORloop to create circles dependant on user input.
+        // circleManager
 
         // array for amount of circles 
-        // circlesArray = [];
-        // for (let i = 0; i < circlesArray.length; i++) { };
+        circlesArray = [];
+        
 
-        const circleManager = () => {
+        const circleManager = (circle) => {
         
         // event handlers to add / remove circles
         addCircleButton.addEventListener("click", addCircle);
         removeCircleButton.addEventListener("click", removeCircle);
 
 
+        // TODO: add FOR loop: dynamic change of velocity and class/color change.
         function addCircle () {
-            // circlesArray.push(1);
-            let circleEl = document.createElement('circle');
-            circleEl.setAttribute("cx", 250);
-            circleEl.setAttribute("cy", 250);
+
+            let circleEl = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
+            const circleObject = {
+            circleElement: circleEl,
+            pX: 250,
+            pY: 250,
+            vX: 1, 
+            vY: 2,
+            }
+
+            circlesArray.push(circleObject);
+
+            circleEl.setAttribute("cx", circleObject.pX);
+            circleEl.setAttribute("cy", circleObject.pY);
             circleEl.setAttribute("r", 40);
             circleEl.setAttribute("id", "circle-element");
+
             svg.appendChild(circleEl);
         };
-
     
         function removeCircle () {
-            let cirleEl = document.getElementById("circle-element");
-            // circlesArray.pop();
+            let circleEl = document.getElementById("circle-element");
             svg.removeChild(circleEl);
+            // circlesArray.pop();
+            // if (svg.hasChildNodes == true){
+            //     let circleEl = document.getElementById("circle-element");
+            //     svg.removeChild(circleEl);
+            // } else {
+            //     console.error("no child nodes");
+            // }
+            
         };
         }; // end circleDOM function
 
-
-
         circleManager();
         
-
-
         // ⚠️ MAIN TIME LOOP TO RUN SVG APPLICATION ⚠️
         const mainLoop = () => {
             // t++;
-
             // cx = mouseX;
             // cy = mouseY;
+
+            for (let i = 0; i < circlesArray.length; i++) {
+                const element = circlesArray[i];
+                let circle = circlesArray[i];   
+                physicsConditions(circle);
+                updatePhysics(circle);
+                setCirclePos(circle);
+            };
             
-            physicsConditions();
-
-            updatePhysics();
-
-
-
-            // func to set x and y values
-            setCirclePos(pX,pY)
-
             requestAnimationFrame(mainLoop);
         };
 

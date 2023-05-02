@@ -1,3 +1,13 @@
+TODO:   get hello world loop talking to server from client with graphQL.
+        test query "hello".
+        front end recieve "hello" and display on page.
+        "thin slice" of full stack.
+        keep code running constantly. 
+        debug errors when they occur.
+
+TODO:   reading database model.
+
+
 string type - parameters on typeDef
 stores a 'blob' of json data
 

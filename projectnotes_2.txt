@@ -11,6 +11,7 @@ TODO:   eslintConfig file.
 
 TODO:   on each circle generation, a new colour is attributed to that circle.. maybe mathFloor(mathRandom) into RGB#s. look into "glassMorphism" CSS. 
 TODO:   Import audioContext package and have a gentle rounded tone on each circles generation! woo!
+TODO: create a function that takes a slider value, splits it into three values, then returns three values between 1 - 254.
 
 
 string type - parameters on typeDef

@@ -19,9 +19,23 @@
     <div>
         <button id="add-circle">+ circle</button>
         <button id="remove-circle">- circle</button>
-        min = 1 circle
-        max = 5 circles
+ move ALL the color sliders then create a circle.
     </div><br>
+        <div class="slidecontainer">
+        Color Slider:
+        <input type="range" min="1" max="255" value="50" class="slider" id="red-range">
+        <h4 id="red-output"></h4>
+      </div>
+      <div class="slidecontainer">
+        Color Slider:
+        <input type="range" min="1" max="255" value="50" class="slider" id="green-range">
+        <h4 id="green-output"></h4>
+      </div>
+      <div class="slidecontainer">
+        Color Slider:
+        <input type="range" min="1" max="255" value="50" class="slider" id="blue-range">
+        <h4 id="blue-output"></h4>
+      </div>
     <div>
         <button id="vUp">velocity increase</button>
         <button id="vDown">velocity decrease</button>
@@ -31,6 +45,10 @@
     </div>
 
     <script>
+
+
+// Update the current slider value (each time you drag the slider handle)
+
 
         // ⚠️= critical program infrastructure.
         // 🧪 = testing/experimental components.
@@ -51,6 +69,17 @@
         let velLog = document.getElementById("velLog");
         const addCircleButton = document.getElementById("add-circle");
         const removeCircleButton = document.getElementById("remove-circle");
+        // SLIDER DOM VARS AND GLOBAL VARS
+        let redSlider = document.getElementById("red-range");
+        let greenSlider = document.getElementById("green-range");
+        let blueSlider = document.getElementById("blue-range");
+        let outputRed = document.getElementById("red-output");
+        let outputGreen = document.getElementById("green-output");
+        let outputBlue = document.getElementById("blue-output");
+        let redRange;
+        let greenRange;
+        let blueRange;
+
 
         // 🧰 PHYSICS VARIABLES 🧰
         let cx;// = circleEl1.getAttribute('cx');
@@ -59,6 +88,34 @@
         let mouseX;
         let mouseY;
         // let circle; // make extra param to treat all cirlces as one to engage FOR 
+
+        // Display the default color slider values
+        outputRed.innerHTML = redSlider.value; 
+        outputGreen.innerHTML = greenSlider.value;
+        outputBlue.innerHTML = blueSlider.value;
+
+
+        // Colour sliders event handler & functions
+
+        // RED SLIDER
+        redSlider.oninput = function() {
+        outputRed.innerHTML = this.value;
+        redRange = this.value;
+        console.log(this.value);
+        };
+        // GREEN SLIDER
+        greenSlider.oninput = function() {
+        outputGreen.innerHTML = this.value;
+        greenRange = this.value;
+        console.log(this.value);
+        };
+        // BLUE SLIDER 
+        blueSlider.oninput = function() {
+        outputBlue.innerHTML = this.value;
+        blueRange = this.value;
+        console.log(this.value);
+        };
+
 
 
         // ⚠️ Set circle position function
@@ -172,14 +229,28 @@
             pY: 250,
             vX: 1, 
             vY: 2,
-            }
+            };
 
             circlesArray.push(circleObject);
 
             circleEl.setAttribute("cx", circleObject.pX);
             circleEl.setAttribute("cy", circleObject.pY);
             circleEl.setAttribute("r", 40);
-            circleEl.setAttribute("id", "circle-element");
+            circleEl.setAttribute("id", "circle-1");
+            // this IF chain is not working atm 
+            // if (redRange === 50 !== greenRange == 50 !== blueRange === 50){
+            //     circleEl.setAttribute("style", "fill: rgba(0, 255, 39, 0.2);")
+            // } else if (greenRange == 50 !== blueRange === 50) {
+            // circleEl.setAttribute("style", "fill:rgba(" + redRange + ",255, 39, 0.2);");
+            // } else if (redRange == 50 !== blueRange === 50) {
+            // circleEl.setAttribute("style", "fill: rgba(0, " + greenRange + ", 39, 0.2);")
+            // } else if (redRange == 50 !== greenRange === 50) {
+            // circleEl.setAttribute("style", "fill: rgba(0, 255, " + blueRange +", 0.2);")
+            // } else {          
+            // circleEl.setAttribute("style", "fill:rgba(" + redRange + "," + greenRange + "," + blueRange + "," + "0.2);");
+            // };
+            circleEl.setAttribute("style", "fill:rgba(" + redRange + "," + greenRange + "," + blueRange + "," + "0.2);");
+            console.log(circleEl);
 
             svg.appendChild(circleEl);
         };

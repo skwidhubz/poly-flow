@@ -7,8 +7,10 @@ TODO:   get hello world loop talking to server from client with graphQL.
 
 TODO:   reading database model.
 
-TODO:   on each circle generation, a    new colour is attributed to that circle.. maybe mathFloor(mathRandom) into RGB#s. look into "glassMorphism" CSS. 
-TODO:    Import audioContext package and have a gentle rounded tone on each circles generation! woo!
+TODO:   eslintConfig file. 
+
+TODO:   on each circle generation, a new colour is attributed to that circle.. maybe mathFloor(mathRandom) into RGB#s. look into "glassMorphism" CSS. 
+TODO:   Import audioContext package and have a gentle rounded tone on each circles generation! woo!
 
 
 string type - parameters on typeDef

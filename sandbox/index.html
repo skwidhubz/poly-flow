@@ -19,23 +19,12 @@
     <div>
         <button id="add-circle">+ circle</button>
         <button id="remove-circle">- circle</button>
- move ALL the color sliders then create a circle.
     </div><br>
         <div class="slidecontainer">
-        Color Slider:
-        <input type="range" min="1" max="255" value="50" class="slider" id="red-range">
-        <h4 id="red-output"></h4>
-      </div>
-      <div class="slidecontainer">
-        Color Slider:
-        <input type="range" min="1" max="255" value="50" class="slider" id="green-range">
-        <h4 id="green-output"></h4>
-      </div>
-      <div class="slidecontainer">
-        Color Slider:
-        <input type="range" min="1" max="255" value="50" class="slider" id="blue-range">
-        <h4 id="blue-output"></h4>
-      </div>
+            Circle color:
+            <input type="range" min="1" max="359" value="100" class="slider" id="hue-range">
+            <h4 id="hue-output"></h4>
+        </div>
     <div>
         <button id="vUp">velocity increase</button>
         <button id="vDown">velocity decrease</button>
@@ -70,15 +59,9 @@
         const addCircleButton = document.getElementById("add-circle");
         const removeCircleButton = document.getElementById("remove-circle");
         // SLIDER DOM VARS AND GLOBAL VARS
-        let redSlider = document.getElementById("red-range");
-        let greenSlider = document.getElementById("green-range");
-        let blueSlider = document.getElementById("blue-range");
-        let outputRed = document.getElementById("red-output");
-        let outputGreen = document.getElementById("green-output");
-        let outputBlue = document.getElementById("blue-output");
-        let redRange;
-        let greenRange;
-        let blueRange;
+        let hueSlider = document.getElementById("hue-range");
+        let outputHue = document.getElementById("hue-output");
+        let hueRange;
 
 
         // 🧰 PHYSICS VARIABLES 🧰
@@ -90,33 +73,16 @@
         // let circle; // make extra param to treat all cirlces as one to engage FOR 
 
         // Display the default color slider values
-        outputRed.innerHTML = redSlider.value; 
-        outputGreen.innerHTML = greenSlider.value;
-        outputBlue.innerHTML = blueSlider.value;
-
+        outputHue.innerHTML = hueSlider.value;
 
         // Colour sliders event handler & functions
 
-        // RED SLIDER
-        redSlider.oninput = function() {
-        outputRed.innerHTML = this.value;
-        redRange = this.value;
+        // HUE SLIDER
+        hueSlider.oninput = function() {
+        outputHue.innerHTML = this.value;
+        hueRange = this.value;
         console.log(this.value);
         };
-        // GREEN SLIDER
-        greenSlider.oninput = function() {
-        outputGreen.innerHTML = this.value;
-        greenRange = this.value;
-        console.log(this.value);
-        };
-        // BLUE SLIDER 
-        blueSlider.oninput = function() {
-        outputBlue.innerHTML = this.value;
-        blueRange = this.value;
-        console.log(this.value);
-        };
-
-
 
         // ⚠️ Set circle position function
         const setCirclePos = (circle) => {
@@ -225,8 +191,8 @@
 
             const circleObject = {
             circleElement: circleEl,
-            pX: 250,
-            pY: 250,
+            pX: Math.random()* 200,
+            pY: Math.random()* 200,
             vX: 1, 
             vY: 2,
             };
@@ -249,7 +215,7 @@
             // } else {          
             // circleEl.setAttribute("style", "fill:rgba(" + redRange + "," + greenRange + "," + blueRange + "," + "0.2);");
             // };
-            circleEl.setAttribute("style", "fill:rgba(" + redRange + "," + greenRange + "," + blueRange + "," + "0.2);");
+            circleEl.setAttribute("style", "fill:hsl(" + hueRange +", 100%, 80%);");
             console.log(circleEl);
 
             svg.appendChild(circleEl);

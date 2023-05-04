@@ -28,7 +28,7 @@
 
 #circle-1 {
     /* fill: blue; */
-    fill: rgba(0, 255, 39, 0.2);
+    opacity: 0.8;
     border-radius: 2px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);

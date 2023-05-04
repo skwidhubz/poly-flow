@@ -1,0 +1,18 @@
+save nav only exist once inside create canvas page
+
+put params into object from useState and save as JSON string.
+
+MVP :
+
+-- either personal || total library.
+> keep personal library for MVP 
+	> User can delete library items.
+
+C.R.U.D ! ! ! 
+
+just save one parameter and title is MVP.
+
+
+
+
+

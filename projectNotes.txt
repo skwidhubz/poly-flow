@@ -14,5 +14,13 @@ just save one parameter and title is MVP.
 
 
 
+create user mutation. KISS -> then impiment rest of mutation. check user in DB first. 
+
+
+commit OFTEN AF. -> commit descripts.
+> use branches to experiement or do features. 
+
+Get stuck on feature? commit to branch. Now go to main where ther are no errors and work on progressing something else. 
+
 
 

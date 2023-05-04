@@ -22,5 +22,8 @@ commit OFTEN AF. -> commit descripts.
 
 Get stuck on feature? commit to branch. Now go to main where ther are no errors and work on progressing something else. 
 
+FREQUENT COMMITS.
+
+
 
 

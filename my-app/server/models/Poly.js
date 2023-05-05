@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const userSchema = require('./User');
 
-const canvasSchema = new Schema(
+const polySchema = new Schema(
     {
         title: {
             type: String,
@@ -17,4 +17,5 @@ const canvasSchema = new Schema(
     },
 );
 
+module.exports = polySchema;
 

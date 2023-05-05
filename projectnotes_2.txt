@@ -6,10 +6,10 @@ TODO:   get hello world loop talking to server from client with graphQL.
         debug errors when they occur.
 
         THIN SLICE:
-        > MONGODB
-        > graphQL
-        > REACT
-        > BROWSER
+        > MONGODB ?
+        > graphQL !
+        > REACT !
+        > BROWSER !
 
 
 TODO:   reading database model.

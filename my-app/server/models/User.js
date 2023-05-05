@@ -1,8 +1,8 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-// import schema from Book.js
-const canvasSchema = require("./Canvas");
+// import polySchema
+const polySchema = require('./Poly')
 
 const userSchema = new Schema(
   {
@@ -21,8 +21,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the canvasSchema
-    // savedBooks: [canvasSchema],
+    // saved cavnas' to user
+      savedPolys: [polySchema],
   },
   // set this to use virtual below
   {

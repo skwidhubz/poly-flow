@@ -1,4 +1,4 @@
 const User = require('./User');
-const Canvas = require('./Canvas');
+const Poly = require('./Poly');
 
-module.exports = { User, Canvas };
+module.exports = { User, Poly };

@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
 import './App.css';
-import Home from './components/Home';
-// import Header from './components/Header';
-import TestModules from './components/TestModules';
 import Nav from './components/Nav';
-import Why from './components/Why';
-// import each component
-// import each components css file
+import Create from './pages/Create';
+import Library from './pages/Library';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import { Route, Routes } from "react-router-dom";
 
 
-// dynamic rendering of pages:
 const App = () => {
-  const [activeSection, setActiveSection] = useState('home');
-
   return (
-    <div className="App">
-      {/* <Header  /> */}
-      <Nav activeSection={activeSection} setActiveSection={setActiveSection} />
-      {activeSection === 'home' && <Home />}
-      {activeSection === 'test-module' && <TestModules />}
-      {activeSection === 'why' && <Why />}
-      {/*activeSection === 'resume' && <Resume />} */}
-      {/* <Footer /> */}
-    </div>
+
+    <>
+    <Nav />
+      <div className="main-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </div>
+    </>
+    
   );
 };
 

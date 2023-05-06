@@ -4,6 +4,23 @@
   font-size: 25px;
 }
 
+.signup-container {
+  padding: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-element {
+  padding: 10px
+}
 
   @media (max-width: 768px) {
     #nav-list {

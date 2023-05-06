@@ -1,9 +1,18 @@
-@import "../index.css";
-
-* {
-  font-size: 25px;
+:root {
+  /* CSS HEX */
+  --royal-blue-web-color: #4169e1ff;
+  --aquamarine: #47e5bcff;
+  --tiffany-blue: #81e4daff;
+  --columbia-blue: #aecfdfff;
+  --coquelicot: #f15025ff;
 }
 
+.login-container {
+  padding: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
   @media (max-width: 768px) {
     #nav-list {

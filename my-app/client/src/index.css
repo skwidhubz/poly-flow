@@ -21,3 +21,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.main-container {
+  background-color: var(--tiffany-blue);
+  height: 100vh;
+}

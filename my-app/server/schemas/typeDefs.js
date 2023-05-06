@@ -7,41 +7,14 @@ type Query {
   message: String!
 }
 
-type User {
-  _id: ID
-  username: String
-  email: String
-  bookCount: Int
-  savedBooks: [Book] // CHANGE TO POLY
-}
-
-type Auth {
-  token: ID!
-  user: User
-}
-
-type Query {
-  me: User
+type text {
+  text: String!
 }
 
 type Mutation {
-  login(email: String!, password: String!): Auth
-  addUser(username: String!, email: String!, password: String!): Auth
-  saveBook(input: BookInput): User          // CHANGE TO POLY
-  removeBook(bookId: String!): User         // CHANGE TO POLY
+  sendText(text: String!): text
 }
-
-
 `;
-
-// type User {
-//     _id: ID
-//     username: String
-//     email: String
-//     bookCount: Int
-//     savedBooks: [Book]
-//   }
-
 
 
 module.exports = typeDefs;

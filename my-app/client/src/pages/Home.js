@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/home.css'
 import logo from '../images/shapeshifter.gif';
-import { TEST_QUERY } from '../utils/queries';
+import { TEST_QUERY, TEXT_QUERY } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
 const Home = () => {

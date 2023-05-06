@@ -1,26 +1,33 @@
 import React from 'react';
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import '../styles/nav.css';
 import logo_image from '../images/logo.png';
 
-const Nav = ({ activeSection, setActiveSection }) => {
-  const navigateTo = (section) => {
-    setActiveSection(section);
-  };
+const Nav = () => {
 
   return (
     <nav className="nav">
-        
+
       <ul id="nav-list">
-        <li className={activeSection === 'home' ? 'home' : ''} onClick={() => navigateTo('home')}><img src={logo_image} width='20%' alt='logo with shapes text reading poly flow'/></li>
-        <li className={activeSection === 'create' ? 'active' : ''} onClick={() => navigateTo('create')}>Create</li>
-        <li className={activeSection === 'test-modules' ? 'test-modules' : ''} onClick={() => navigateTo('test-modules')}>TestModules</li>
-        <li className={activeSection === 'save' ? 'active' : ''} onClick={() => navigateTo('save')}>Save</li>
-        <li className={activeSection === 'library' ? 'active' : ''} onClick={() => navigateTo('library')}>Library</li>
-        <li className={activeSection === 'loginform' ? 'loginform' : ''} onClick={() => navigateTo('loginform')}>login</li>
-        <li className={activeSection === 'signupform' ? 'signupform' : ''} onClick={() => navigateTo('signupform')}>signup</li>
+        <CustomLink to="/"><img src={logo_image} width='20%' alt='logo with shapes text reading poly flow'/></CustomLink>
+        <CustomLink to="/create">Create Poly</CustomLink>
+        <CustomLink to="/library">Library</CustomLink>
+        <CustomLink to="/login">Login</CustomLink>
+        <CustomLink to="/signup">Sign Up</CustomLink>
       </ul>
     </nav>
   );
 };
+
+const CustomLink = ({to, children, ...props}) => {
+  const resolvedPath = useResolvedPath(to);
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+  return (
+    <li className={isActive ? "active" : ""}>
+      <Link to={to} {...props}>{children}</Link>
+    </li>
+)
+
+}
 
 export default Nav;

@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import '../styles/canvas.css';
+
+
+
+// react app component
+const Canvas = () => {
 
 // poly script
 // ⚠️= critical program infrastructure.
@@ -9,7 +14,7 @@ import '../styles/canvas.css';
 
         console.log('script executed');        
 
-
+    // TODO: Convert DOM vars to REACT vars 
         // 🧰 DOCUMENT VARIABLES 🧰
         // const circleEl1 = document.getElementById("circle1");
         const velInc = document.getElementById("vUp");
@@ -24,15 +29,21 @@ import '../styles/canvas.css';
         // SLIDER DOM VARS AND GLOBAL VARS
         let hueSlider = document.getElementById("hue-range");
         let outputHue = document.getElementById("hue-output");
-        let hueRange;
+        // let hueRange;
+        const [hueRange, setHueRange] = useState();
 
 
         // 🧰 PHYSICS VARIABLES 🧰
-        let cx;// = circleEl1.getAttribute('cx');
-        let cy; //= circleEl1.getAttribute('cy');
-        var t = 0;
-        let mouseX;
-        let mouseY;
+        // let cx;// = circleEl1.getAttribute('cx');
+        const [cx, setCx] = useState();
+        // let cy; //= circleEl1.getAttribute('cy');
+        const [cy, setCy] = useState();
+        // var t = 0;
+        const [t, setT] = useState();
+        // let mouseX;
+        // let mouseY;
+        const [mouseX, setMouseX] = useState();
+        const [mouseY, setMouseY] = useState();
         // let circle; // make extra param to treat all cirlces as one to engage FOR 
 
         // Display the default color slider values
@@ -137,9 +148,10 @@ import '../styles/canvas.css';
         // circleManager
 
         // array for amount of circles 
-        circlesArray = [];
-        
+        // circlesArray = [];
+        const [circlesArray, setCirclesArray] = useState();
 
+        
         const circleManager = (circle) => {
         
         // event handlers to add / remove circles
@@ -151,7 +163,7 @@ import '../styles/canvas.css';
         function addCircle () {
 
             let circleEl = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-
+        // TODO: Circle object must be formatted and converted to REACT compadible.
             const circleObject = {
             circleElement: circleEl,
             pX: Math.random()* 200, // default 250
@@ -166,18 +178,6 @@ import '../styles/canvas.css';
             circleEl.setAttribute("cy", circleObject.pY);
             circleEl.setAttribute("r", 40);
             circleEl.setAttribute("id", "circle-1");
-            // this IF chain is not working atm 
-            // if (redRange === 50 !== greenRange == 50 !== blueRange === 50){
-            //     circleEl.setAttribute("style", "fill: rgba(0, 255, 39, 0.2);")
-            // } else if (greenRange == 50 !== blueRange === 50) {
-            // circleEl.setAttribute("style", "fill:rgba(" + redRange + ",255, 39, 0.2);");
-            // } else if (redRange == 50 !== blueRange === 50) {
-            // circleEl.setAttribute("style", "fill: rgba(0, " + greenRange + ", 39, 0.2);")
-            // } else if (redRange == 50 !== greenRange === 50) {
-            // circleEl.setAttribute("style", "fill: rgba(0, 255, " + blueRange +", 0.2);")
-            // } else {          
-            // circleEl.setAttribute("style", "fill:rgba(" + redRange + "," + greenRange + "," + blueRange + "," + "0.2);");
-            // };
             circleEl.setAttribute("style", "fill:hsl(" + hueRange +", 100%, 80%);");
             console.log(circleEl);
 
@@ -186,15 +186,7 @@ import '../styles/canvas.css';
     
         function removeCircle () {
             let circleEl = document.getElementById("circle-element");
-            svg.removeChild(circleEl);
-            // circlesArray.pop();
-            // if (svg.hasChildNodes == true){
-            //     let circleEl = document.getElementById("circle-element");
-            //     svg.removeChild(circleEl);
-            // } else {
-            //     console.error("no child nodes");
-            // }
-            
+            svg.removeChild(circleEl);  
         };
         }; // end circleDOM function
 
@@ -202,9 +194,6 @@ import '../styles/canvas.css';
         
         // ⚠️ MAIN TIME LOOP TO RUN SVG APPLICATION ⚠️
         const mainLoop = () => {
-            // t++;
-            // cx = mouseX;
-            // cy = mouseY;
 
             for (let i = 0; i < circlesArray.length; i++) {
                 const element = circlesArray[i];
@@ -222,21 +211,20 @@ import '../styles/canvas.css';
             screenLog.innerText = `
                 Screen X/Y: ${e.screenX}, ${e.screenY}
                 Client X/Y: ${e.clientX}, ${e.clientY}`;
-                // mouseX = e.clientX;
-                // mouseY = e.clientY;
             };
 
         document.addEventListener("mousemove", logKey);
 
         requestAnimationFrame(mainLoop);
 
-// react app component
-const Canvas = () => {
+// end poly canvas script.
+
+// return HTML page
 return (
 <>
 <div id="svg-container">
         <svg id="svg-main" width="500" height="500">
-            {/* <!-- <circle id="circle1" cx="50" cy="250" r="40"/> --> */}
+            {/* svg container for circle generation */}
         </svg>
     </div>
     <br/>
@@ -247,15 +235,15 @@ return (
         <div class="slidecontainer">
             Circle color:
             <input type="range" min="1" max="359" value="100" class="slider" id="hue-range"/>
-            <h4 id="hue-output"></h4>
+            <h4 id="hue-output">:</h4>
         </div>
     <div>
         <button id="vUp">velocity increase</button>
         <button id="vDown">velocity decrease</button>
     </div>
     <div>
-        <h4 id="logger"></h4>
-        <h4 id="velLog"></h4>
+        <h4 id="logger">:</h4>
+        <h4 id="velLog">:</h4>
     </div>
 </>
 )

@@ -13,7 +13,11 @@ const polySchema = new Schema(
         },
         // access user details to save params to
         // use REF to user ID 
-        username: [userSchema], 
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
     },
 );
 

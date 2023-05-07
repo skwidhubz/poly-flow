@@ -1,30 +1,30 @@
-export const getSavedBookIds = () => {
-    const savedBookIds = localStorage.getItem('saved_books')
-      ? JSON.parse(localStorage.getItem('saved_books'))
+export const getSavedPolyIds = () => {
+    const savedPolyIds = localStorage.getItem('saved_polys')
+      ? JSON.parse(localStorage.getItem('saved_polys'))
       : [];
   
-    return savedBookIds;
+    return savedPolyIds;
   };
   
-  export const saveBookIds = (bookIdArr) => {
-    if (bookIdArr.length) {
-      localStorage.setItem('saved_books', JSON.stringify(bookIdArr));
+  export const savePolyIds = (polyIdArr) => {
+    if (polyIdArr.length) {
+      localStorage.setItem('saved_polys', JSON.stringify(polyIdArr));
     } else {
-      localStorage.removeItem('saved_books');
+      localStorage.removeItem('saved_polys');
     }
   };
   
-  export const removeBookId = (bookId) => {
-    const savedBookIds = localStorage.getItem('saved_books')
-      ? JSON.parse(localStorage.getItem('saved_books'))
+  export const removePolyId = (polyId) => {
+    const savedPolyIds = localStorage.getItem('saved_polys')
+      ? JSON.parse(localStorage.getItem('saved_polys'))
       : null;
   
-    if (!savedBookIds) {
+    if (!savedPolyIds) {
       return false;
     }
   
-    const updatedSavedBookIds = savedBookIds?.filter((savedBookId) => savedBookId !== bookId);
-    localStorage.setItem('saved_books', JSON.stringify(updatedSavedBookIds));
+    const updatedSavedPolyIds = savedPolyIds?.filter((savedPolyId) => savedPolyId !== polyId);
+    localStorage.setItem('saved_polys', JSON.stringify(updatedSavedPolyIds));
   
     return true;
   };

@@ -22,4 +22,4 @@ T Parker contributed to this project.
 ## License
 MIT
 
-<marquee> Thank you for making it this far =) </marquee>
+

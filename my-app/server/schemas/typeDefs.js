@@ -7,7 +7,7 @@ const typeDefs = gql`
     username: String
     email: String
     polyCount: Int
-    savedPolys: [Book]
+    savedPolys: [Poly]
   }
 
   type Poly {

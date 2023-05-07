@@ -14,7 +14,7 @@ const polySchema = new Schema(
         // access user details to save params to
         // use REF to user ID 
         user: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "User",
             required: true
         },

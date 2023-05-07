@@ -21,3 +21,5 @@ T Parker contributed to this project.
 - Please contact me at: tommaxwellparker@gmail.com
 ## License
 MIT
+
+<marquee> Thank you for making it this far =) </marquee>

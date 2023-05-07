@@ -57,7 +57,7 @@ const LoginForm = () => {
   return (
     <>
     <div className="login-container">
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="form-main">
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
@@ -67,8 +67,9 @@ const LoginForm = () => {
           Something went wrong with your login credentials!
         </Alert>
         <Form.Group>
-          <Form.Label htmlFor="email">Email</Form.Label>
+          <Form.Label htmlFor="email" className="form-element">Email:</Form.Label>
           <Form.Control
+            className="form-control"
             type="text"
             placeholder="Your email"
             name="email"
@@ -76,14 +77,12 @@ const LoginForm = () => {
             value={userFormData.email}
             required
           />
-          <Form.Control.Feedback type="invalid">
-            Email is required!
-          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Label htmlFor="password" className="form-element">Password:</Form.Label>
           <Form.Control
+            className="form-control"
             type="password"
             placeholder="Your password"
             name="password"
@@ -91,11 +90,9 @@ const LoginForm = () => {
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type="invalid">
-            Password is required!
-          </Form.Control.Feedback>
         </Form.Group>
         <Button
+          className="form-control"
           disabled={!(userFormData.email && userFormData.password)}
           type="submit"
           variant="success"

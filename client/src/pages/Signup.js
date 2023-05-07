@@ -12,12 +12,9 @@ const SignupForm = () => {
     email: "",
     password: "",
   });
-  // set state for form validation
   const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  // declared the addUser with the useMutation
   const [addUser, { error }] = useMutation(ADD_USER);
 
   useEffect(() => {
@@ -28,6 +25,19 @@ const SignupForm = () => {
     }
   }, [error]);
 
+  const [notificationText, setNotificationText] = useState('');
+  const onBlurHandler = (e) => {
+    if (e.target.value === ''){
+      if (e.target.id === 'name'){
+        setNotificationText('Name is required..')
+      } else if (e.target.id === 'email'){
+        setNotificationText('Email is requred..')
+      } else if (e.target.id === 'message'){
+        setNotificationText('Message is requred..')
+      }
+    }};
+
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -36,7 +46,6 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -64,9 +73,7 @@ const SignupForm = () => {
   return (
     <>
       <div className="signup-container">
-      {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit} className="form-main">
-        {/* show alert if server response is bad */}
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
@@ -77,50 +84,48 @@ const SignupForm = () => {
         </Alert>
 
         <Form.Group>
-          <Form.Label htmlFor="username" className="form-element">Username</Form.Label>
+          <Form.Label htmlFor="username" id="name" className="form-element">Username:</Form.Label>
           <Form.Control
+            className="form-control"
             type="text"
             placeholder="Your username"
             name="username"
             onChange={handleInputChange}
             value={userFormData.username}
             required
+            onBlur={onBlurHandler}
           />
-          <Form.Control.Feedback type="invalid" className="form-element">
-            Username is required!
-          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor="email" className="form-element">Email</Form.Label>
+          <Form.Label htmlFor="email" id="email" className="form-element">Email:</Form.Label>
           <Form.Control
+            className="form-control"
             type="email"
             placeholder="Your email address"
             name="email"
             onChange={handleInputChange}
             value={userFormData.email}
             required
+            onBlur={onBlurHandler}
           />
-          <Form.Control.Feedback type="invalid" className="form-element">
-            Email is required!
-          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor="password" className="form-element">Password</Form.Label>
+          <Form.Label htmlFor="password" id="password" className="form-element">Password:</Form.Label>
           <Form.Control
+            className="form-control"
             type="password"
             placeholder="Your password"
             name="password"
             onChange={handleInputChange}
             value={userFormData.password}
             required
+            onBlur={onBlurHandler}
           />
-          <Form.Control.Feedback type="invalid" className="form-element">
-            Password is required!
-          </Form.Control.Feedback>
         </Form.Group>
         <Button 
+          className="form-control"
           disabled={
             !(
               userFormData.username &&
@@ -134,6 +139,7 @@ const SignupForm = () => {
           Submit
         </Button>
       </Form>
+      <div id="onblur-text">{notificationText}</div>
       </div>
     </>
   );

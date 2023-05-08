@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import '../styles/canvas.css';
 
-
-
 // react app component
 const Canvas = () => {
 
@@ -151,7 +149,6 @@ const Canvas = () => {
         // circlesArray = [];
         const [circlesArray, setCirclesArray] = useState();
 
-        
         const circleManager = (circle) => {
         
         // event handlers to add / remove circles
@@ -164,13 +161,13 @@ const Canvas = () => {
 
             let circleEl = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         // TODO: Circle object must be formatted and converted to REACT compadible.
-            const circleObject = {
+            const [circleObject, setCircleObject] = useState({
             circleElement: circleEl,
             pX: Math.random()* 200, // default 250
             pY: Math.random()* 200, // default 250
             vX: 1, 
             vY: 2,
-            };
+            });
 
             circlesArray.push(circleObject);
 

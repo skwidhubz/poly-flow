@@ -33,7 +33,7 @@ const saveDataFunction = () => {
     localStorage.setItem('params', JSON.stringify(dataObj));
     
     saveData({ 
-        variables: {params: JSON.stringify(dataObj)} 
+        variables: { Params: JSON.stringify(dataObj) } 
     });
 };
 

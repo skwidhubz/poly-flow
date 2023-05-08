@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const polySchema = require("./Poly");
+const { Data, dataSchema } = require("./Data");
 
 const userSchema = new Schema(
   {
@@ -19,8 +20,9 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    savedData: [dataSchema],
     // set savedPOLY to be an array of data that adheres to the polySchema
-    savedPolys: [polySchema],
+    // savedPolys: [polySchema],
   },
   // set this to use virtual below
   {

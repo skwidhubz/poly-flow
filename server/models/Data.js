@@ -6,10 +6,11 @@ const dataSchema = new Schema(
             type: String,
             required: true,
         },
+        
 
     },
 );
 
 const Data = model("Data", dataSchema);
 
-module.exports = Data;
+module.exports = { Data, dataSchema };

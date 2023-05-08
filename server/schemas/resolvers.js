@@ -18,9 +18,13 @@ const resolvers = {
 
   Mutation: {
     // saving # of circles and hue from canvas as object 
-    saveData: async (parent, {dataObj}) => {
-      const params = await Data.create({ params: dataObj });
-      return { params };
+    saveData: async (parent, {input}, context) => {
+      const params = await Data.create(input);
+      const user = await User.findByIdAndUpdate(
+        context.user._id,
+        {savedData: params}
+        );
+      return { params, user };
     },
     
     login: async (parent, { email, password }) => {

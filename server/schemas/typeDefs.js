@@ -31,6 +31,10 @@ const typeDefs = gql`
     title: String!
   }
 
+  input DataObj {
+    params: String!
+  }
+
   type Query {
     me: User
   }
@@ -40,7 +44,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     savePoly(input: PolyInput): User
     removePoly(polyId: String!): User
-    saveData(input: dataObj): User
+    saveData(input: DataObj): User
   }
 `;
 

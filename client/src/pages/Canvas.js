@@ -1,246 +1,58 @@
 import React, { useState } from "react";
 import '../styles/canvas.css';
+import { useMutation } from "@apollo/client";
+import { SAVE_DATA } from "../utils/mutations";
 
 // react app component
 const Canvas = () => {
 
-// poly script
-// ⚠️= critical program infrastructure.
-        // 🧪 = testing/experimental components.
-        // 🧰 = global variables/constants
-        // 🐛 = bug/notes.
+const [circleCount, setCircleCount] = useState(1);
+const [hueValue, setHueValue] = useState();
+const [saveData] = useMutation(SAVE_DATA); 
 
-        console.log('script executed');        
+const addCircleHandler = () => {
+console.log('add circle');
+setCircleCount(circleCount + 1);
+};
 
-    // TODO: Convert DOM vars to REACT vars 
-        // 🧰 DOCUMENT VARIABLES 🧰
-        // const circleEl1 = document.getElementById("circle1");
-        const velInc = document.getElementById("vUp");
-        const velDec = document.getElementById("vDown");
-        const svg = document.getElementById("svg-main");
-        const svgW = svg.getAttribute('width');
-        const svgH = svg.getAttribute('height');
-        let screenLog = document.getElementById("logger");
-        let velLog = document.getElementById("velLog");
-        const addCircleButton = document.getElementById("add-circle");
-        const removeCircleButton = document.getElementById("remove-circle");
-        // SLIDER DOM VARS AND GLOBAL VARS
-        let hueSlider = document.getElementById("hue-range");
-        let outputHue = document.getElementById("hue-output");
-        // let hueRange;
-        const [hueRange, setHueRange] = useState();
+const removeCircleHandler = () => {
+console.log('remove circle');
+setCircleCount(circleCount - 1);
+};
 
+const hueChangeHandler = (event) => {
+console.log(event.target.value);
+setHueValue(event.target.value);
+};
 
-        // 🧰 PHYSICS VARIABLES 🧰
-        // let cx;// = circleEl1.getAttribute('cx');
-        const [cx, setCx] = useState();
-        // let cy; //= circleEl1.getAttribute('cy');
-        const [cy, setCy] = useState();
-        // var t = 0;
-        const [t, setT] = useState();
-        // let mouseX;
-        // let mouseY;
-        const [mouseX, setMouseX] = useState();
-        const [mouseY, setMouseY] = useState();
-        // let circle; // make extra param to treat all cirlces as one to engage FOR 
-
-        // Display the default color slider values
-        outputHue.innerHTML = hueSlider.value;
-
-        // Colour sliders event handler & functions
-
-        // HUE SLIDER
-        hueSlider.oninput = function() {
-        outputHue.innerHTML = this.value;
-        hueRange = this.value;
-        console.log(this.value);
-        };
-
-        // ⚠️ Set circle position function
-        const setCirclePos = (circle) => {
-            // console.log(_cx, _cy);
-            let circleEl = circle.circleElement;
-            circleEl.setAttribute('cx', circle.pX);
-            circleEl.setAttribute('cy', circle.pY);
-        };
-
-        // ⚠️ PHYSICS PARAMETERS AND PROPERTYS ⚠️
-        //position
-        // const circleParams = {
-        //     pX: 250,
-        //     pY: 250,
-        //     vX: 1, 
-        //     vY: 2,
-            // aX: ,
-            // aY // (keep as zero for now)
-        // }
-
-        // let pX = 250, pY = 250;
-        // //velocity
-        // let vX = 1, vY = 2;
-        // //acceleration
-        // let aX, aY; // (keep as zero for now)
-
-        // display default velocity values
-        // velLog.innerHTML = `
-        //         velocityX: ${circle.vX}
-        //         velocityY: ${circle.vY}`;
-
-        // updates velocity/position thru main time loop. 
-        function updatePhysics(circle){
-            //if set velocity from slider, etc, dont have these two
-            // vX += aX;
-            // vY += aY;
-            circle.pX += circle.vX;
-            circle.pY += circle.vY;
-        };
-
-        const velocityIncrease = (circle) => {
-            circle.vY*=1.5;
-            circle.vX*=1.5;
-            console.log(circle.vX, circle.vY);
-            velLog.innerHTML = `
-                velocityX: ${circle.vX}
-                velocityY: ${circle.vY}`;
-
-        };
-        const velocityDecrease = (circle) => {
-            circle.vX/=1.5;
-            circle.vY/=1.5;
-            console.log(circle.vX, circle.vY);
-            velLog.innerHTML = `
-                velocityX: ${circle.vX}
-                velocityY: ${circle.vY}`;
-        }
-
-        // event handlers for velocity increase & decrease
-        velInc.addEventListener("click", velocityIncrease)
-        velDec.addEventListener("click", velocityDecrease)
-
-        // Add action for when passes boundry of SVG
-        function physicsConditions(circle){
-
-            // if circle is past rhs of screen
-            if (circle.pX >= svgW - 40) {
-                // cx = svgW - 40;
-                circle.vX = -Math.abs(circle.vX);
-                //if circle is past lhs of screen
-                } else if (circle.pX <= 40) {
-                // cx = 40;
-                //make sure circle isnt moving left
-                circle.vX = Math.abs(circle.vX);
-                };
-
-            if (circle.pY >= svgH - 40) {
-                // cy = svgH - 40;
-                circle.vY = -Math.abs(circle.vY);
-                } else if (circle.pY <= 40) {
-                // cy = 40;
-                circle.vY = Math.abs(circle.vY);
-                };
-            // return vY, vX;
-        };
-
-
-        // 🧪 !!EXPERIEMENT!! 🧪
-        // circleManager
-
-        // array for amount of circles 
-        // circlesArray = [];
-        const [circlesArray, setCirclesArray] = useState();
-
-        const circleManager = (circle) => {
-        
-        // event handlers to add / remove circles
-        addCircleButton.addEventListener("click", addCircle);
-        removeCircleButton.addEventListener("click", removeCircle);
-
-
-        // TODO: add FOR loop: dynamic change of velocity and class/color change.
-        function addCircle () {
-
-            let circleEl = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        // TODO: Circle object must be formatted and converted to REACT compadible.
-            const [circleObject, setCircleObject] = useState({
-            circleElement: circleEl,
-            pX: Math.random()* 200, // default 250
-            pY: Math.random()* 200, // default 250
-            vX: 1, 
-            vY: 2,
-            });
-
-            circlesArray.push(circleObject);
-
-            circleEl.setAttribute("cx", circleObject.pX);
-            circleEl.setAttribute("cy", circleObject.pY);
-            circleEl.setAttribute("r", 40);
-            circleEl.setAttribute("id", "circle-1");
-            circleEl.setAttribute("style", "fill:hsl(" + hueRange +", 100%, 80%);");
-            console.log(circleEl);
-
-            svg.appendChild(circleEl);
-        };
+const saveDataFunction = () => {
+    let dataObj = {
+        circles: circleCount, 
+        hue: hueValue
+    };
+    localStorage.setItem('params', JSON.stringify(dataObj));
     
-        function removeCircle () {
-            let circleEl = document.getElementById("circle-element");
-            svg.removeChild(circleEl);  
-        };
-        }; // end circleDOM function
+    saveData({ 
+        variables: {params: JSON.stringify(dataObj)} 
+    });
+};
 
-        circleManager();
-        
-        // ⚠️ MAIN TIME LOOP TO RUN SVG APPLICATION ⚠️
-        const mainLoop = () => {
-
-            for (let i = 0; i < circlesArray.length; i++) {
-                const element = circlesArray[i];
-                let circle = circlesArray[i];   
-                physicsConditions(circle);
-                updatePhysics(circle);
-                setCirclePos(circle);
-            };
-            
-            requestAnimationFrame(mainLoop);
-        };
-
-
-        function logKey(e) {
-            screenLog.innerText = `
-                Screen X/Y: ${e.screenX}, ${e.screenY}
-                Client X/Y: ${e.clientX}, ${e.clientY}`;
-            };
-
-        document.addEventListener("mousemove", logKey);
-
-        requestAnimationFrame(mainLoop);
-
-// end poly canvas script.
 
 // return HTML page
 return (
 <>
-<div id="svg-container">
-        <svg id="svg-main" width="500" height="500">
-            {/* svg container for circle generation */}
-        </svg>
-    </div>
-    <br/>
-    <div>
-        <button id="add-circle">+ circle</button>
-        <button id="remove-circle">- circle</button>
-    </div><br/>
+    <div className="main-app-container">
+        <div>
+        <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
+        <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
+        <h2 id="circle-count">{circleCount}</h2>
+        </div>
         <div class="slidecontainer">
             Circle color:
-            <input type="range" min="1" max="359" value="100" class="slider" id="hue-range"/>
-            <h4 id="hue-output">:</h4>
+            <input type="range" min="1" max="359" value={hueValue} class="slider" id="hue-range" onChange={hueChangeHandler}/>
+            <h2 id="hue-output">{hueValue}</h2>
         </div>
-    <div>
-        <button id="vUp">velocity increase</button>
-        <button id="vDown">velocity decrease</button>
-    </div>
-    <div>
-        <h4 id="logger">:</h4>
-        <h4 id="velLog">:</h4>
+        <button onClick={saveDataFunction}>save data</button>
     </div>
 </>
 )

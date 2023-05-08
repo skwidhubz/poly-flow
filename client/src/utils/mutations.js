@@ -1,5 +1,10 @@
 import { gql } from "@apollo/client";
 
+export const SAVE_DATA = gql`
+  mutation saveData($dataObj: String!){
+    saveData(input: $dataObj)
+  }`
+
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
     login(email: $email, password: $password) {

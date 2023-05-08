@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Data } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -17,6 +17,12 @@ const resolvers = {
   },
 
   Mutation: {
+    // saving # of circles and hue from canvas as object 
+    saveData: async (parent, {dataObj}) => {
+      const params = await Data.create({ params: dataObj });
+      return { params };
+    },
+    
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       // check if user exists with email and credentials

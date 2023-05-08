@@ -7,7 +7,7 @@ const polySchema = new Schema(
             type: String,
             required: true,
         },
-        params: {
+        description: {
             type: String,
             required: true,
         },

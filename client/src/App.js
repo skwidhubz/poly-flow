@@ -7,6 +7,7 @@ import Library from './pages/Library';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
+import Footer from './components/Footer';
 import { Route, Routes } from "react-router-dom";
 
 
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
+    <Footer />
     </>
     
   );

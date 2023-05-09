@@ -34,9 +34,11 @@ const saveDataFunction = () => {
     
     saveData({ 
         variables: { Params: JSON.stringify(dataObj) } 
+
+        // update function(?) to clear or update the cache. 
     });
     // MAKE PAGE REFRESH ON SAVE
-    document.location.reload();;
+    document.location.reload();
 };
 
 

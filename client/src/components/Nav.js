@@ -7,22 +7,16 @@ import Auth from '../utils/auth';
 
 const Nav = () => {
 
-  // const [usernameNav, setUsernameNav] = useState();
-  // setUsernameNav({
-  //   Auth.loggedIn({`${Auth.getProfile().data.username}`}
-  //   )});
-
   return (
     <nav className="nav">
 
       <ul id="nav-list">
-        <CustomLink to="/"><img src={logo_image} id="home-image" width='20%' alt='logo with shapes text reading poly flow'/></CustomLink>
-        <CustomLink to="/canvas">Canvas</CustomLink>
+        <CustomLink className="nav-item" to="/"><img src={logo_image} id="home-image" width='20%' alt='logo with shapes text reading poly flow'/></CustomLink>
+        <CustomLink className="nav-item" to="/canvas">Canvas</CustomLink>
         {/* <CustomLink to="/create">Create Poly</CustomLink> */}
-        <CustomLink to="/library">Library</CustomLink>
-        <CustomLink to="/login">Login</CustomLink>
-        <CustomLink to="/signup">Sign Up</CustomLink>
-
+        <CustomLink className="nav-item" to="/library">Library</CustomLink>
+        <CustomLink className="nav-item" to="/login">Login</CustomLink>
+        <CustomLink className="nav-item" to="/signup">Sign Up</CustomLink>
       </ul>
     </nav>
   );

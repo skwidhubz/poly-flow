@@ -19,6 +19,7 @@ const Library = () => {
         dataID
       }
     });
+    // Cache with gql mutation ! ! 
     // MAKE PAGE REFRESH ON DELETE
     document.location.reload();
   }

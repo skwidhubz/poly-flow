@@ -1,3 +1,12 @@
+:root {
+  /* CSS HEX */
+  --royal-blue-web-color: #4169e1ff;
+  --aquamarine: #47e5bcff;
+  --tiffany-blue: #81e4daff;
+  --columbia-blue: #aecfdfff;
+  --coquelicot: #f15327;
+}
+
 .main-app-container {
     display: flex;
     flex-direction: column;
@@ -28,9 +37,22 @@
     cursor: pointer; /* Cursor on hover */
   }
 
+
+
 button {
-    padding: 5px;
-    margin: 20px;
+  background-color: var(--coquelicot);
+  padding: 5px;
+  margin: 20px;
+}
+
+#add-circle {
+  color: var(--royal-blue-web-color);
+}
+#remove-circle {
+  color: var(--royal-blue-web-color);
+}
+#save-data {
+  color: var(--royal-blue-web-color);
 }
 
 h2 {

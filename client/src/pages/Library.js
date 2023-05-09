@@ -3,14 +3,22 @@ import '../styles/library.css'
 import { useQuery, useMutation } from '@apollo/client';
 import { LOAD_DATA } from '../utils/queries';
 import { DELETE_DATA } from '../utils/mutations';
+import { Route, Routes, Link, redirect } from "react-router-dom";
+import Canvas from './Canvas';
 
-    // ?data = do nothing
-
-  // 
 
 const Library = () => {
 
-  const [deleteData] = useMutation(DELETE_DATA);
+  const [deleteData] = useMutation(DELETE_DATA, 
+    {
+      update(cache, { data: { deleteData }}) {
+        console.log(deleteData);
+        cache.writeQuery({
+          query: LOAD_DATA,
+          data: { params: deleteData.savedData },
+        });
+      }
+    });
 
   const deleteDataHandler = async (event) => {
     const dataID = event.target.id;
@@ -18,14 +26,19 @@ const Library = () => {
       variables: {
         dataID
       }
-    });
-    // Cache with gql mutation ! ! 
-    // MAKE PAGE REFRESH ON DELETE
-    document.location.reload();
-  }
+    })
+  };
 
   const { data } = useQuery(LOAD_DATA);
   const savedData = data?.params || "";
+
+  // const blakeTest = 'blake' 
+
+  // const loadDataHandler = (id) => {
+  //   console.log('load handle exe');
+  //   redirect(`/canvas/:${id}`)
+  // };
+
 
 
   return (
@@ -41,6 +54,7 @@ const Library = () => {
             <li key={index}>
               <p>hue: {JSON.parse(data.params).hue}</p> 
               <p>circles: {JSON.parse(data.params).circles}</p>
+              <Link to={`/canvas/${data._id}`}>LOAD</Link>
               <button id={data._id} onClick={deleteDataHandler}>DELETE</button>
             </li>
             )

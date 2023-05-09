@@ -21,6 +21,14 @@
   align-items: flex-end;
 }
 
+button {
+  background-color: var(--coquelicot);
+}
+
+button:hover {
+  background-color: var(--royal-blue-web-color);
+  color: white;
+}
 
 .form-element {
   padding: 10px;
@@ -28,6 +36,7 @@
 
 .form-control {
   margin: 5px;
+  border-radius: 10px;
 }
 
   @media (max-width: 768px) {

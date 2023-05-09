@@ -13,10 +13,13 @@ const Footer = () => {
     return (
         <>
             <div className='footer-container'>
+                <div className="footer-group">
                 <div className='footer-divs'>logged in as: </div>
                 <div className='footer-divs'>{usernameDisp}</div>
-                <br/>
                 <div className='logout-div'><button onClick={logoutHandler}>logout</button></div>
+                </div>
+                <br/>
+
             </div>
         </>
     )

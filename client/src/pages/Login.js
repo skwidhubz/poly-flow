@@ -67,7 +67,7 @@ const LoginForm = () => {
           Something went wrong with your login credentials!
         </Alert>
         <Form.Group>
-          <Form.Label htmlFor="email" className="form-element">Email:</Form.Label>
+          {/* <Form.Label htmlFor="email" className="form-element">Email:</Form.Label> */}
           <Form.Control
             className="form-control"
             type="text"
@@ -80,7 +80,7 @@ const LoginForm = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor="password" className="form-element">Password:</Form.Label>
+          {/* <Form.Label htmlFor="password" className="form-element">Password:</Form.Label> */}
           <Form.Control
             className="form-control"
             type="password"

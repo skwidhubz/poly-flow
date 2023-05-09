@@ -31,6 +31,11 @@ a {
     align-items: center;
   }
 
+.nav li a {
+  transition-duration: 0.4s;
+
+}
+
 .nav li a:hover {
     /* background-color: var(--neutral); */
     color: #F15025;

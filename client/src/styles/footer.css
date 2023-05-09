@@ -14,13 +14,43 @@
     justify-content: center;
     color: var(--columbia-blue);
     padding: 10px;
+    font-size: 10px;
+    
 }
-
+.footer-group {
+  width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .footer-divs {
+  justify-content: flex-start;
   padding-left: 10px;
+  padding: 5px;
+  margin: 20px;
 }
 
 .logout-div {
+  justify-content: flex-end;
   padding-left: 10px; 
 }
+
+button {
+  margin-bottom: 15px;
+  background-color: transparent;
+  color: var(--columbia-blue);
+  transition-duration: 0.4s;
+  border: var(--tiffany-blue);
+  border-style: solid;
+  border-width: 0.5px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+button:hover {
+  background-color: var(--coquelicot);
+  color: white;
+}
+
+
 

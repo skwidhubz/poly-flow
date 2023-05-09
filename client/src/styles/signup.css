@@ -4,6 +4,15 @@
   font-size: 25px;
 }
 
+button {
+  background-color: var(--coquelicot);
+}
+
+button:hover {
+  background-color: var(--royal-blue-web-color);
+  color: white;
+}
+
 .signup-container {
   padding: 20vh;
   display: flex;

@@ -55,7 +55,8 @@ const resolvers = {
           }}
         }
         );
-      return { params, user };
+        console.log(user.email)
+      return user;
     },
     
     login: async (parent, { email, password }) => {

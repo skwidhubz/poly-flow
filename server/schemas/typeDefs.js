@@ -8,9 +8,11 @@ const typeDefs = gql`
     email: String
     polyCount: Int
     savedPolys: [Poly]
+    savedData: [Params]
   }
 
   type Params {
+    _id: ID
     params: String!
   }
 

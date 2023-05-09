@@ -1,14 +1,37 @@
 import React, { useState } from "react";
 import '../styles/canvas.css';
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_DATA } from "../utils/mutations";
-
+import { useParams } from 'react-router-dom'
+import { LOAD_DATA } from "../utils/queries";
 // react app component
 const Canvas = () => {
 
-const [circleCount, setCircleCount] = useState(1);
+const { id } = useParams();
+const { data } = useQuery(LOAD_DATA);
+const loadedData = data?.params.find(element => element.id === data.id);
+console.log(loadedData);
+const loadedID = loadedData._id;
+console.log(loadedID);
+// const [testVar, setTestVar] = useState("");
+
+const [circleCount, setCircleCount] = useState(1); 
+// pull data from ID with ROUTE parameter... 
+//  use ID in query to find certain data and populate. 
 const [hueValue, setHueValue] = useState();
-const [saveData] = useMutation(SAVE_DATA); 
+const [saveData] = useMutation(SAVE_DATA);
+
+// const [saveData] = useMutation(SAVE_DATA,
+//     {
+//         update(cache, { data: { saveData }}) {
+//           console.log(saveData);
+//           cache.writeQuery({
+//             query: SAVE_DATA,
+//             data: { params: saveData.savedData },
+//           });
+//         }
+//       }); 
+// // save instead of delete on data object
 
 const addCircleHandler = () => {
 console.log('add circle');
@@ -46,6 +69,10 @@ const saveDataFunction = () => {
 return (
 <>
     <div className="main-app-container">
+
+        <div>
+            {loadedID}
+        </div>
         <div>
         <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
         <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
@@ -56,7 +83,8 @@ return (
             <input type="range" min="1" max="359" value={hueValue} className="slider" id="hue-range" onChange={hueChangeHandler}/>
             <h2 id="hue-output">Color: {hueValue}</h2>
         </div>
-        <button onClick={saveDataFunction}>save data</button>
+        <button id="save-data" onClick={saveDataFunction}>save data</button>
+
     </div>
 </>
 )

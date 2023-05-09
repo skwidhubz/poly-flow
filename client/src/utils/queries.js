@@ -25,3 +25,11 @@ query Params {
   }
 }
 `
+
+export const LOAD_PARAMS = gql`
+query Load {
+  param {
+    _id
+    params
+  }
+}`

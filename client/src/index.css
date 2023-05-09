@@ -9,7 +9,7 @@
 --aquamarine: #47e5bcff;
 --tiffany-blue: #81e4daff;
 --columbia-blue: #aecfdfff;
---coquelicot: rgb(241, 83, 39);
+--coquelicot: #f15327;
 
 }
 
@@ -29,5 +29,5 @@ code {
 
 .main-container {
   background-color: var(--tiffany-blue);
-  height: 70vh;
+  /* height: 70vh; */
 }

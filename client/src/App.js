@@ -19,7 +19,7 @@ const App = () => {
       <div className="main-container">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/canvas" element={<Canvas />} />
+          <Route path="/canvas/:id?" element={<Canvas />} />
           <Route path="/create" element={<Create />} />
           <Route path="/library" element={<Library />} />
           <Route path="/login" element={<Login />} />

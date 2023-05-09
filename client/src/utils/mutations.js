@@ -4,6 +4,7 @@ export const SAVE_DATA = gql`
   mutation saveData($Params: String!) {
     saveData(input: {params: $Params}) {
         username
+        
     }
   }`
 
@@ -25,7 +26,11 @@ mutation deleteData($dataID: ID) {
   deleteData(dataID: $dataID) {
     _id
     username
-    email 
+    email
+    savedData {
+      _id
+      params
+    }
   }
 }`
 

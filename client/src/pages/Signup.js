@@ -84,7 +84,7 @@ const SignupForm = () => {
         </Alert>
 
         <Form.Group>
-          <Form.Label htmlFor="username" id="name" className="form-element">Username:</Form.Label>
+          {/* <Form.Label htmlFor="username" id="name" className="form-element">Username:</Form.Label> */}
           <Form.Control
             className="form-control"
             type="text"
@@ -98,7 +98,7 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor="email" id="email" className="form-element">Email:</Form.Label>
+          {/* <Form.Label htmlFor="email" id="email" className="form-element">Email:</Form.Label> */}
           <Form.Control
             className="form-control"
             type="email"
@@ -112,7 +112,7 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor="password" id="password" className="form-element">Password:</Form.Label>
+          {/* <Form.Label htmlFor="password" id="password" className="form-element">Password:</Form.Label> */}
           <Form.Control
             className="form-control"
             type="password"

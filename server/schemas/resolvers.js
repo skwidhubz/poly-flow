@@ -1,6 +1,8 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Data } = require("../models");
 const { signToken } = require("../utils/auth");
+const mongoose = require("mongoose");
+
 
 const resolvers = {
   Query: {
@@ -16,8 +18,13 @@ const resolvers = {
     },
 
     // query saved data params
-    params: async () => {
-      return Data.find()
+    params: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+        return userData.savedData;
+      }
     },
   },
 
@@ -29,7 +36,24 @@ const resolvers = {
       const params = await Data.create(input);
       const user = await User.findByIdAndUpdate(
         context.user._id,
-        {savedData: params}
+        {$push: {
+          savedData: params
+        }}
+        );
+      return { params, user };
+    },
+
+    deleteData: async (parent, {dataID}, context) => {
+      console.log(dataID);
+      console.log(context.user._id)
+      const params = await Data.deleteOne({_id : dataID});
+      const user = await User.findByIdAndUpdate(
+        context.user._id,
+        {$pull: {
+          savedData: {
+            _id: mongoose.Types.ObjectId(dataID)
+          }}
+        }
         );
       return { params, user };
     },

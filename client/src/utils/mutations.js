@@ -7,12 +7,6 @@ export const SAVE_DATA = gql`
     }
   }`
 
-export const LOAD_DATA = gql`
-query allData {
-  loaddData {
-    params
-  }
-}`
 
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -25,6 +19,15 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const DELETE_DATA = gql`
+mutation deleteData($dataID: ID) {
+  deleteData(dataID: $dataID) {
+    _id
+    username
+    email 
+  }
+}`
 
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {

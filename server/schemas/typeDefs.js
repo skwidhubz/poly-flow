@@ -25,6 +25,12 @@ const typeDefs = gql`
     user: User
   }
 
+  type Data {
+    _id: ID
+    params: String!
+  }
+
+
   input PolyInput {
     polyId: String!
     description: String
@@ -39,7 +45,9 @@ const typeDefs = gql`
     me: User
   }
 
-
+  type Query {
+    params: [Data]
+  }
 
   type Mutation {
     login(email: String!, password: String!): Auth
@@ -47,6 +55,7 @@ const typeDefs = gql`
     savePoly(input: PolyInput): User
     removePoly(polyId: String!): User
     saveData(input: DataObj): User
+    deleteData(dataID: ID): User
   }
 `;
 

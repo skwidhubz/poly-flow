@@ -16,3 +16,12 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const LOAD_DATA = gql`
+query Params {
+  params {
+    _id
+    params
+  }
+}
+`

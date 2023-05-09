@@ -47,9 +47,9 @@ return (
         <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
         <h2 id="circle-count">{circleCount}</h2>
         </div>
-        <div class="slidecontainer">
+        <div className="slidecontainer">
             Circle color:
-            <input type="range" min="1" max="359" value={hueValue} class="slider" id="hue-range" onChange={hueChangeHandler}/>
+            <input type="range" min="1" max="359" value={hueValue} className="slider" id="hue-range" onChange={hueChangeHandler}/>
             <h2 id="hue-output">{hueValue}</h2>
         </div>
         <button onClick={saveDataFunction}>save data</button>

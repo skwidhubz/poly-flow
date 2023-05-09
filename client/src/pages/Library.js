@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/library.css'
-import { useQuery } from '@apollo/client';
-import { LOAD_DATA } from '../utils/mutations';
+import { useQuery, useMutation } from '@apollo/client';
+import { LOAD_DATA } from '../utils/queries';
+import { DELETE_DATA } from '../utils/mutations';
 
     // ?data = do nothing
 
@@ -9,8 +10,22 @@ import { LOAD_DATA } from '../utils/mutations';
 
 const Library = () => {
 
+  const [deleteData] = useMutation(DELETE_DATA);
+
+  const deleteDataHandler = async (event) => {
+    const dataID = event.target.id;
+    await deleteData({
+      variables: {
+        dataID
+      }
+    });
+    // MAKE PAGE REFRESH ON DELETE
+  }
+
   const { data } = useQuery(LOAD_DATA);
   const savedData = data?.params || "";
+
+
 
   const [defaultText, setText] = useState("enter text");
 
@@ -34,7 +49,20 @@ const Library = () => {
             <input type="submit" value="Submit"/>
         </form>
         <div>
-         <h1>Saved Data:</h1>  {savedData}
+         <h1>Saved Data:</h1> 
+         <ul id="params-list">
+         {
+          savedData ? savedData.map((data, index) => {
+            return (
+            <li key={index}>
+              <p>hue: {JSON.parse(data.params).hue}</p> 
+              <p>circles: {JSON.parse(data.params).circles}</p>
+              <button id={data._id} onClick={deleteDataHandler}>DELETE</button>
+            </li>
+            )
+          }) : <p>no saved data</p>
+         }
+         </ul>
         </div>
       </div>
       </>

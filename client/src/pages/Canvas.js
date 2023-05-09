@@ -35,6 +35,8 @@ const saveDataFunction = () => {
     saveData({ 
         variables: { Params: JSON.stringify(dataObj) } 
     });
+    // MAKE PAGE REFRESH ON SAVE
+    document.location.reload();;
 };
 
 

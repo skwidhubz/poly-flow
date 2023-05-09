@@ -4,6 +4,13 @@
   font-size: 25px;
 }
 
+.library-container {
+  padding: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
   @media (max-width: 768px) {
     #nav-list {

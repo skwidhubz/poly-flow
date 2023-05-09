@@ -12,7 +12,7 @@ const Nav = () => {
       <ul id="nav-list">
         <CustomLink to="/"><img src={logo_image} id="home-image" width='20%' alt='logo with shapes text reading poly flow'/></CustomLink>
         <CustomLink to="/canvas">Canvas</CustomLink>
-        <CustomLink to="/create">Create Poly</CustomLink>
+        {/* <CustomLink to="/create">Create Poly</CustomLink> */}
         <CustomLink to="/library">Library</CustomLink>
         <CustomLink to="/login">Login</CustomLink>
         <CustomLink to="/signup">Sign Up</CustomLink>

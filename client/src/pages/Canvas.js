@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../styles/canvas.css';
 import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_DATA } from "../utils/mutations";
@@ -11,9 +11,14 @@ const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
 const loadedData = data?.params.find(element => element.id === data.id);
 console.log(loadedData);
-const loadedID = loadedData._id;
+const loadedID = loadedData?._id;
 console.log(loadedID);
 // const [testVar, setTestVar] = useState("");
+
+//useEffect to grab incoming data and populate the params with it.
+useEffect(()=> {
+
+}, []);
 
 const [circleCount, setCircleCount] = useState(1); 
 // pull data from ID with ROUTE parameter... 
@@ -70,8 +75,12 @@ return (
 <>
     <div className="main-app-container">
 
+    
         <div>
             {loadedID}
+        </div>
+        <div>
+            <svg className="canvas-svg" width="300" height="300"></svg>
         </div>
         <div>
         <button id="add-circle" onClick={addCircleHandler}>+ circle</button>

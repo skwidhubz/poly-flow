@@ -37,7 +37,10 @@
     cursor: pointer; /* Cursor on hover */
   }
 
-
+.canvas-svg {
+  margin: 5px;
+  background-color: var(--columbia-blue);
+}
 
 button {
   background-color: var(--coquelicot);

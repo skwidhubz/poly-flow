@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import '../styles/nav.css';
 import logo_image from '../images/logo.png';
+import Auth from '../utils/auth';
 
 
 const Nav = () => {
+
+  // const [usernameNav, setUsernameNav] = useState();
+  // setUsernameNav({
+  //   Auth.loggedIn({`${Auth.getProfile().data.username}`}
+  //   )});
 
   return (
     <nav className="nav">
@@ -16,6 +22,7 @@ const Nav = () => {
         <CustomLink to="/library">Library</CustomLink>
         <CustomLink to="/login">Login</CustomLink>
         <CustomLink to="/signup">Sign Up</CustomLink>
+
       </ul>
     </nav>
   );

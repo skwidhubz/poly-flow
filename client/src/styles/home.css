@@ -5,8 +5,22 @@
 }
 
 .welcome-text {
+  font-size: larger;
   color: #47E5BC;
+  font-weight: bold;
 }
+
+.App {
+  background-color: #F15025;
+}
+
+.App-logo {
+  opacity: 0.99;
+  border-radius: 250px;
+  border-style: outset;
+  border-width: 5px;
+}
+
 
 .nav {
     background-color: #4169e1;

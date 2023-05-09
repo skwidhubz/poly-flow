@@ -7,6 +7,13 @@ export const SAVE_DATA = gql`
     }
   }`
 
+export const LOAD_DATA = gql`
+query allData {
+  loaddData {
+    params
+  }
+}`
+
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
     login(email: $email, password: $password) {

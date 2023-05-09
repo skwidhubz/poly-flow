@@ -14,7 +14,14 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+
+    // query saved data params
+    params: async () => {
+      return Data.find()
+    },
   },
+
+
 
   Mutation: {
     // saving # of circles and hue from canvas as object 

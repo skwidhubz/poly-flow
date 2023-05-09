@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "T.Parker 2023",
   "private": true,
-  "proxy": "http://localhost:3001", 
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@apollo/client": "^3.5.10",
     "@apollo/react-hooks": "^4.0.0",
@@ -40,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
   }
 }

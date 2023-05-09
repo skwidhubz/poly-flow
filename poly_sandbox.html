@@ -198,23 +198,10 @@
             };
 
             circlesArray.push(circleObject);
-
             circleEl.setAttribute("cx", circleObject.pX);
             circleEl.setAttribute("cy", circleObject.pY);
             circleEl.setAttribute("r", 40);
             circleEl.setAttribute("id", "circle-1");
-            // this IF chain is not working atm 
-            // if (redRange === 50 !== greenRange == 50 !== blueRange === 50){
-            //     circleEl.setAttribute("style", "fill: rgba(0, 255, 39, 0.2);")
-            // } else if (greenRange == 50 !== blueRange === 50) {
-            // circleEl.setAttribute("style", "fill:rgba(" + redRange + ",255, 39, 0.2);");
-            // } else if (redRange == 50 !== blueRange === 50) {
-            // circleEl.setAttribute("style", "fill: rgba(0, " + greenRange + ", 39, 0.2);")
-            // } else if (redRange == 50 !== greenRange === 50) {
-            // circleEl.setAttribute("style", "fill: rgba(0, 255, " + blueRange +", 0.2);")
-            // } else {          
-            // circleEl.setAttribute("style", "fill:rgba(" + redRange + "," + greenRange + "," + blueRange + "," + "0.2);");
-            // };
             circleEl.setAttribute("style", "fill:hsl(" + hueRange +", 100%, 80%);");
             console.log(circleEl);
 

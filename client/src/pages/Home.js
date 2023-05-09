@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/home.css'
 import logo from '../images/shapeshifter.gif';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
 
 const Home = () => {
     console.log('homepage rendering');

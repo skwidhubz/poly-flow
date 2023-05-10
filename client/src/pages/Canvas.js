@@ -8,38 +8,34 @@ import { LOAD_DATA } from "../utils/queries";
 const Canvas = () => {
 
 const [circleCount, setCircleCount] = useState(1); 
-// pull data from ID with ROUTE parameter... 
-//  use ID in query to find certain data and populate. 
 const [hueValue, setHueValue] = useState();
 const [saveData] = useMutation(SAVE_DATA);
-
-// if logged in ideas:
-// only access/view CANVAS if logged in. 
-
+// useState varibales to fill with loaded LOAD_DATA
+const [loadedCircles, setLoadedCircles] = useState(0);
+const [loadedHue, setLoadedHue] = useState()
 
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
 
-if (!data.params) {
-    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
-} 
 
+// load dataSet from USER ID:
 const loadedData = data?.params.find(element => element.id === data.id);
-console.log(loadedData);
+// console.log(loadedData);
 const loadedID = loadedData?._id;
-console.log(loadedID);
-
-
-// load dataSet from USER ID .
-// const [testVar, setTestVar] = useState("");
+// console.log(loadedID); // loaded data per userID from the library LOAD
+const paramsObject = JSON.parse(loadedData.params); // parse the loaded data to access the SVG parameters
+// console.log(paramsObject); // object holding the parameters loaded from the user ID
+// console.log(paramsObject.circles); // circles = paramsObject.circles
+// console.log(paramsObject.hue); // hue = paramsObject.hue
+const circlesDB = paramsObject.circles;
+const hueDB = paramsObject.hue;
 
 //useEffect to grab incoming data and populate the params with it.
 // first arg is cb func.. when internal vrs change, cb is called. 
-// useEffect(()=> {
-//     let newCircle = loadedDATA2;
-//     setCircleCount(newCircle);
-// }, []); // empty array exe on mount state once.
-
+useEffect(()=> {
+    setLoadedCircles(circlesDB);
+    setLoadedHue(hueDB);
+}, []); // empty array exe on mount state once.
 
 
 // const [saveData] = useMutation(SAVE_DATA,
@@ -56,12 +52,12 @@ console.log(loadedID);
 
 const addCircleHandler = () => {
 console.log('add circle');
-setCircleCount(circleCount + 1);
+setCircleCount(loadedCircles + 1);
 };
 
 const removeCircleHandler = () => {
 console.log('remove circle');
-setCircleCount(circleCount - 1);
+setCircleCount(loadedCircles - 1);
 };
 
 const hueChangeHandler = (event) => {
@@ -85,6 +81,12 @@ const saveDataFunction = () => {
     document.location.reload();
 };
 
+
+  // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
+// console.log(data);
+if (!data?.params) {
+    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+};
 
 // return HTML page
 return (

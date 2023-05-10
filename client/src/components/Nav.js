@@ -7,16 +7,16 @@ import Auth from '../utils/auth';
 
 const Nav = () => {
 
-  const token = localStorage.getItem('usertoken');
+  const token = localStorage.getItem('id_token');
 
   return (
     <nav className="nav">
       {/* make CANVAS and LIBRARY log in dependant.  */}
       <ul id="nav-list">
         <CustomLink className="nav-item" to="/"><img src={logo_image} id="home-image" width='20%' alt='logo with shapes text reading poly flow'/></CustomLink>
-        <CustomLink className={`nav-item ${token=null ? 'disable-link' : ''}`}  to="/canvas">Canvas</CustomLink> 
+        <CustomLink className={`nav-item ${token===null ? 'disable-link' : ''}`}  to="/canvas">Canvas</CustomLink> 
         <CustomLink to="/create">Create Poly</CustomLink>
-        <CustomLink className={`nav-item ${token=null ? 'disable-link' : ''}`} to="/library">Library</CustomLink>
+        <CustomLink className={`nav-item ${token===null ? 'disable-link' : ''}`} to="/library">Library</CustomLink>
         <CustomLink className="nav-item" to="/login">Login</CustomLink>
         <CustomLink className="nav-item" to="/signup">Sign Up</CustomLink>
       </ul>

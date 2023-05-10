@@ -83,62 +83,96 @@ const saveDataFunction = () => {
     document.location.reload();
 };
 
-// END DATABASE FUNCTIONS 
+// 💾 END DATABASE FUNCTIONS 💾
 
-// BEGIN SVG GAME FUNCTIONS
+// 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
 
 // OSC funcs for add or remove circle
 const oscillatorEventADD = () => {
     // instance of A.C (vanilla)
-    const audioContext = new AudioContext();
+  const audioContext = new AudioContext();
 
-    // oscillator node
-    const oscillator = audioContext.createOscillator();
-    oscillator.type = 'sine';
-    oscillator.frequency.value = 523.25; // pitch value (hertz)
+  // create gain node with ADSR envelope
+  const gainNode = audioContext.createGain();
+  const attackTime = 0.1; // in seconds
+  const decayTime = 0.2; // in seconds
+  const sustainLevel = 0.01; // between 0 and 1
+  const releaseTime = 0.1; // in seconds
 
-    // Connect the oscillator to the audioContext
-    oscillator.connect(audioContext.destination);
+  const now = audioContext.currentTime;
+  gainNode.gain.setValueAtTime(0, now);
+  gainNode.gain.linearRampToValueAtTime(1, now + attackTime);
+  gainNode.gain.exponentialRampToValueAtTime(sustainLevel, now + attackTime + decayTime);
+  gainNode.gain.setValueAtTime(sustainLevel, now + attackTime + decayTime + releaseTime);
+  gainNode.gain.linearRampToValueAtTime(0, now + attackTime + decayTime + releaseTime + 0.1);
 
-    // start osc
-    oscillator.start();
+  // oscillator node
+  const oscillator = audioContext.createOscillator();
+  oscillator.type = 'sine';
+  oscillator.frequency.value = 200; // pitch value (hertz)
 
-    // stop osc after 50ms
-    setTimeout(() => {
-      oscillator.stop();
-      setIsPlaying(false);
-    }, 50);
+  // connect the oscillator to the gain node with the ADSR envelope
+  oscillator.connect(gainNode);
 
-    setIsPlaying(true);
-  }; // end of AC func
+  // connect the gain node to the audio context destination
+  gainNode.connect(audioContext.destination);
+
+  // start osc
+  oscillator.start();
+
+  // stop osc after ADSR envelope duration
+  setTimeout(() => {
+    oscillator.stop();
+    setIsPlaying(false);
+  }, (attackTime + decayTime + releaseTime + 0.1) * 1000);
+
+  setIsPlaying(true);
+  }; // end of AC-add func
 
   const oscillatorEventREMOVE = () => {
     // instance of A.C (vanilla)
-    const audioContext = new AudioContext();
+  const audioContext = new AudioContext();
 
-    // oscillator node
-    const oscillator = audioContext.createOscillator();
-    oscillator.type = 'sine';
-    oscillator.frequency.value = 261.63; // pitch value (hertz)
+  // create gain node with ADSR envelope
+  const gainNode = audioContext.createGain();
+  const attackTime = 0.1; // in seconds
+  const decayTime = 0.1; // in seconds
+  const sustainLevel = 0.01; // between 0 and 1
+  const releaseTime = 0.1; // in seconds
 
-    // Connect the oscillator to the audioContext
-    oscillator.connect(audioContext.destination);
+  const now = audioContext.currentTime;
+  gainNode.gain.setValueAtTime(0, now);
+  gainNode.gain.linearRampToValueAtTime(1, now + attackTime);
+  gainNode.gain.exponentialRampToValueAtTime(sustainLevel, now + attackTime + decayTime);
+  gainNode.gain.setValueAtTime(sustainLevel, now + attackTime + decayTime + releaseTime);
+  gainNode.gain.linearRampToValueAtTime(0, now + attackTime + decayTime + releaseTime + 0.1);
 
-    // start osc
-    oscillator.start();
+  // oscillator node
+  const oscillator = audioContext.createOscillator();
+  oscillator.type = 'sawtooth';
+  oscillator.frequency.value = 50; // pitch value (hertz)
 
-    // stop osc after 50ms
-    setTimeout(() => {
-      oscillator.stop();
-      setIsPlaying(false);
-    }, 50);
+  // connect the oscillator to the gain node with the ADSR envelope
+  oscillator.connect(gainNode);
 
-    setIsPlaying(true);
-  }; // end of AC func
+  // connect the gain node to the audio context destination
+  gainNode.connect(audioContext.destination);
+
+  // start osc
+  oscillator.start();
+
+  // stop osc after ADSR envelope duration
+  setTimeout(() => {
+    oscillator.stop();
+    setIsPlaying(false);
+  }, (attackTime + decayTime + releaseTime + 0.1) * 1000);
+
+  setIsPlaying(true);
+  }; // end of AC-remove func
 
 
 
-  // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
+// EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
 // console.log(data);
 if (!data?.params) {
     return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>

@@ -29,6 +29,8 @@ const Library = () => {
     })
   };
 
+
+
   const { data } = useQuery(LOAD_DATA);
   const savedData = data?.params || "";
 
@@ -39,6 +41,9 @@ const Library = () => {
   //   redirect(`/canvas/:${id}`)
   // };
 
+  if (!data.params) {
+    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+} 
 
 
   return (

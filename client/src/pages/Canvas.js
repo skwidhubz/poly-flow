@@ -7,24 +7,40 @@ import { LOAD_DATA } from "../utils/queries";
 // react app component
 const Canvas = () => {
 
-const { id } = useParams();
-const { data } = useQuery(LOAD_DATA);
-const loadedData = data?.params.find(element => element.id === data.id);
-console.log(loadedData);
-const loadedID = loadedData?._id;
-console.log(loadedID);
-// const [testVar, setTestVar] = useState("");
-
-//useEffect to grab incoming data and populate the params with it.
-useEffect(()=> {
-
-}, []);
-
 const [circleCount, setCircleCount] = useState(1); 
 // pull data from ID with ROUTE parameter... 
 //  use ID in query to find certain data and populate. 
 const [hueValue, setHueValue] = useState();
 const [saveData] = useMutation(SAVE_DATA);
+
+// if logged in ideas:
+// only access/view CANVAS if logged in. 
+
+
+const { id } = useParams();
+const { data } = useQuery(LOAD_DATA);
+
+if (!data.params) {
+    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+} 
+
+const loadedData = data?.params.find(element => element.id === data.id);
+console.log(loadedData);
+const loadedID = loadedData?._id;
+console.log(loadedID);
+
+
+// load dataSet from USER ID .
+// const [testVar, setTestVar] = useState("");
+
+//useEffect to grab incoming data and populate the params with it.
+// first arg is cb func.. when internal vrs change, cb is called. 
+// useEffect(()=> {
+//     let newCircle = loadedDATA2;
+//     setCircleCount(newCircle);
+// }, []); // empty array exe on mount state once.
+
+
 
 // const [saveData] = useMutation(SAVE_DATA,
 //     {
@@ -77,7 +93,7 @@ return (
 
     
         <div>
-            {loadedID}
+            {loadedID} 
         </div>
         <div>
             <svg className="canvas-svg" width="300" height="300"></svg>

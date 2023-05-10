@@ -31,3 +31,10 @@ code {
   background-color: var(--tiffany-blue);
   /* height: 70vh; */
 }
+
+.login-warning {
+  padding: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

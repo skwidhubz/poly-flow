@@ -6,33 +6,33 @@ const Create = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const handleClick = () => {
-    // Create a new AudioContext
+  const oscillatorEvent = () => {
+    // instance of A.C (vanilla)
     const audioContext = new AudioContext();
 
-    // Create an OscillatorNode (a source of audio)
+    // oscillator node
     const oscillator = audioContext.createOscillator();
     oscillator.type = 'sine';
-    oscillator.frequency.value = 440; // set frequency to 440Hz (A4)
+    oscillator.frequency.value = 250; // pitch value (hertz)
 
-    // Connect the oscillator to the audioContext's destination
+    // Connect the oscillator to the audioContext
     oscillator.connect(audioContext.destination);
 
-    // Start the oscillator
+    // start osc
     oscillator.start();
 
-    // Stop the oscillator after 1 second
+    // stop osc after 50ms
     setTimeout(() => {
       oscillator.stop();
       setIsPlaying(false);
-    }, 1000);
+    }, 50);
 
     setIsPlaying(true);
-  }
+  }; // end of AC func
 
   return (
-    <div>
-      <button onClick={handleClick}>{isPlaying ? 'Playing...' : 'Play Sine Wave'}</button>
+    <div className='create-audio-container'>
+      <button className='create-button' onClick={oscillatorEvent}>{isPlaying ? 'Playing...' : 'Play Sine Wave'}</button>
     </div>
   );
 };

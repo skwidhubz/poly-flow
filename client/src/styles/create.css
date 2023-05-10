@@ -1,9 +1,28 @@
 @import "../index.css";
 
+:root {
+  /* CSS HEX */
+  --royal-blue-web-color: #4169e1ff;
+  --aquamarine: #47e5bcff;
+  --tiffany-blue: #81e4daff;
+  --columbia-blue: #aecfdfff;
+  --coquelicot: #f15327;
+  
+}
+
 * {
   font-size: 25px;
 }
 
+.create-audio-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.create-button {
+  background-color: var(--royal-blue-web-color)
+}
 
   @media (max-width: 768px) {
     #nav-list {

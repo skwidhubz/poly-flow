@@ -12,7 +12,9 @@ const [hueValue, setHueValue] = useState();
 const [saveData] = useMutation(SAVE_DATA);
 // useState varibales to fill with loaded LOAD_DATA
 const [loadedCircles, setLoadedCircles] = useState(0);
-const [loadedHue, setLoadedHue] = useState()
+const [loadedHue, setLoadedHue] = useState();
+// oscillator func useState
+const [isPlaying, setIsPlaying] = useState(false);
 
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
@@ -81,6 +83,60 @@ const saveDataFunction = () => {
     document.location.reload();
 };
 
+// END DATABASE FUNCTIONS 
+
+// BEGIN SVG GAME FUNCTIONS
+
+// OSC funcs for add or remove circle
+const oscillatorEventADD = () => {
+    // instance of A.C (vanilla)
+    const audioContext = new AudioContext();
+
+    // oscillator node
+    const oscillator = audioContext.createOscillator();
+    oscillator.type = 'sine';
+    oscillator.frequency.value = 523.25; // pitch value (hertz)
+
+    // Connect the oscillator to the audioContext
+    oscillator.connect(audioContext.destination);
+
+    // start osc
+    oscillator.start();
+
+    // stop osc after 50ms
+    setTimeout(() => {
+      oscillator.stop();
+      setIsPlaying(false);
+    }, 50);
+
+    setIsPlaying(true);
+  }; // end of AC func
+
+  const oscillatorEventREMOVE = () => {
+    // instance of A.C (vanilla)
+    const audioContext = new AudioContext();
+
+    // oscillator node
+    const oscillator = audioContext.createOscillator();
+    oscillator.type = 'sine';
+    oscillator.frequency.value = 261.63; // pitch value (hertz)
+
+    // Connect the oscillator to the audioContext
+    oscillator.connect(audioContext.destination);
+
+    // start osc
+    oscillator.start();
+
+    // stop osc after 50ms
+    setTimeout(() => {
+      oscillator.stop();
+      setIsPlaying(false);
+    }, 50);
+
+    setIsPlaying(true);
+  }; // end of AC func
+
+
 
   // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
 // console.log(data);
@@ -101,8 +157,8 @@ return (
             <svg className="canvas-svg" width="300" height="300"></svg>
         </div>
         <div>
-        <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
-        <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
+        <button id="add-circle" onClick={addCircleHandler && oscillatorEventADD}>+ circle</button>
+        <button id="remove-circle" onClick={removeCircleHandler && oscillatorEventREMOVE}>- circle</button>
         <h2 id="circle-count">Circles: {circleCount}</h2>
         </div>
         <div className="slidecontainer">

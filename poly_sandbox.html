@@ -123,7 +123,8 @@
             circle.pY += circle.vY;
         };
 
-        const velocityIncrease = (circle) => {
+        // 🐛
+        const velocityIncrease = (circle) => { 
             circle.vY*=1.5;
             circle.vX*=1.5;
             console.log(circle.vX, circle.vY);
@@ -132,6 +133,7 @@
                 velocityY: ${circle.vY}`;
 
         };
+        // 🐛
         const velocityDecrease = (circle) => {
             circle.vX/=1.5;
             circle.vY/=1.5;
@@ -208,6 +210,7 @@
             svg.appendChild(circleEl);
         };
     
+        // 🐛
         function removeCircle () {
             let circleEl = document.getElementById("circle-element");
             svg.removeChild(circleEl);

@@ -58,10 +58,10 @@ const Library = () => {
           savedData ? savedData.map((data, index) => {
             return (
             <li key={index}>
-              <p>hue: {JSON.parse(data.params).hue}</p> 
-              <p>circles: {JSON.parse(data.params).circles}</p>
-              <Link to={`/canvas/${data._id}`}>LOAD</Link>
-              <button id={data._id} onClick={deleteDataHandler}>DELETE</button>
+              <p>hue: {JSON.parse(data?.params).hue}</p> 
+              <p>circles: {JSON.parse(data?.params).circles}</p>
+              <Link to={`/canvas/${data?._id}`}>LOAD</Link>
+              <button id={data?._id} onClick={deleteDataHandler}>DELETE</button>
             </li>
             )
           }) : <p>no saved data</p>

@@ -26,10 +26,10 @@ const loadedData = data?.params.find(element => element.id === data.id);
 const loadedID = loadedData?._id;
 // console.log(loadedID); // loaded data per userID from the library LOAD
 const paramsObject = JSON.parse(loadedData.params); // parse the loaded data to access the SVG parameters
-// console.log(paramsObject); // object holding the parameters loaded from the user ID
-// console.log(paramsObject.circles); // circles = paramsObject.circles
-// console.log(paramsObject.hue); // hue = paramsObject.hue
-const circlesDB = paramsObject.circles;
+console.log(paramsObject); // object holding the parameters loaded from the user ID
+console.log(paramsObject.circles); // circles = paramsObject.circles
+console.log(paramsObject.hue); // hue = paramsObject.hue
+const circlesDB = paramsObject.circles; 
 const hueDB = paramsObject.hue;
 
 //useEffect to grab incoming data and populate the params with it.
@@ -151,7 +151,7 @@ const oscillatorEventADD = () => {
   // oscillator node
   const oscillator = audioContext.createOscillator();
   oscillator.type = 'sawtooth';
-  oscillator.frequency.value = 50; // pitch value (hertz)
+  oscillator.frequency.value = 40; // pitch value (hertz)
 
   // connect the oscillator to the gain node with the ADSR envelope
   oscillator.connect(gainNode);

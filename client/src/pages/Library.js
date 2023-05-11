@@ -31,15 +31,11 @@ const Library = () => {
 
 
 
-  const { data } = useQuery(LOAD_DATA);
+  const { data } = useQuery(LOAD_DATA); // received new object. change syntax and handling. 
   const savedData = data?.params || "";
+  console.log(savedData);
 
-  // const blakeTest = 'blake' 
-
-  // const loadDataHandler = (id) => {
-  //   console.log('load handle exe');
-  //   redirect(`/canvas/:${id}`)
-  // };
+  
 
   // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
   if (!data?.params) {
@@ -58,8 +54,7 @@ const Library = () => {
           savedData ? savedData.map((data, index) => {
             return (
             <li key={index}>
-              <p>hue: {JSON.parse(data?.params).hue}</p> 
-              <p>circles: {JSON.parse(data?.params).circles}</p>
+              <p>id: {JSON.stringify(data?.params)}</p>
               <Link to={`/canvas/${data?._id}`}>LOAD</Link>
               <button id={data?._id} onClick={deleteDataHandler}>DELETE</button>
             </li>

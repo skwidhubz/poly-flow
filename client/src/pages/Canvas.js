@@ -87,7 +87,8 @@ const saveDataFunction = () => {
 
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
 
-// OSC funcs for add or remove circle
+
+// OSC funcs for add or remove circle 
 const oscillatorEventADD = () => {
     // instance of A.C (vanilla)
   const audioContext = new AudioContext();
@@ -188,7 +189,7 @@ return (
             {loadedID} 
         </div>
         <div>
-            <svg className="canvas-svg" width="300" height="300"></svg>
+            <svg className="canvas-svg" width="400" height="400"></svg>
         </div>
         <div>
         <button id="add-circle" onClick={addCircleHandler && oscillatorEventADD}>+ circle</button>

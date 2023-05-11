@@ -43,7 +43,6 @@ const LoginForm = () => {
       });
 
       Auth.login(data.login.token);
-      document.location.reload();
     } catch (e) {
       console.error(e);
     }

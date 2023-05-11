@@ -7,71 +7,81 @@ import { LOAD_DATA } from "../utils/queries";
 // react app component
 const Canvas = () => {
 
-const [circleCount, setCircleCount] = useState(1); 
-const [hueValue, setHueValue] = useState();
+const [hueValue, setHueValue] = useState(); // current hue value
+const [hueValuesArray, setHueValuesArray] = useState([]); // empty array state for HUE values 
+
 const [saveData] = useMutation(SAVE_DATA);
+
 // useState varibales to fill with loaded LOAD_DATA
 const [loadedCircles, setLoadedCircles] = useState(0);
 const [loadedHue, setLoadedHue] = useState();
+
 // oscillator func useState
 const [isPlaying, setIsPlaying] = useState(false);
 
+//useEffect to grab incoming data and populate the params with it.
+// first arg is cb func.. when internal vrs change, cb is called. 
+// useEffect(()=> {
+//     // setLoadedCircles(circlesDB);
+//     // setLoadedHue(hueDB);
+//     setHueValue([loadedHue]);
+// }, []); // empty array exe on mount state once.
+
+// ARRAY FOR HUE VALUES, ONE PER CIRCLE. Save into object, not circle number. populate num of circles with array length
+
+// const { id } = window.location(!'/canvas') ? useParams() : '';
+
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
-
 
 // load dataSet from USER ID:
 const loadedData = data?.params.find(element => element.id === data.id);
 // console.log(loadedData);
 const loadedID = loadedData?._id;
 // console.log(loadedID); // loaded data per userID from the library LOAD
-const paramsObject = JSON.parse(loadedData.params); // parse the loaded data to access the SVG parameters
+const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
 console.log(paramsObject); // object holding the parameters loaded from the user ID
-console.log(paramsObject.circles); // circles = paramsObject.circles
-console.log(paramsObject.hue); // hue = paramsObject.hue
-const circlesDB = paramsObject.circles; 
-const hueDB = paramsObject.hue;
-
-//useEffect to grab incoming data and populate the params with it.
-// first arg is cb func.. when internal vrs change, cb is called. 
-useEffect(()=> {
-    setLoadedCircles(circlesDB);
-    setLoadedHue(hueDB);
-}, []); // empty array exe on mount state once.
+// console.log(paramsObject.circles); // circles = paramsObject.circles
+// console.log(paramsObject.hue); // hue = paramsObject.hue
+// const circlesDB = paramsObject.circles; 
+const hueDB = paramsObject.length
+console.log(hueDB);
 
 
-// const [saveData] = useMutation(SAVE_DATA,
-//     {
-//         update(cache, { data: { saveData }}) {
-//           console.log(saveData);
-//           cache.writeQuery({
-//             query: SAVE_DATA,
-//             data: { params: saveData.savedData },
-//           });
-//         }
-//       }); 
-// // save instead of delete on data object
 
 const addCircleHandler = () => {
 console.log('add circle');
-setCircleCount(loadedCircles + 1);
+setHueValuesArray(
+    hueValuesArray => [...hueValuesArray, hueValue]
+);
+console.log(hueValuesArray);
 };
 
 const removeCircleHandler = () => {
 console.log('remove circle');
-setCircleCount(loadedCircles - 1);
+// setCircleCount(circleCount - 1);
 };
 
 const hueChangeHandler = (event) => {
-console.log(event.target.value);
+// console.log(event.target.value);
 setHueValue(event.target.value);
+// add the current created hue to the hue array
+
 };
 
+
+// function to update hue into dataObj circles array
 const saveDataFunction = () => {
+
     let dataObj = {
-        circles: circleCount, 
-        hue: hueValue
+        circles: [
+            {
+                hue: hueValue
+            }
+        ]
     };
+
+
     localStorage.setItem('params', JSON.stringify(dataObj));
     
     saveData({ 
@@ -189,12 +199,15 @@ return (
             {loadedID} 
         </div>
         <div>
+            placeholder for SVG title
+        </div>
+        <div>
             <svg className="canvas-svg" width="400" height="400"></svg>
         </div>
         <div>
         <button id="add-circle" onClick={addCircleHandler && oscillatorEventADD}>+ circle</button>
         <button id="remove-circle" onClick={removeCircleHandler && oscillatorEventREMOVE}>- circle</button>
-        <h2 id="circle-count">Circles: {circleCount}</h2>
+        <h2 id="circle-count">Circles: {hueValuesArray.length}</h2>
         </div>
         <div className="slidecontainer">
             Circle color:

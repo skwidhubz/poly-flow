@@ -19,6 +19,9 @@ const [loadedHue, setLoadedHue] = useState();
 // oscillator func useState
 const [isPlaying, setIsPlaying] = useState(false);
 
+//osc for circles created/creating
+const [circles, setCircles] = useState([]);
+
 //useEffect to grab incoming data and populate the params with it.
 // first arg is cb func.. when internal vrs change, cb is called. 
 // useEffect(()=> {
@@ -26,6 +29,11 @@ const [isPlaying, setIsPlaying] = useState(false);
 //     // setLoadedHue(hueDB);
 //     setHueValue([loadedHue]);
 // }, []); // empty array exe on mount state once.
+
+useEffect(() => {
+    setCircles([...circles, newCircle]);
+}, [hueValuesArray]);
+
 
 // ARRAY FOR HUE VALUES, ONE PER CIRCLE. Save into object, not circle number. populate num of circles with array length
 
@@ -44,21 +52,24 @@ console.log(paramsObject); // object holding the parameters loaded from the user
 // console.log(paramsObject.circles); // circles = paramsObject.circles
 // console.log(paramsObject.hue); // hue = paramsObject.hue
 // const circlesDB = paramsObject.circles; 
-const hueDB = paramsObject.length
-console.log(hueDB);
+const circlesArrayFromData = paramsObject.circles
+// console.log(hueDB);
 
-
+let newCircle = circlesArrayFromData?.map(loadedData => <circle cx={250} cy={250} r={40} style={`fill:hsl(${hueValue}, 100%, 80%);`}></circle>);
 
 const addCircleHandler = () => {
 console.log('add circle');
+oscillatorEventADD();
 setHueValuesArray(
     hueValuesArray => [...hueValuesArray, hueValue]
 );
-console.log(hueValuesArray);
+console.log(newCircle);
+// console.log(hueValuesArray);
 };
 
 const removeCircleHandler = () => {
 console.log('remove circle');
+oscillatorEventREMOVE();
 // setCircleCount(circleCount - 1);
 };
 
@@ -76,7 +87,7 @@ const saveDataFunction = () => {
     let dataObj = {
         circles: [
             {
-                hue: hueValue
+                hue: hueValuesArray
             }
         ]
     };
@@ -90,7 +101,7 @@ const saveDataFunction = () => {
         // update function(?) to clear or update the cache. 
     });
     // MAKE PAGE REFRESH ON SAVE
-    document.location.reload();
+    // window.location('/library');
 };
 
 // 💾 END DATABASE FUNCTIONS 💾
@@ -196,18 +207,18 @@ return (
 
     
         <div>
-            {loadedID} 
+            ID from server load: {loadedID} 
         </div>
         <div>
             placeholder for SVG title
         </div>
         <div>
-            <svg className="canvas-svg" width="400" height="400"></svg>
+            <svg className="canvas-svg" style={{backgroundColor: "white"}} width="400" height="400"></svg>
         </div>
         <div>
-        <button id="add-circle" onClick={addCircleHandler && oscillatorEventADD}>+ circle</button>
-        <button id="remove-circle" onClick={removeCircleHandler && oscillatorEventREMOVE}>- circle</button>
-        <h2 id="circle-count">Circles: {hueValuesArray.length}</h2>
+        <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
+        <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
+        <h2 id="circle-count">Circles: {circlesArrayFromData.length}</h2>
         </div>
         <div className="slidecontainer">
             Circle color:

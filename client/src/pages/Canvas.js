@@ -54,8 +54,10 @@ console.log(paramsObject); // object holding the parameters loaded from the user
 // const circlesDB = paramsObject.circles; 
 const circlesArrayFromData = paramsObject.circles
 // console.log(hueDB);
+console.log(circlesArrayFromData);
 
-let newCircle = circlesArrayFromData?.map(loadedData => <circle cx={250} cy={250} r={40} style={`fill:hsl(${hueValue}, 100%, 80%);`}></circle>);
+let newCircle = circles.map(loadedData => <circle cx={200} cy={200} r={40} fill={`hsl(${hueValue}, 100%, 80%);`}></circle>);
+// let newCircle = circles.map(loadedData => <circle cx={200} cy={200} r={40} fill={`hsl(${circlesArrayFromData.hue}, 100%, 80%);`}></circle>);
 
 const addCircleHandler = () => {
 console.log('add circle');
@@ -212,8 +214,10 @@ return (
         <div>
             placeholder for SVG title
         </div>
-        <div>
-            <svg className="canvas-svg" style={{backgroundColor: "white"}} width="400" height="400"></svg>
+        <div className="canvas-svg-div">
+            <svg className="canvas-svg" style={{backgroundColor: "white"}} width="400" height="400">
+                {newCircle}
+            </svg>
         </div>
         <div>
         <button id="add-circle" onClick={addCircleHandler}>+ circle</button>

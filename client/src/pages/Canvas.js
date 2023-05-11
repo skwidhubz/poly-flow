@@ -222,7 +222,7 @@ return (
         <div>
         <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
         <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
-        <h2 id="circle-count">Circles: {circlesArrayFromData.length}</h2>
+        <h2 id="circle-count">Circles: {circlesArrayFromData?.length}</h2>
         </div>
         <div className="slidecontainer">
             Circle color:

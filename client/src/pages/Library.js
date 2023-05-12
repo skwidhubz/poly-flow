@@ -42,17 +42,17 @@ const Library = () => {
   return (
       <>
       <div className='library-container'>
-      <h1>SAVED POLY PAGE</h1>
+      <h1>USER LIBRARY PAGE </h1>
         <div>
-         <h1>Saved Data:</h1> 
+         <h1>Saved Canvas':</h1> 
          <ul id="params-list">
          {
           savedData ? savedData.map((data, index) => {
             return (
-            <li key={index}>
-              <p>id: {JSON.stringify(data?.params)}</p>
-              <Link to={`/canvas/${data?._id}`}>LOAD</Link>
-              <button id={data?._id} onClick={deleteDataHandler}>DELETE</button>
+            <li className="library-li" key={index}>
+              <p>Params: {JSON.stringify(data?.params)}</p>
+              <Link className="library-load lib-button" to={`/canvas/${data?._id}`}>LOAD</Link>
+              <Link className="library-delete lib-button" id={data?._id} onClick={deleteDataHandler}>DELETE</Link>
             </li>
             )
           }) : <p>no saved data</p>

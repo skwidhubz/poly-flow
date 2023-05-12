@@ -20,6 +20,28 @@ button:hover {
   color: white;
 }
 
+.library-li {
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+  padding: 15px;
+  margin: 5px;
+}
+
+.library-load {
+  background-color: rgb(56, 105, 89);
+  width: 150px;
+}
+
+.lib-button {
+  margin: 5px;
+}
+
+.library-delete {
+  background-color: rgb(56, 105, 89);
+  width: 150px;
+}
+
   @media (max-width: 768px) {
     #nav-list {
       display: flex;

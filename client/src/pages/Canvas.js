@@ -22,57 +22,46 @@ const [isPlaying, setIsPlaying] = useState(false);
 //osc for circles created/creating
 const [circles, setCircles] = useState([]);
 
-//useEffect to grab incoming data and populate the params with it.
-// first arg is cb func.. when internal vrs change, cb is called. 
-// useEffect(()=> {
-//     // setLoadedCircles(circlesDB);
-//     // setLoadedHue(hueDB);
-//     setHueValue([loadedHue]);
-// }, []); // empty array exe on mount state once.
-
-useEffect(() => {
-    setCircles([...circles, newCircle]);
-}, [hueValuesArray]);
-
+// useEffect(() => {
+    
+//     console.log("Circles inside UE",circles);
+// }, [circles]);
 
 // ARRAY FOR HUE VALUES, ONE PER CIRCLE. Save into object, not circle number. populate num of circles with array length
-
-// const { id } = window.location(!'/canvas') ? useParams() : '';
 
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
 
 // load dataSet from USER ID:
-const loadedData = data?.params.find(element => element.id === data.id);
-// console.log(loadedData);
+const loadedData = data?.params.find(element => id === element._id);
 const loadedID = loadedData?._id;
-// console.log(loadedID); // loaded data per userID from the library LOAD
 const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
-console.log(paramsObject); // object holding the parameters loaded from the user ID
-// console.log(paramsObject.circles); // circles = paramsObject.circles
-// console.log(paramsObject.hue); // hue = paramsObject.hue
-// const circlesDB = paramsObject.circles; 
-const circlesArrayFromData = paramsObject.circles
-// console.log(hueDB);
-console.log(circlesArrayFromData);
+// console.log(paramsObject); // object holding the parameters loaded from the user ID
+// console.log("Data", paramsObject); // 
 
-let newCircle = circles.map(loadedData => <circle cx={200} cy={200} r={40} fill={`hsl(${hueValue}, 100%, 80%);`}></circle>);
-// let newCircle = circles.map(loadedData => <circle cx={200} cy={200} r={40} fill={`hsl(${circlesArrayFromData.hue}, 100%, 80%);`}></circle>);
+useEffect(()=>{
+    console.log("UE1"); // running on infinite loop. TODO: DEBUG. 
+    setCircles(paramsObject?.circles)
+},[paramsObject])
 
 const addCircleHandler = () => {
-console.log('add circle');
-oscillatorEventADD();
+// console.log('add circle');
+// oscillatorEventADD();
+
+// console.log("New value", hueValue, hueValuesArray);
 setHueValuesArray(
-    hueValuesArray => [...hueValuesArray, hueValue]
+     [...hueValuesArray, hueValue]
+     
 );
-console.log(newCircle);
-// console.log(hueValuesArray);
+let newCircle =  `<circle cx={200} cy={200} r={40} fill={hsl(${hueValue}, 100%, 80%);}></circle>`;
+setCircles([...circles, newCircle]);
+
 };
 
 const removeCircleHandler = () => {
 console.log('remove circle');
-oscillatorEventREMOVE();
-// setCircleCount(circleCount - 1);
+setCircles(circles.slice(0,-1)) // remove last circle in ARRAY
+// oscillatorEventREMOVE();
 };
 
 const hueChangeHandler = (event) => {
@@ -87,13 +76,8 @@ setHueValue(event.target.value);
 const saveDataFunction = () => {
 
     let dataObj = {
-        circles: [
-            {
-                hue: hueValuesArray
-            }
-        ]
+        circles: circles
     };
-
 
     localStorage.setItem('params', JSON.stringify(dataObj));
     
@@ -216,13 +200,13 @@ return (
         </div>
         <div className="canvas-svg-div">
             <svg className="canvas-svg" style={{backgroundColor: "white"}} width="400" height="400">
-                {newCircle}
+                {/* {newCircle} */}
             </svg>
         </div>
         <div>
         <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
         <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
-        <h2 id="circle-count">Circles: {circlesArrayFromData?.length}</h2>
+        <h2 id="circle-count">Circles: {circles?.length}</h2>
         </div>
         <div className="slidecontainer">
             Circle color:

@@ -29,20 +29,16 @@ const Library = () => {
     })
   };
 
-
-
   const { data } = useQuery(LOAD_DATA); // received new object. change syntax and handling. 
   const savedData = data?.params || "";
   console.log(savedData);
 
-  
 
   // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
   if (!data?.params) {
     return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
   } 
-
-
+  
   return (
       <>
       <div className='library-container'>

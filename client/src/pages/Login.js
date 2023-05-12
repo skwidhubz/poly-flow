@@ -42,7 +42,7 @@ const LoginForm = () => {
         variables: { ...userFormData },
       });
 
-      Auth.login(data.login.token);
+      Auth.login(data.login.token); // REDIRECT to library not working TODO 
     } catch (e) {
       console.error(e);
     }

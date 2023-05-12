@@ -204,10 +204,10 @@
             circleEl.setAttribute("cy", circleObject.pY);
             circleEl.setAttribute("r", 40);
             circleEl.setAttribute("id", "circle-1");
-            circleEl.setAttribute("style", "fill:hsl(" + hueRange +", 100%, 80%);");
+            circleEl.setAttribute("style", "fill:hsl(" + hueRange +", 100%, 80%);"); // !
             console.log(circleEl);
 
-            svg.appendChild(circleEl);
+            svg.appendChild(circleEl); // to the SVG
         };
     
         // 🐛

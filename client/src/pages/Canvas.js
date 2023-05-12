@@ -19,7 +19,7 @@ const [loadedHue, setLoadedHue] = useState();
 // oscillator func useState
 const [isPlaying, setIsPlaying] = useState(false);
 
-//osc for circles created/creating
+//CIRCLES ARRAY
 const [circles, setCircles] = useState([]);
 
 // useEffect(() => {
@@ -39,8 +39,9 @@ const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded
 // console.log(paramsObject); // object holding the parameters loaded from the user ID
 // console.log("Data", paramsObject); // 
 
+// running on infinite loop. TODO: DEBUG. 
 useEffect(()=>{
-    console.log("UE1"); // running on infinite loop. TODO: DEBUG. 
+    console.log("UE1"); 
     setCircles(paramsObject?.circles)
 },[paramsObject])
 

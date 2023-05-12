@@ -39,7 +39,6 @@ const loadedData = data?.params.find(element => id === element._id);
 const loadedID = loadedData?._id;
 const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
 
-// TODO: 
 useEffect(()=>{
     console.log("UE1"); 
     setCircles(paramsObject?.circles)
@@ -53,9 +52,8 @@ setHueValuesArray(
      [...hueValuesArray, hueValue]
 );
 let newCircle =  `<circle cx={200} cy={200} r={40} fill={hsl(${hueValue}, 100%, 80%);}></circle>`;
-if(circles!==null){
-    setCircles([...circles, newCircle])
-}
+// 🐛🐛🐛 TODO: 'circles' array is undefined in console and therefor throwing an error when addCircleHandler is executed. 🐛🐛🐛
+setCircles([...circles, newCircle])
 };
 
 const removeCircleHandler = () => {

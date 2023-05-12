@@ -35,9 +35,9 @@ const Library = () => {
 
 
   // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
-  if (!data?.params) {
-    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
-  } 
+  // if (!data?.params) {
+  //   return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+  // } 
   
   return (
       <>

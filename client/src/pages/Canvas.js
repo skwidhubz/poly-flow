@@ -22,6 +22,7 @@ const [isPlaying, setIsPlaying] = useState(false);
 
 //CIRCLES ARRAY
 const [circles, setCircles] = useState([]);
+console.log("circles array", circles);
 
 // useEffect(() => {
     
@@ -47,20 +48,19 @@ useEffect(()=>{
 const addCircleHandler = () => {
 // console.log('add circle');
 oscillatorEventADD();
-
 // console.log("New value", hueValue, hueValuesArray);
 setHueValuesArray(
      [...hueValuesArray, hueValue]
-     
 );
 let newCircle =  `<circle cx={200} cy={200} r={40} fill={hsl(${hueValue}, 100%, 80%);}></circle>`;
-setCircles([...circles, newCircle]);
-
+if(circles!==null){
+    setCircles([...circles, newCircle])
+}
 };
 
 const removeCircleHandler = () => {
 console.log('remove circle');
-setCircles(circles.slice(0,-1)) // remove last circle in ARRAY
+setCircles(circles?.slice(0,-1)) // remove last circle in ARRAY
 oscillatorEventREMOVE();
 };
 
@@ -71,7 +71,7 @@ setHueValue(event.target.value);
 
 };
 
-
+ /// re-var to !duplic.thank
 // save state of canvas function
 const saveDataFunction = () => {
     let dataObj = {
@@ -184,12 +184,11 @@ const oscillatorEventADD = () => {
   }; // end of AC-remove func
 
 
-
 // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
 // console.log(data);
-if (!data?.params) {
-    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
-};
+// if (!data?.params) {
+//     return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+// };
 
 // return HTML page
 return (

@@ -43,6 +43,8 @@ const resolvers = {
       return { params, user };
     },
 
+    
+
     deleteData: async (parent, {dataID}, context) => {
       console.log(dataID);
       console.log(context.user._id)

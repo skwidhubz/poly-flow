@@ -36,14 +36,12 @@ const { data } = useQuery(LOAD_DATA);
 const loadedData = data?.params.find(element => id === element._id);
 const loadedID = loadedData?._id;
 const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
-// console.log(paramsObject); // object holding the parameters loaded from the user ID
-// console.log("Data", paramsObject); // 
 
-// running on infinite loop. TODO: DEBUG. 
+// TODO: 
 useEffect(()=>{
     console.log("UE1"); 
     setCircles(paramsObject?.circles)
-},[paramsObject])
+},[paramsObject.length])
 
 const addCircleHandler = () => {
 // console.log('add circle');

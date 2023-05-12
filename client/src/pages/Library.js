@@ -3,8 +3,8 @@ import '../styles/library.css'
 import { useQuery, useMutation } from '@apollo/client';
 import { LOAD_DATA } from '../utils/queries';
 import { DELETE_DATA } from '../utils/mutations';
-import { Route, Routes, Link, redirect } from "react-router-dom";
-import Canvas from './Canvas';
+import { Link } from "react-router-dom";
+import Auth from '../utils/auth';
 
 
 const Library = () => {
@@ -34,10 +34,17 @@ const Library = () => {
   console.log(savedData);
 
 
+// check if user is logged in to display page 🛡️
+const authCheck = () => {
+  const token = localStorage.getItem('id_token'); // get token from LS
+  const isTokenValid = !(Auth.isTokenExpired(token)); // check if token is still valid
+  const isLoggedIn = token!==null && isTokenValid; // if token exists AND is valid then logged in is true
   // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
-  // if (!data?.params) {
-  //   return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
-  // } 
+  if (!isLoggedIn) {
+      return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+  }};
+  
+  authCheck();
   
   return (
       <>

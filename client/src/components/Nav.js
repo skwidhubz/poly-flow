@@ -18,7 +18,6 @@ const Nav = () => {
       <ul id="nav-list">
         <CustomLink className="nav-item" to="/"><img src={logo_image} id="home-image" width='20%' alt='logo with shapes text reading poly flow'/></CustomLink>
         <CustomLink className={`nav-item ${isLoggedOut ? 'disable-link' : ''}`}  to="/canvas">Canvas</CustomLink> 
-        <CustomLink to="/create">sndbx</CustomLink>
         <CustomLink className={`nav-item ${isLoggedOut ? 'disable-link' : ''}`} to="/library">Library</CustomLink>
         <CustomLink className={`nav-item ${isLoggedIn ? 'disable-link' : ''}`} to="/login">Login</CustomLink>
         <CustomLink className={`nav-item ${isLoggedIn ? 'disable-link' : ''}`} to="/signup">Sign Up</CustomLink>

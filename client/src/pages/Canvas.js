@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styles/canvas.css';
 import { useMutation, useQuery } from "@apollo/client";
-import { SAVE_DATA } from "../utils/mutations";
+import { SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
 import { useParams } from 'react-router-dom'
 import { LOAD_DATA } from "../utils/queries";
 // react app component
@@ -11,6 +11,7 @@ const [hueValue, setHueValue] = useState(); // current hue value
 const [hueValuesArray, setHueValuesArray] = useState([]); // empty array state for HUE values 
 
 const [saveData] = useMutation(SAVE_DATA);
+const [updateData] = useMutation(UPDATE_DATA);
 
 // useState varibales to fill with loaded LOAD_DATA
 const [loadedCircles, setLoadedCircles] = useState(0);
@@ -71,28 +72,33 @@ setHueValue(event.target.value);
 };
 
 
-// function to update hue into dataObj circles array
+// save state of canvas function
 const saveDataFunction = () => {
-
     let dataObj = {
         circles: circles
     };
-
     localStorage.setItem('params', JSON.stringify(dataObj));
     
     saveData({ 
         variables: { Params: JSON.stringify(dataObj) } 
+    })
+};
 
-        // update function(?) to clear or update the cache. 
-    });
-    // MAKE PAGE REFRESH ON SAVE
-    // window.location('/library');
+// update state of canvas function
+const updateDataFunction = () => {
+    let dataObj = {
+        circles: circles
+    };
+    localStorage.setItem('params', JSON.stringify(dataObj));
+    
+    updateData({ 
+        variables: { Params: JSON.stringify(dataObj) } 
+    })
 };
 
 // 💾 END DATABASE FUNCTIONS 💾
 
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
-
 
 // OSC funcs for add or remove circle 
 const oscillatorEventADD = () => {
@@ -189,8 +195,6 @@ if (!data?.params) {
 return (
 <>
     <div className="main-app-container">
-
-    
         <div>
             ID from server load: {loadedID} 
         </div>
@@ -199,7 +203,6 @@ return (
         </div>
         <div className="canvas-svg-div">
             <svg className="canvas-svg" style={{backgroundColor: "white"}} width="400" height="400">
-                {/* {newCircle} */}
             </svg>
         </div>
         <div>
@@ -213,7 +216,7 @@ return (
             <h2 id="hue-output">Color: {hueValue}</h2>
         </div>
         <button id="save-data" onClick={saveDataFunction}>save data</button>
-
+        <button id="save-data" onClick={updateDataFunction}>update data</button>
     </div>
 </>
 )

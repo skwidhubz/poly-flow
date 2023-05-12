@@ -43,6 +43,17 @@ const resolvers = {
       return { params, user };
     },
 
+
+    updateData: async (parent, {input}, context) => {
+      const params = await Data.findByIdAndUpdate(input);
+      const user = await User.findById(
+        context.user._id,
+        {$push: {
+          savedData: params
+        }}
+        );
+      return { params, user };
+    },
     
 
     deleteData: async (parent, {dataID}, context) => {

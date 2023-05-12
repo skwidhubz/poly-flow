@@ -45,7 +45,7 @@ useEffect(()=>{
 
 const addCircleHandler = () => {
 // console.log('add circle');
-// oscillatorEventADD();
+oscillatorEventADD();
 
 // console.log("New value", hueValue, hueValuesArray);
 setHueValuesArray(
@@ -60,7 +60,7 @@ setCircles([...circles, newCircle]);
 const removeCircleHandler = () => {
 console.log('remove circle');
 setCircles(circles.slice(0,-1)) // remove last circle in ARRAY
-// oscillatorEventREMOVE();
+oscillatorEventREMOVE();
 };
 
 const hueChangeHandler = (event) => {

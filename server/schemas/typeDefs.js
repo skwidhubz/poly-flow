@@ -58,6 +58,7 @@ const typeDefs = gql`
     removePoly(polyId: String!): User
     saveData(input: DataObj): User
     deleteData(dataID: ID): User
+    updateData(input: DataObj): User
   }
 `;
 

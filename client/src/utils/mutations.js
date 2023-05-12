@@ -8,6 +8,15 @@ export const SAVE_DATA = gql`
     }
   }`
 
+export const UPDATE_DATA = gql`
+  mutation saveData($Params: String!) {
+    saveData(input: {params: $Params}) {
+        username
+        
+    }
+}`
+
+
 
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {

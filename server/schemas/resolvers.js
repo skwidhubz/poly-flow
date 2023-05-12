@@ -45,8 +45,8 @@ const resolvers = {
 
 
     updateData: async (parent, {input}, context) => {
-      const params = await Data.findByIdAndUpdate(input);
-      const user = await User.findById(
+      const params = await Data.updateOne(input);
+      const user = await User.findByIdAndUpdate(
         context.user._id,
         {$push: {
           savedData: params

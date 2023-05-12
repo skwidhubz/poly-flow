@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
 import { useParams } from 'react-router-dom'
 import { LOAD_DATA } from "../utils/queries";
+
 // react app component
 const Canvas = () => {
 
@@ -23,13 +24,6 @@ const [isPlaying, setIsPlaying] = useState(false);
 //CIRCLES ARRAY
 const [circles, setCircles] = useState([]);
 
-// useEffect(() => {
-    
-//     console.log("Circles inside UE",circles);
-// }, [circles]);
-
-// ARRAY FOR HUE VALUES, ONE PER CIRCLE. Save into object, not circle number. populate num of circles with array length
-
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
 
@@ -38,7 +32,7 @@ const loadedData = data?.params.find(element => id === element._id);
 const loadedID = loadedData?._id;
 const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
 
-// TODO: 
+// UE to iterate loaded data into circles
 useEffect(()=>{
     console.log("UE1"); 
     setCircles(paramsObject?.circles)
@@ -47,15 +41,12 @@ useEffect(()=>{
 const addCircleHandler = () => {
 // console.log('add circle');
 oscillatorEventADD();
-
 // console.log("New value", hueValue, hueValuesArray);
 setHueValuesArray(
-     [...hueValuesArray, hueValue]
-     
+     [...hueValuesArray, hueValue] 
 );
 let newCircle =  `<circle cx={200} cy={200} r={40} fill={hsl(${hueValue}, 100%, 80%);}></circle>`;
 setCircles([...circles, newCircle]);
-
 };
 
 const removeCircleHandler = () => {
@@ -65,12 +56,9 @@ oscillatorEventREMOVE();
 };
 
 const hueChangeHandler = (event) => {
-// console.log(event.target.value);
 setHueValue(event.target.value);
 // add the current created hue to the hue array
-
 };
-
 
 // save state of canvas function
 const saveDataFunction = () => {
@@ -100,7 +88,7 @@ const updateDataFunction = () => {
 
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
 
-// OSC funcs for add or remove circle 
+// OSC funcs for add or remove circle 🔔
 const oscillatorEventADD = () => {
     // instance of A.C (vanilla)
   const audioContext = new AudioContext();
@@ -140,7 +128,7 @@ const oscillatorEventADD = () => {
   }, (attackTime + decayTime + releaseTime + 0.1) * 1000);
 
   setIsPlaying(true);
-  }; // end of AC-add func
+  }; // end of AC-add func 🔔
 
   const oscillatorEventREMOVE = () => {
     // instance of A.C (vanilla)
@@ -181,15 +169,14 @@ const oscillatorEventADD = () => {
   }, (attackTime + decayTime + releaseTime + 0.1) * 1000);
 
   setIsPlaying(true);
-  }; // end of AC-remove func
-
+  }; // end of AC-remove func 🔔
 
 
 // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
 // console.log(data);
-if (!data?.params) {
-    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
-};
+// if (!data?.params) {
+//     return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+// };
 
 // return HTML page
 return (

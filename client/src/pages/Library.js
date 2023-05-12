@@ -35,9 +35,9 @@ const Library = () => {
 
 
   // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
-  if (!data?.params) {
-    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
-  } 
+  // if (!data?.params) {
+  //   return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+  // } 
   
   return (
       <>
@@ -47,7 +47,7 @@ const Library = () => {
          <h1>Saved Canvas':</h1> 
          <ul id="params-list">
          {
-          savedData ? savedData.map((data, index) => {
+          savedData ? savedData?.map((data, index) => {
             return (
             <li className="library-li" key={index}>
               <p>Params: {JSON.stringify(data?.params)}</p>

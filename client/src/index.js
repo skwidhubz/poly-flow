@@ -35,13 +35,14 @@ const client = new ApolloClient({
 ReactDOM.render(  
 <React.StrictMode>
   <ApolloProvider client={client}>
-    <HashRouter>
+    <HashRouter> 
       <App />
     </HashRouter>
   </ApolloProvider>
 </React.StrictMode>,
 document.getElementById('root'));
 
+// switched from BROWSER to HASH Router as pages were not rendering on Heroku thru NavBar click. this has fixed the issue.
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -105,6 +105,12 @@ const updateDataFunction = () => {
 
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
 
+const svg = document.getElementById("svg-main");
+const svgW = svg.getAttribute('width');
+const svgH = svg.getAttribute('height');
+
+
+
 const mainGameLoop = () => {
     
 }
@@ -226,11 +232,11 @@ return (
         </div>
         <div className="slidecontainer">
             Circle color:
-            <input type="range" min="1" max="359" value={hueValue} className="slider" id="hue-range" onChange={hueChangeHandler}/>
+            <input type="range" min="1" max="359" value={hueValue} className="slider" id="hue-range-slider" onChange={hueChangeHandler}/>
             <h2 id="hue-output">Color: {hueValue}</h2>
         </div>
-        <button id="save-data" onClick={saveDataFunction}>save data</button>
-        <button id="save-data" onClick={updateDataFunction}>update data</button>
+        <button id="save-data-button" onClick={saveDataFunction}>save data</button>
+        <button id="update-data-button" onClick={updateDataFunction}>update data</button>
     </div>
 </>
 )

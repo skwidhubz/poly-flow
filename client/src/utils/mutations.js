@@ -9,8 +9,8 @@ export const SAVE_DATA = gql`
   }`
 
 export const UPDATE_DATA = gql`
-  mutation saveData($Params: String!) {
-    saveData(input: {params: $Params}) {
+  mutation updateData($Params: String!) {
+    updateData(input: {params: $Params}) {
         username
         
     }

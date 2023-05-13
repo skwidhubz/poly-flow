@@ -36,17 +36,19 @@ const [circlesArray, setCircles] = useState([]); // this should not throw undefi
 
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
+console.log('raw data useQuery', data);
 
 // load dataSet from USER ID:
 const loadedData = data?.params.find(element => id === element._id);
 const loadedID = loadedData?._id;
 const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
-// console.log('log params object', paramsObject)
+console.log('loaded data', loadedData)
 
 useEffect(()=>{
     console.log("UE-setCircles");
     setCircles(paramsObject?.circles || [] )
-},[paramsObject.length])
+},[paramsObject.length]);
+
 
 // Function to ADD-CIRCLE onClick
 const addCircleHandler = () => {
@@ -55,7 +57,7 @@ oscillatorEventADD();
 setHueValuesArray(
      [...hueValuesArray, hueValue]
 );
-let newCircle =  `<circle cx={200} cy={200} r={15} fill={hsl(${hueValue}, 100%, 80%);}></circle>`;
+let newCircle =  <circle cx={200} cy={200} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
 setCircles([...circlesArray, newCircle]) 
 };
 
@@ -76,7 +78,7 @@ setHueValue(event.target.value);
 const saveDataFunction = () => {
     console.log('saveData exe preOBJ', circlesArray);
     let dataObj = {
-        circles: circlesArray
+        params: circlesArray
     };
     console.log('saveData exe postOBJ', circlesArray);
     localStorage.setItem('params', JSON.stringify(dataObj));
@@ -90,7 +92,7 @@ const saveDataFunction = () => {
 const updateDataFunction = () => {
     console.log('updateData exe');
     let dataObj = {
-        circles: circlesArray
+        params: circlesArray
     };
     console.log(dataObj);
     localStorage.setItem('params', JSON.stringify(dataObj));
@@ -102,6 +104,10 @@ const updateDataFunction = () => {
 // 💾 END DATABASE FUNCTIONS 💾
 
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
+
+const mainGameLoop = () => {
+    
+}
 
 // OSC funcs for add or remove circle 
 const oscillatorEventADD = () => {
@@ -210,7 +216,7 @@ return (
         </div>
         <div className="canvas-svg-div">
             <svg className="canvas-svg" style={{backgroundColor: "white"}} width="300" height="300">
-                {/* insert circles here  */}
+                {circlesArray}
             </svg>
         </div>
         <div>

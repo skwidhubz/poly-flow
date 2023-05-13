@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/library.css'
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ALL, LOAD_DATA } from '../utils/queries';
+import { GET_ALL, LOAD_DATA, LOAD_PARAMS } from '../utils/queries';
 import { DELETE_DATA } from '../utils/mutations';
 import { Link } from "react-router-dom";
 import Auth from '../utils/auth';
@@ -14,7 +14,7 @@ const Library = () => {
       update(cache, { data: { deleteData }}) {
         console.log(deleteData);
         cache.writeQuery({
-          query: LOAD_DATA,
+          query: LOAD_PARAMS,
           data: { params: deleteData.savedData },
         });
       }
@@ -29,13 +29,13 @@ const Library = () => {
     })
   };
 
-  const { data } = useQuery(LOAD_DATA); // received new object. change syntax and handling. 
+  const { data } = useQuery(LOAD_PARAMS); // received new object. change syntax and handling. // query is the LOAD issue. 
   console.log('loaded data', data);
   const savedData = data?.params || "";
   // console.log(savedData);
 
 
-// check if user is logged in to display page 🛡️
+// check if user is logged in to display page 🛡️  
 const authCheck = () => {
   const token = localStorage.getItem('id_token'); // get token from LS
   const isTokenValid = !(Auth.isTokenExpired(token)); // check if token is still valid

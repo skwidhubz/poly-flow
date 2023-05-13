@@ -25,7 +25,7 @@ export const GET_ME = gql`
       }
     }
   }
-`;
+`
 
 export const LOAD_DATA = gql`
 query Params {
@@ -33,13 +33,20 @@ query Params {
     _id
     params
   }
+  me {
+    _id
+  }
 }
 `
 
 export const LOAD_PARAMS = gql`
 query Load {
-  param {
+  params {
     _id
     params
   }
+  me {
+    _id
+  }
 }`
+;

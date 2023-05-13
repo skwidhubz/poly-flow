@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/library.css'
 import { useQuery, useMutation } from '@apollo/client';
-import { LOAD_DATA } from '../utils/queries';
+import { GET_ALL, LOAD_DATA } from '../utils/queries';
 import { DELETE_DATA } from '../utils/mutations';
 import { Link } from "react-router-dom";
 import Auth from '../utils/auth';
@@ -30,8 +30,9 @@ const Library = () => {
   };
 
   const { data } = useQuery(LOAD_DATA); // received new object. change syntax and handling. 
+  console.log('loaded data', data);
   const savedData = data?.params || "";
-  console.log(savedData);
+  // console.log(savedData);
 
 
 // check if user is logged in to display page 🛡️

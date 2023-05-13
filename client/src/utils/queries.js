@@ -2,6 +2,16 @@ import { gql } from "@apollo/client";
 
 // LIBRARY QUERY (per user)
 
+export const GET_ALL = gql`
+query Me {
+  me {
+    savedData {
+      _id
+      params
+    }
+  }
+}`
+
 export const GET_ME = gql`
   {
     me {

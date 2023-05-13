@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
 import { useParams } from 'react-router-dom'
 import { LOAD_DATA } from "../utils/queries";
+import { ReactSVG } from "react-svg";
 import Auth from '../utils/auth';
 
 // react app component
@@ -25,12 +26,12 @@ const [isPlaying, setIsPlaying] = useState(false);
 // TODO: The bug of circlesArray 'undefined' occurs from here onward.
 //CIRCLES ARRAY
 const [circlesArray, setCircles] = useState([]); // this should not throw undefined? 🐛
-console.log("circles array", circlesArray); // circlesArray is already undefined here 🐛
+// console.log("circles array", circlesArray); // circlesArray is already undefined here 🐛
 
 
-useEffect(() => {
-    console.log("Circles inside UE", circlesArray);
-}, [circlesArray]);
+// useEffect(() => {
+//     console.log("Circles inside UE", circlesArray);
+// }, [circlesArray]);
 
 
 const { id } = useParams();
@@ -40,7 +41,7 @@ const { data } = useQuery(LOAD_DATA);
 const loadedData = data?.params.find(element => id === element._id);
 const loadedID = loadedData?._id;
 const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
-console.log('log params object', paramsObject)
+// console.log('log params object', paramsObject)
 
 useEffect(()=>{
     console.log("UE-setCircles");
@@ -49,7 +50,7 @@ useEffect(()=>{
 
 // Function to ADD-CIRCLE onClick
 const addCircleHandler = () => {
-console.log('add circle');
+// console.log('add circle');
 oscillatorEventADD();
 setHueValuesArray(
      [...hueValuesArray, hueValue]
@@ -60,7 +61,7 @@ setCircles([...circlesArray, newCircle])
 
 // Function to REMOVE-CIRCLE onClick
 const removeCircleHandler = () => {
-console.log('remove circle');
+// console.log('remove circle');
 setCircles(circlesArray?.slice(0,-1)) 
 oscillatorEventREMOVE();
 };
@@ -73,11 +74,13 @@ setHueValue(event.target.value);
 
 // save state of canvas function
 const saveDataFunction = () => {
+    console.log('saveData exe preOBJ', circlesArray);
     let dataObj = {
         circles: circlesArray
     };
+    console.log('saveData exe postOBJ', circlesArray);
     localStorage.setItem('params', JSON.stringify(dataObj));
-    
+    console.log(dataObj);
     saveData({ 
         variables: { Params: JSON.stringify(dataObj) } 
     })
@@ -85,11 +88,12 @@ const saveDataFunction = () => {
 
 // update state of canvas function
 const updateDataFunction = () => {
+    console.log('updateData exe');
     let dataObj = {
         circles: circlesArray
     };
+    console.log(dataObj);
     localStorage.setItem('params', JSON.stringify(dataObj));
-    
     updateData({ 
         variables: { Params: JSON.stringify(dataObj) } 
     })
@@ -206,6 +210,7 @@ return (
         </div>
         <div className="canvas-svg-div">
             <svg className="canvas-svg" style={{backgroundColor: "white"}} width="300" height="300">
+                {/* insert circles here  */}
             </svg>
         </div>
         <div>

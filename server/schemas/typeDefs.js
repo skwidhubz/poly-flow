@@ -40,7 +40,7 @@ const typeDefs = gql`
   }
 
   input DataObj {
-    params: String!
+    params: String! 
   }
 
   type Query {

@@ -5,7 +5,7 @@ import App from './App';
 import { setContext } from '@apollo/client/link/context';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -32,14 +32,12 @@ const client = new ApolloClient({
 });
 
 
-
-
 ReactDOM.render(  
 <React.StrictMode>
   <ApolloProvider client={client}>
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </ApolloProvider>
 </React.StrictMode>,
 document.getElementById('root'));

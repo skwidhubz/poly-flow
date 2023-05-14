@@ -105,98 +105,144 @@ const updateDataFunction = () => {
 
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
 
-const svg = document.getElementById("svg-main");
-const svgW = svg.getAttribute('width');
-const svgH = svg.getAttribute('height');
+    // // 🧰 DOCUMENT VARIABLES 🧰
+    //     const svg = document.getElementById("svg-main"); // REACTIFY
+    //     const svgW = svg.getAttribute('width');
+    //     const svgH = svg.getAttribute('height');
+
+    // // 🧰 PHYSICS VARIABLES 🧰
+    //     let cx;// = circleEl1.getAttribute('cx');
+    //     let cy; //= circleEl1.getAttribute('cy');
+
+    // // ⚠️ Set circle position function
+    //     const setCirclePos = (circle) => {
+    //     // console.log(_cx, _cy);
+    //     let circleEl = circle.circleElement; // REACTIFY
+    //     circleEl.setAttribute('cx', circle.pX); // REACTIFY
+    //     circleEl.setAttribute('cy', circle.pY); // REACTIFY
+    //     };
+
+    //     function updatePhysics(circle){
+    //     //if set velocity from slider, etc, dont have these two
+    //     // vX += aX;
+    //     // vY += aY;
+    //     circle.pX += circle.vX;
+    //     circle.pY += circle.vY;
+    //     };
+
+    // Add action for when passes boundry of SVG
+        // function physicsConditions(circle){
+
+        //     // if circle is past rhs of screen
+        //     if (circle.pX >= svgW - 40) {
+        //         // cx = svgW - 40;
+        //         circle.vX = -Math.abs(circle.vX);
+        //         //if circle is past lhs of screen
+        //         } else if (circle.pX <= 40) {
+        //         // cx = 40;
+        //         //make sure circle isnt moving left
+        //         circle.vX = Math.abs(circle.vX);
+        //         };
+
+        //     if (circle.pY >= svgH - 40) {
+        //         // cy = svgH - 40;
+        //         circle.vY = -Math.abs(circle.vY);
+        //         } else if (circle.pY <= 40) {
+        //         // cy = 40;
+        //         circle.vY = Math.abs(circle.vY);
+        //         };
+        //         // return vY, vX;
+        //     };
 
 
+    // // MAIN GAME LOOP 🎮 
+    //     const mainGameLoop = () => {
+            
+            
+    //     }
 
-const mainGameLoop = () => {
-    
-}
+    // OSC funcs for add or remove circle 
+    const oscillatorEventADD = () => {
+        // instance of A.C (vanilla)
+    const audioContext = new AudioContext();
 
-// OSC funcs for add or remove circle 
-const oscillatorEventADD = () => {
-    // instance of A.C (vanilla)
-  const audioContext = new AudioContext();
+    // create gain node with ADSR envelope
+    const gainNode = audioContext.createGain();
+    const attackTime = 0.1; // in seconds
+    const decayTime = 0.2; // in seconds
+    const sustainLevel = 0.01; // between 0 and 1
+    const releaseTime = 0.1; // in seconds
 
-  // create gain node with ADSR envelope
-  const gainNode = audioContext.createGain();
-  const attackTime = 0.1; // in seconds
-  const decayTime = 0.2; // in seconds
-  const sustainLevel = 0.01; // between 0 and 1
-  const releaseTime = 0.1; // in seconds
+    const now = audioContext.currentTime;
+    gainNode.gain.setValueAtTime(0, now);
+    gainNode.gain.linearRampToValueAtTime(1, now + attackTime);
+    gainNode.gain.exponentialRampToValueAtTime(sustainLevel, now + attackTime + decayTime);
+    gainNode.gain.setValueAtTime(sustainLevel, now + attackTime + decayTime + releaseTime);
+    gainNode.gain.linearRampToValueAtTime(0, now + attackTime + decayTime + releaseTime + 0.1);
 
-  const now = audioContext.currentTime;
-  gainNode.gain.setValueAtTime(0, now);
-  gainNode.gain.linearRampToValueAtTime(1, now + attackTime);
-  gainNode.gain.exponentialRampToValueAtTime(sustainLevel, now + attackTime + decayTime);
-  gainNode.gain.setValueAtTime(sustainLevel, now + attackTime + decayTime + releaseTime);
-  gainNode.gain.linearRampToValueAtTime(0, now + attackTime + decayTime + releaseTime + 0.1);
+    // oscillator node
+    const oscillator = audioContext.createOscillator();
+    oscillator.type = 'sine';
+    oscillator.frequency.value = 200; // pitch value (hertz)
 
-  // oscillator node
-  const oscillator = audioContext.createOscillator();
-  oscillator.type = 'sine';
-  oscillator.frequency.value = 200; // pitch value (hertz)
+    // connect the oscillator to the gain node with the ADSR envelope
+    oscillator.connect(gainNode);
 
-  // connect the oscillator to the gain node with the ADSR envelope
-  oscillator.connect(gainNode);
+    // connect the gain node to the audio context destination
+    gainNode.connect(audioContext.destination);
 
-  // connect the gain node to the audio context destination
-  gainNode.connect(audioContext.destination);
+    // start osc
+    oscillator.start();
 
-  // start osc
-  oscillator.start();
+    // stop osc after ADSR envelope duration
+    setTimeout(() => {
+        oscillator.stop();
+        setIsPlaying(false);
+    }, (attackTime + decayTime + releaseTime + 0.1) * 1000);
 
-  // stop osc after ADSR envelope duration
-  setTimeout(() => {
-    oscillator.stop();
-    setIsPlaying(false);
-  }, (attackTime + decayTime + releaseTime + 0.1) * 1000);
+    setIsPlaying(true);
+    }; // end of AC-add func
 
-  setIsPlaying(true);
-  }; // end of AC-add func
+    const oscillatorEventREMOVE = () => {
+        // instance of A.C (vanilla)
+    const audioContext = new AudioContext();
 
-  const oscillatorEventREMOVE = () => {
-    // instance of A.C (vanilla)
-  const audioContext = new AudioContext();
+    // create gain node with ADSR envelope
+    const gainNode = audioContext.createGain();
+    const attackTime = 0.1; // in seconds
+    const decayTime = 0.1; // in seconds
+    const sustainLevel = 0.01; // between 0 and 1
+    const releaseTime = 0.1; // in seconds
 
-  // create gain node with ADSR envelope
-  const gainNode = audioContext.createGain();
-  const attackTime = 0.1; // in seconds
-  const decayTime = 0.1; // in seconds
-  const sustainLevel = 0.01; // between 0 and 1
-  const releaseTime = 0.1; // in seconds
+    const now = audioContext.currentTime;
+    gainNode.gain.setValueAtTime(0, now);
+    gainNode.gain.linearRampToValueAtTime(1, now + attackTime);
+    gainNode.gain.exponentialRampToValueAtTime(sustainLevel, now + attackTime + decayTime);
+    gainNode.gain.setValueAtTime(sustainLevel, now + attackTime + decayTime + releaseTime);
+    gainNode.gain.linearRampToValueAtTime(0, now + attackTime + decayTime + releaseTime + 0.1);
 
-  const now = audioContext.currentTime;
-  gainNode.gain.setValueAtTime(0, now);
-  gainNode.gain.linearRampToValueAtTime(1, now + attackTime);
-  gainNode.gain.exponentialRampToValueAtTime(sustainLevel, now + attackTime + decayTime);
-  gainNode.gain.setValueAtTime(sustainLevel, now + attackTime + decayTime + releaseTime);
-  gainNode.gain.linearRampToValueAtTime(0, now + attackTime + decayTime + releaseTime + 0.1);
+    // oscillator node
+    const oscillator = audioContext.createOscillator();
+    oscillator.type = 'sawtooth';
+    oscillator.frequency.value = 40; // pitch value (hertz)
 
-  // oscillator node
-  const oscillator = audioContext.createOscillator();
-  oscillator.type = 'sawtooth';
-  oscillator.frequency.value = 40; // pitch value (hertz)
+    // connect the oscillator to the gain node with the ADSR envelope
+    oscillator.connect(gainNode);
 
-  // connect the oscillator to the gain node with the ADSR envelope
-  oscillator.connect(gainNode);
+    // connect the gain node to the audio context destination
+    gainNode.connect(audioContext.destination);
 
-  // connect the gain node to the audio context destination
-  gainNode.connect(audioContext.destination);
+    // start osc
+    oscillator.start();
 
-  // start osc
-  oscillator.start();
+    // stop osc after ADSR envelope duration
+    setTimeout(() => {
+        oscillator.stop();
+        setIsPlaying(false);
+    }, (attackTime + decayTime + releaseTime + 0.1) * 1000);
 
-  // stop osc after ADSR envelope duration
-  setTimeout(() => {
-    oscillator.stop();
-    setIsPlaying(false);
-  }, (attackTime + decayTime + releaseTime + 0.1) * 1000);
-
-  setIsPlaying(true);
-  }; // end of AC-remove func
+    setIsPlaying(true);
+    }; // end of AC-remove func
 
 // check if user is logged in to display page 🛡️
 const authCheck = () => {

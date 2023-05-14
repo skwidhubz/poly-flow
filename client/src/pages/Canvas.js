@@ -90,21 +90,18 @@ const updateDataFunction = () => {
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
 
     // 🧰 DOCUMENT VARIABLES 🧰
-        const svg = document.getElementById("svg-main"); // REACTIFY?
-        const svgW = 300;
-        const svgH = 300;
+        const svgW = 300; // SVG Width
+        const svgH = 300; // SVG Height
 
     // 🧰 PHYSICS VARIABLES 🧰
-        const [cx, setCx] = useState();// = circleEl1.getAttribute('cx');
-        const [cy, setCy] = useState();//= circleEl1.getAttribute('cy');
         const [pX, setPx] = useState(Math.random()* 200)
         const [pY, setPy] = useState(Math.random()* 200)
         const [vX, setVx] = useState(1);
         const [vY, setVy] = useState(2);
 
         function updatePhysics(){
-        setPx(pX + vX);
-        setPy(pY + vY);
+        setPx(pX + 1);
+        setPy(pY + 1.5);
         };
 
     // Add action for when passes boundry of SVG
@@ -121,20 +118,19 @@ const updateDataFunction = () => {
                 } else if (pY <= 40) {
                 setVy = Math.abs(vY);
                 };
-                // return vY, vX;
             };
   
 // MAIN GAME LOOP 🎮 
     const mainGameLoop = () => {
             
-    // for (let i = 0; i < circlesArray.length; i++) {
-        // let circleElement = circlesArray[i];   
-        physicsConditions();
-        updatePhysics();
+    for (let i = 0; i < circlesArray.length; i++) {
+        let circleElement = circlesArray[i];   
+        physicsConditions(circleElement);
+        updatePhysics(circleElement);
         // setCirclePos(circleElement);
         // };    
         requestAnimationFrame(mainGameLoop);
-        };
+        }};
 
     // OSC funcs for add or remove circle 
     const oscillatorEventADD = () => {

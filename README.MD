@@ -13,9 +13,7 @@ The concept of this app is to facilitate a relaxing, interactive and creative ex
 ## Deployed Application
 (https://poly-flow.herokuapp.com/)
 <br>
-<p align="center">
 ![polyflow_deployed](https://github.com/skwidhubz/poly-flow/assets/81959922/a2d25a6e-5660-4b88-90bc-514f583d415e)
-</p>
 <br>
 ## Installation
 The dependencies required for this project are: react, apollo, mongoose, graphQL, concurrently, express, jsonwebtoken, bcrypt, react-dom, react-router-dom.

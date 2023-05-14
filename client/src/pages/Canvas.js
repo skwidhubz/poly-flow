@@ -111,19 +111,19 @@ const updateDataFunction = () => {
         function physicsConditions(){
 
             if (pX >= svgW - 40) {
-                setVx = -Math.abs(vX);
+                setVx( -Math.abs(vX));
                 } else if (pX <= 40) {
-                setVx = Math.abs(vX);
+                setVx( Math.abs(vX));
                 };
 
             if (pY >= svgH - 40) {
-                setVy = -Math.abs(vY);
+                setVy( -Math.abs(vY));
                 } else if (pY <= 40) {
-                setVy = Math.abs(vY);
+                setVy( Math.abs(vY));
                 };
             };
 
-
+            
 // start game loop timer on mount
 useEffect(() => {
     const t = d3.timer(mainGameLoop)
@@ -141,7 +141,6 @@ useEffect(() => {
         console.log('loop?');
         // setCirclePos(circleElement);
         // };
- 
         // requestAnimationFrame(mainGameLoop);
         // setTimeout(mainGameLoop, 1000)
         };

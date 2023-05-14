@@ -26,7 +26,8 @@ button:hover {
   background-color: antiquewhite;
   padding: 15px;
   margin: 5px;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 10px 10px rgb(56, 105, 89);
 }
 
 .library-load {
@@ -47,6 +48,9 @@ button:hover {
 }
 
 .lib-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 5px;
 }
 

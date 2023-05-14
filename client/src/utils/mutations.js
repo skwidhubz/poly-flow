@@ -19,8 +19,7 @@ export const UPDATE_DATA = gql`
 export const DELETE_USER_MUTATION = gql`
   mutation {
     deleteUser {
-      id
-      message
+      _id
     }
   }`;
 

@@ -77,13 +77,9 @@ setHueValue(event.target.value);
 
 // save state of canvas function
 const saveDataFunction = () => {
-    console.log('saveData exe preOBJ', circlesArray);
     let dataObj = {
         params: circlesArray
     };
-    console.log('saveData exe postOBJ', circlesArray);
-    localStorage.setItem('params', JSON.stringify(dataObj));
-    console.log(dataObj);
     saveData({ 
         variables: { Params: JSON.stringify(dataObj) } 
     })
@@ -91,13 +87,10 @@ const saveDataFunction = () => {
 
 // update state of canvas function
 const updateDataFunction = () => {
-    console.log('updateData exe');
     let dataObj = {
         _id: loadedID,
         params: circlesArray
     };
-    console.log("Calling update mutation",dataObj);
-    localStorage.setItem('params', JSON.stringify(dataObj));
     updateData({ 
         variables: { Params: JSON.stringify(dataObj) } 
         // add variable as ID

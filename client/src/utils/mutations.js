@@ -6,7 +6,7 @@ export const SAVE_DATA = gql`
         username
         
     }
-  }`
+  }`;
 
 export const UPDATE_DATA = gql`
   mutation updateData($Params: String!) {
@@ -14,9 +14,15 @@ export const UPDATE_DATA = gql`
         username
         
     }
-}`
+}`;
 
-
+export const DELETE_USER_MUTATION = gql`
+  mutation {
+    deleteUser {
+      id
+      message
+    }
+  }`;
 
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -27,8 +33,7 @@ export const LOGIN_USER = gql`
         username
       }
     }
-  }
-`;
+  }`;
 
 export const DELETE_DATA = gql`
 mutation deleteData($dataID: ID) {
@@ -41,7 +46,7 @@ mutation deleteData($dataID: ID) {
       params
     }
   }
-}`
+}`;
 
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
@@ -53,8 +58,7 @@ export const ADD_USER = gql`
         email
       }
     }
-  }
-`;
+}`;
 
 export const SAVE_POLY = gql`
   mutation savePoly($input: PolyInput) {
@@ -68,8 +72,7 @@ export const SAVE_POLY = gql`
         description
       }
     }
-  }
-`;
+  }`;
 
 export const REMOVE_POLY = gql`
   mutation removePoly($polyId: String!) {
@@ -83,5 +86,4 @@ export const REMOVE_POLY = gql`
         description
       }
     }
-  }
-`;
+  }`;

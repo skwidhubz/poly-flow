@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../styles/canvas.css';
 import { useMutation, useQuery } from "@apollo/client";
-import { SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
+import { DELETE_USER_MUTATION, SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
 import { useParams } from 'react-router-dom'
 import { LOAD_DATA } from "../utils/queries";
 import { ReactSVG } from "react-svg";
@@ -15,6 +15,7 @@ const [hueValuesArray, setHueValuesArray] = useState([]); // empty array state f
 
 const [saveData] = useMutation(SAVE_DATA);
 const [updateData] = useMutation(UPDATE_DATA);
+const [deleteUser] = useMutation(DELETE_USER_MUTATION);
 
 // useState varibales to fill with loaded LOAD_DATA
 const [loadedCircles, setLoadedCircles] = useState(0);

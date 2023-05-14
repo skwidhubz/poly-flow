@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^5.4.7",
     "bootstrap": "^4.4.1",
+    "d3": "^7.8.4",
     "graphql": "^16.3.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
@@ -44,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.21.8",
     "tailwindcss": "^3.3.2"
   }
 }

@@ -4,8 +4,10 @@ import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
 import { useParams } from 'react-router-dom'
 import { LOAD_DATA } from "../utils/queries";
-import { ReactSVG } from "react-svg";
+// import { ReactSVG } from "react-svg";
 import Auth from '../utils/auth';
+import * as d3 from "d3";
+
 
 // react app component
 const Canvas = () => {
@@ -95,7 +97,7 @@ const updateDataFunction = () => {
         const svgH = 300; // SVG Height
 
     // 🧰 PHYSICS VARIABLES 🧰
-        const [pX, setPx] = useState(Math.random()* 200)
+        const [pX, setPx] = useState(Math.random()* 150)
         const [pY, setPy] = useState(Math.random()* 200)
         const [vX, setVx] = useState(1);
         const [vY, setVy] = useState(2);
@@ -122,23 +124,29 @@ const updateDataFunction = () => {
             };
 
 
+// start game loop timer on mount
+useEffect(() => {
+    const t = d3.timer(mainGameLoop)
+    return () => t.stop()
+  }, [])
+
   
 // MAIN GAME LOOP 🎮 
     const mainGameLoop = () => {
             
     // for (let i = 0; i < circlesArray.length; i++) {
     //     let circleElement = circlesArray[i];   
-    //     physicsConditions(circleElement);
-        // updatePhysics(circleElement);
+        physicsConditions();
+        updatePhysics();
         console.log('loop?');
         // setCirclePos(circleElement);
         // };
  
         // requestAnimationFrame(mainGameLoop);
-        setTimeout(mainGameLoop, 1000)
+        // setTimeout(mainGameLoop, 1000)
         };
 
-        requestAnimationFrame(mainGameLoop);
+        // requestAnimationFrame(mainGameLoop);
 
     // 🐛 🐛 🐛 => Destroy gameLoop in ReactLifeCycle or change to useEffect. 🐛 🐛 🐛
 

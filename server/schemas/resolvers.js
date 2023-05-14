@@ -107,6 +107,11 @@ const resolvers = {
 
       return { token, user };
     },
+
+    deleteUser: async (parent, args, context) => {
+    const user = await User.findByIdAndDelete(context.user._id)
+    },
+
     savePoly: async (parent, { input }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(

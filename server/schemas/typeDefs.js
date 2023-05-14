@@ -59,6 +59,7 @@ const typeDefs = gql`
     saveData(input: DataObj): User
     deleteData(dataID: ID): User
     updateData(input: DataObj): User
+    deleteUser(input: ID): User
   }
 `;
 

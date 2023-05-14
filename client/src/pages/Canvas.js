@@ -52,6 +52,7 @@ let newCircle =  <circle key={circlesKeyProp} cx={pX} cy={pY} r={15} fill={`hsl(
 setCircles([...circlesArray, newCircle]);
 };
 
+
 // Function to REMOVE-CIRCLE onClick
 const removeCircleHandler = () => {
 // console.log('remove circle');
@@ -119,18 +120,27 @@ const updateDataFunction = () => {
                 setVy = Math.abs(vY);
                 };
             };
+
+
   
 // MAIN GAME LOOP 🎮 
     const mainGameLoop = () => {
             
-    for (let i = 0; i < circlesArray.length; i++) {
-        let circleElement = circlesArray[i];   
-        physicsConditions(circleElement);
-        updatePhysics(circleElement);
+    // for (let i = 0; i < circlesArray.length; i++) {
+    //     let circleElement = circlesArray[i];   
+    //     physicsConditions(circleElement);
+        // updatePhysics(circleElement);
+        console.log('loop?');
         // setCirclePos(circleElement);
-        // };    
+        // };
+ 
+        // requestAnimationFrame(mainGameLoop);
+        setTimeout(mainGameLoop, 1000)
+        };
+
         requestAnimationFrame(mainGameLoop);
-        }};
+
+    // 🐛 🐛 🐛 => Destroy gameLoop in ReactLifeCycle or change to useEffect. 🐛 🐛 🐛
 
     // OSC funcs for add or remove circle 
     const oscillatorEventADD = () => {
@@ -227,7 +237,7 @@ const updateDataFunction = () => {
 
 authCheck();
 
-requestAnimationFrame(mainGameLoop);
+
 
 // return HTML page
 return (

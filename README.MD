@@ -3,6 +3,7 @@
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue)          
 ## Table of Contents                      
 - [Project description](#description)
+- [Deployed Application](#deployed)
 - [Installation](#installation)
 - [License](#license)
 - [Command](#command)

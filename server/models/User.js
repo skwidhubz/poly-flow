@@ -21,8 +21,7 @@ const userSchema = new Schema(
       required: true,
     },
     savedData: [dataSchema],
-    // set savedPOLY to be an array of data that adheres to the polySchema
-    // savedPolys: [polySchema],
+    // save and update data from Canvas page to savedData property on this model.
   },
   // set this to use virtual below
   {

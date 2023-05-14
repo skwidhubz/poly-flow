@@ -29,6 +29,8 @@ const Library = () => {
     })
   };
 
+  
+
   const { data } = useQuery(LOAD_PARAMS); // received new object. change syntax and handling. // query is the LOAD issue. 
   console.log('loaded data', data);
   const savedData = data?.params || "";
@@ -47,12 +49,13 @@ const authCheck = () => {
   
   authCheck();
   
+
+  
   return (
       <>
       <div className='library-container'>
-      <h1>USER LIBRARY PAGE </h1>
+      <button id='library-refresh-button' onClick={()=>{window.location.reload()}}><h1>REFRESH USER LIBRARY</h1></button>
         <div>
-         <h1>Saved Canvas':</h1> 
          <ul id="params-list">
          {
           savedData ? savedData.map((data, index) => {

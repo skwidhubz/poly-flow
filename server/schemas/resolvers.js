@@ -56,7 +56,7 @@ const resolvers = {
       const savedDataObject = await userObject.savedData;
       const matchedID = await savedDataObject.map(element => savedDataObject._id = dataID);
       console.log("arrayID", savedDataObject._id, "matchedID", matchedID);
-      const user = await User.findByIdAndUpdate(
+      const user = await User.findByIdAndUpdate( 
         context.user._id,
         {$push: {
           savedData: {

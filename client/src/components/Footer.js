@@ -1,12 +1,15 @@
 import React from 'react';
 import '../styles/footer.css';
 import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { DELETE_USER_MUTATION } from '../utils/mutations';
 
 const Footer = () => {
 
+    const [deleteUser] = useQuery(DELETE_USER_MUTATION);
     
     const deleteUserHandler = () => {
-        // insert delete mutation
+        deleteUser();
         alert("Your user profile was deleted.");
     };
     

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../styles/canvas.css';
 import { useMutation, useQuery } from "@apollo/client";
-import { DELETE_USER_MUTATION, SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
+import { SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
 import { useParams } from 'react-router-dom'
 import { LOAD_DATA } from "../utils/queries";
 import { ReactSVG } from "react-svg";
@@ -15,51 +15,41 @@ const [hueValuesArray, setHueValuesArray] = useState([]); // empty array state f
 
 const [saveData] = useMutation(SAVE_DATA);
 const [updateData] = useMutation(UPDATE_DATA);
-const [deleteUser] = useMutation(DELETE_USER_MUTATION);
-
-// useState varibales to fill with loaded LOAD_DATA
-const [loadedCircles, setLoadedCircles] = useState(0);
-const [loadedHue, setLoadedHue] = useState();
 
 // oscillator func useState
 const [isPlaying, setIsPlaying] = useState(false);
 
-// TODO: The bug of circlesArray 'undefined' occurs from here onward.
 //CIRCLES ARRAY
-const [circlesArray, setCircles] = useState([]); // this should not throw undefined? 🐛
-// console.log("circles array", circlesArray); // circlesArray is already undefined here 🐛
-
-
-// useEffect(() => {
-//     console.log("Circles inside UE", circlesArray);
-// }, [circlesArray]);
-
+const [circlesArray, setCircles] = useState([]); 
+const [circlesKeyProp, setCirclesKeyProp] = useState(1);
 
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
-console.log('raw data useQuery', data);
+// console.log('raw data useQuery', data);
 
 // load dataSet from USER ID:
 const loadedData = data?.params.find(element => id === element._id);
 const loadedID = loadedData?._id;
 const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
-console.log('loaded data', loadedData)
+// console.log('loaded data', loadedData)
 
 useEffect(()=>{
-    console.log("UE-setCircles");
+    // console.log("UE-setCircles");
     setCircles(paramsObject?.circles || [] )
 },[paramsObject.length]);
 
 
 // Function to ADD-CIRCLE onClick
-const addCircleHandler = () => {
+const addCircleHandler = (circle) => {
 // console.log('add circle');
 oscillatorEventADD();
+setCirclesKeyProp(
+    circlesKeyProp+1)
 setHueValuesArray(
      [...hueValuesArray, hueValue]
 );
-let newCircle =  <circle cx={200} cy={200} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
-setCircles([...circlesArray, newCircle]) 
+let newCircle =  <circle key={circlesKeyProp} cx={pX} cy={pY} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
+setCircles([...circlesArray, newCircle]);
 };
 
 // Function to REMOVE-CIRCLE onClick
@@ -71,8 +61,6 @@ oscillatorEventREMOVE();
 
 const hueChangeHandler = (event) => {
 setHueValue(event.target.value);
-// add the current created hue to the hue array
-
 };
 
 // save state of canvas function
@@ -101,61 +89,52 @@ const updateDataFunction = () => {
 
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
 
-    // // 🧰 DOCUMENT VARIABLES 🧰
-    //     const svg = document.getElementById("svg-main"); // REACTIFY
-    //     const svgW = svg.getAttribute('width');
-    //     const svgH = svg.getAttribute('height');
+    // 🧰 DOCUMENT VARIABLES 🧰
+        const svg = document.getElementById("svg-main"); // REACTIFY?
+        const svgW = 300;
+        const svgH = 300;
 
-    // // 🧰 PHYSICS VARIABLES 🧰
-    //     let cx;// = circleEl1.getAttribute('cx');
-    //     let cy; //= circleEl1.getAttribute('cy');
+    // 🧰 PHYSICS VARIABLES 🧰
+        const [cx, setCx] = useState();// = circleEl1.getAttribute('cx');
+        const [cy, setCy] = useState();//= circleEl1.getAttribute('cy');
+        const [pX, setPx] = useState(Math.random()* 200)
+        const [pY, setPy] = useState(Math.random()* 200)
+        const [vX, setVx] = useState(1);
+        const [vY, setVy] = useState(2);
 
-    // // ⚠️ Set circle position function
-    //     const setCirclePos = (circle) => {
-    //     // console.log(_cx, _cy);
-    //     let circleEl = circle.circleElement; // REACTIFY
-    //     circleEl.setAttribute('cx', circle.pX); // REACTIFY
-    //     circleEl.setAttribute('cy', circle.pY); // REACTIFY
-    //     };
-
-    //     function updatePhysics(circle){
-    //     //if set velocity from slider, etc, dont have these two
-    //     // vX += aX;
-    //     // vY += aY;
-    //     circle.pX += circle.vX;
-    //     circle.pY += circle.vY;
-    //     };
+        function updatePhysics(){
+        setPx(pX + vX);
+        setPy(pY + vY);
+        };
 
     // Add action for when passes boundry of SVG
-        // function physicsConditions(circle){
+        function physicsConditions(){
 
-        //     // if circle is past rhs of screen
-        //     if (circle.pX >= svgW - 40) {
-        //         // cx = svgW - 40;
-        //         circle.vX = -Math.abs(circle.vX);
-        //         //if circle is past lhs of screen
-        //         } else if (circle.pX <= 40) {
-        //         // cx = 40;
-        //         //make sure circle isnt moving left
-        //         circle.vX = Math.abs(circle.vX);
-        //         };
+            if (pX >= svgW - 40) {
+                setVx = -Math.abs(vX);
+                } else if (pX <= 40) {
+                setVx = Math.abs(vX);
+                };
 
-        //     if (circle.pY >= svgH - 40) {
-        //         // cy = svgH - 40;
-        //         circle.vY = -Math.abs(circle.vY);
-        //         } else if (circle.pY <= 40) {
-        //         // cy = 40;
-        //         circle.vY = Math.abs(circle.vY);
-        //         };
-        //         // return vY, vX;
-        //     };
-
-
-    // // MAIN GAME LOOP 🎮 
-    //     const mainGameLoop = () => {
+            if (pY >= svgH - 40) {
+                setVy = -Math.abs(vY);
+                } else if (pY <= 40) {
+                setVy = Math.abs(vY);
+                };
+                // return vY, vX;
+            };
+  
+// MAIN GAME LOOP 🎮 
+    const mainGameLoop = () => {
             
-            
-    //     }
+    // for (let i = 0; i < circlesArray.length; i++) {
+        // let circleElement = circlesArray[i];   
+        physicsConditions();
+        updatePhysics();
+        // setCirclePos(circleElement);
+        // };    
+        requestAnimationFrame(mainGameLoop);
+        };
 
     // OSC funcs for add or remove circle 
     const oscillatorEventADD = () => {
@@ -241,16 +220,18 @@ const updateDataFunction = () => {
     }; // end of AC-remove func
 
 // check if user is logged in to display page 🛡️
-const authCheck = () => {
-const token = localStorage.getItem('id_token'); // get token from LS
-const isTokenValid = !(Auth.isTokenExpired(token)); // check if token is still valid
-const isLoggedIn = token!==null && isTokenValid; // if token exists AND is valid then logged in is true
-// EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
-if (!isLoggedIn) {
-    return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
-}};
+    const authCheck = () => {
+    const token = localStorage.getItem('id_token'); // get token from LS
+    const isTokenValid = !(Auth.isTokenExpired(token)); // check if token is still valid
+    const isLoggedIn = token!==null && isTokenValid; // if token exists AND is valid then logged in is true
+    // EARLY RETURN IF STATEMENT FUCTION TO DISABLE PAGE FUNCTION IF !LOGGED-IN
+    if (!isLoggedIn) {
+        return <p className='login-warning'>Please signup and/or login to view this page 🙏</p>
+    }};
 
 authCheck();
+
+requestAnimationFrame(mainGameLoop);
 
 // return HTML page
 return (
@@ -263,7 +244,7 @@ return (
             placeholder for SVG title
         </div>
         <div className="canvas-svg-div">
-            <svg className="canvas-svg" style={{backgroundColor: "white"}} width="300" height="300">
+            <svg className="canvas-svg" id="svg-main" style={{backgroundColor: "white"}} width="300" height="300">
                 {circlesArray}
             </svg>
         </div>

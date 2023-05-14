@@ -43,17 +43,30 @@ const resolvers = {
       return { params, user };
     },
 
-
+    //🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛
+// find the data
+// then update the data with the new input
+// reference the user, then the saved data array of the user, then the object ID within that user 
     updateData: async (parent, {input}, context) => {
-      const params = await Data.findByIdAndUpdate(input);
-      const user = await User.findById(
+      // console.log("All consts: ",input);
+      const dataID = await JSON.parse(input.params)._id;
+      const userID = await context.user._id;
+      const dataObject = await Data.findById(dataID);
+      const userObject = await User.findById(userID);
+      const savedDataObject = await userObject.savedData;
+      const matchedID = await savedDataObject.map(element => savedDataObject._id = dataID);
+      await console.log("arrayID", savedDataObject._id, "matchedID", matchedID);
+      const user = await User.findByIdAndUpdate(
         context.user._id,
         {$push: {
-          savedData: params
+          savedData: {
+            _id: mongoose.Types.ObjectId(dataID),
+            params: JSON.stringify(dataObject),
+          }
         }}
-        );
-      return { params, user };
+      )
     },
+        //🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛🐛
     
 
     deleteData: async (parent, {dataID}, context) => {

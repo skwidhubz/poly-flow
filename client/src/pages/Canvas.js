@@ -92,12 +92,14 @@ const saveDataFunction = () => {
 const updateDataFunction = () => {
     console.log('updateData exe');
     let dataObj = {
+        _id: loadedID,
         params: circlesArray
     };
-    console.log(dataObj);
+    console.log("Calling update mutation",dataObj);
     localStorage.setItem('params', JSON.stringify(dataObj));
     updateData({ 
         variables: { Params: JSON.stringify(dataObj) } 
+        // add variable as ID
     })
 };
 

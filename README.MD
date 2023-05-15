@@ -18,6 +18,7 @@ The concept of this app is to facilitate a relaxing, interactive and creative ex
 <br>
 ## Installation
 The dependencies required for this project are:
+<html>
 <ul>
   <li>react</li>
   <li>apollo</li>
@@ -30,10 +31,14 @@ The dependencies required for this project are:
   <li>react-dom</li>
   <li>react-router-dom</li>
 </ul>
+ </html>
+
 ## Command
 The command line execution is: npm run develop 
+
 ## Contributors
 T Parker contributed to this project.
+
 ## Questions
 - My GitHub page: (https://github.com/skwidhubz)
 - Please contact me at: tommaxwellparker@gmail.com

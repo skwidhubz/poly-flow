@@ -61,6 +61,6 @@ MIT
 
 
 
-🤍 - skwidhubz 2023 - 🤍
+🤍 - [skwidhubz](https://github.com/skwidhubz) 2023 - 🤍
 
 

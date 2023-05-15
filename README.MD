@@ -27,16 +27,20 @@ Video demonstration of application:
 The dependencies required for this project are:
 <html>
 <ul>
-  <li>react</li>
-  <li>apollo</li>
-  <li>mongoose</li>
-  <li>graphQL</li>
-  <li>concurrently</li>
-  <li>express</li>
-  <li>jsonwebtoken</li>
-  <li>bcrypt</li>
-  <li>react-dom</li>
-  <li>react-router-dom</li>
+  <li>React</li>
+  <li>Apollo</li>
+  <li>Apollo-server-express</li>
+  <li>Dotenv</li>
+  <li>Mongoose</li>
+  <li>MongoDB</li>
+  <li>GraphQL</li>
+  <li>Concurrently</li>
+  <li>Express</li>
+  <li>JWT</li>
+  <li>Bcrypt</li>
+  <li>React-dom</li>
+  <li>React-router-dom</li>
+  <li>
 </ul>
  </html>
 

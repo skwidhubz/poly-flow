@@ -4,6 +4,7 @@
 ## Table of Contents                      
 - [Project description](#description)
 - [Deployed Application](#deployed)
+- [Demonstration](#demonstration)
 - [Installation](#installation)
 - [License](#license)
 - [Command](#command)
@@ -18,6 +19,7 @@ The 'Canvas' is designed to be intuitive and yet also rely on the users curiosit
 
 ![polyflow_deployed](https://github.com/skwidhubz/poly-flow/assets/81959922/a2d25a6e-5660-4b88-90bc-514f583d415e)
 
+## Demonstration
 Video demonstration of application:
 (https://clipchamp.com/watch/6NnQpEqjKbS)
 

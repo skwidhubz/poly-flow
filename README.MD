@@ -36,7 +36,8 @@ The dependencies required for this project are:
   <li>GraphQL</li>
   <li>Concurrently</li>
   <li>Express</li>
-  <li>JWT</li>
+  <li>jsonwebtoken</li>
+  <li>JWT-decode
   <li>Bcrypt</li>
   <li>React-dom</li>
   <li>React-router-dom</li>

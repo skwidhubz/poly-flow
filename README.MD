@@ -45,7 +45,7 @@ The dependencies required for this project are:
  </html>
 
 ## Command
-The command line execution is: npm run develop 
+The command line execution is: `npm run develop`
 
 ## Contributors
 T Parker contributed to this project.

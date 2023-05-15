@@ -14,9 +14,9 @@
     justify-content: center;
     color: var(--columbia-blue);
     padding: 10px;
-    font-size: 10px;
-    
+    font-size: 10px;  
 }
+
 .footer-group {
   width: 70vw;
   display: flex;
@@ -58,5 +58,11 @@ button:hover {
   color: white;
 }
 
+@media (max-width: 768px) {
+  .footer-item {
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 

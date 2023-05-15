@@ -14,6 +14,13 @@
     padding: 50px;
 }
 
+#svg-main {
+  border-style: solid;
+  border-color: #04AA6D;
+  border-width: 1px;
+  border-radius: 10px;
+}
+
 /* The slider itself */
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
@@ -32,7 +39,7 @@
     -webkit-appearance: none; /* Override default look */
     appearance: none;
     width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
+    height: 35px; /* Slider handle height */
     background: #04AA6D; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
@@ -54,9 +61,22 @@ button {
 
 #save-data-button {
   color: #04AA6D;
+  width: 150px;
+  padding: 10px;
+  font-size: 25px;
 }
+#save-data-button:hover {
+  color: aliceblue;
+}
+
 #update-data-button {
   color: #04AA6D;
+  width: 180px;
+  padding: 10px;
+  font-size: 25px;
+}
+#update-data-button:hover {
+  color: aliceblue;
 }
 
 #add-circle {
@@ -73,3 +93,11 @@ h2 {
     background-color: aliceblue;
 }
 
+.canvas-hue-display {
+  border-style: solid;
+  border-color: #04AA6D;
+  border-width: 1px;
+  border-radius: 10px;
+  width: 200px;
+  margin: 10px;
+}

@@ -61,7 +61,7 @@ console.log("cX", cX, "cY", cY);
 setCx(randomValueBetween(20, 280));
 setCy(randomValueBetween(20, 280));
 console.log("cX", cX, "cY", cY);
-let newCircle =  <circle key={circlesKeyProp} cx={cX} cy={cY} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
+let newCircle =  <circle key={circlesKeyProp} cx={cX} cy={cY} r={20} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
 setCircles([...circlesArray, newCircle]);
 };
 
@@ -196,8 +196,8 @@ const updateDataFunction = () => {
 
     // oscillator node
     const oscillator = audioContext.createOscillator();
-    oscillator.type = 'sine';
-    oscillator.frequency.value = 200; // pitch value (hertz)
+    oscillator.type = 'triangle';
+    oscillator.frequency.value = 220; // pitch value (hertz)
 
     // connect the oscillator to the gain node with the ADSR envelope
     oscillator.connect(gainNode);
@@ -277,25 +277,26 @@ return (
 <>
     <div className="main-app-container">
         <div>
-           <p className="canvas-loaded-id">💾 loadedDataID : {loadedID} </p> 
+           {/* <p className="canvas-loaded-id">💾 loadedDataID : {loadedID} </p>  */}
         </div>
         <div>
             {/* <span className="span-tester">UEtest inc. : N/a</span> */}
         </div>
         <div className="canvas-svg-div">
-            <svg className="canvas-svg" id="svg-main" style={{backgroundColor: "white"}} width="300" height="300">
+            <svg className="canvas-svg" id="svg-main" style={{backgroundColor: "white"}} width="350" height="350">
                 {circlesArray}
             </svg>
         </div>
         <div>
-        <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
-        <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
-        <h2 id="circle-count">Circles: {circlesArray?.length}</h2>
+        <button id="add-circle" onClick={addCircleHandler}>➕</button>
+        <button id="remove-circle" onClick={removeCircleHandler}>➖</button>
+        {/* <h2 id="circle-count">Circles: {circlesArray?.length}</h2> */}
         </div>
         <div className="slidecontainer">
-            Circle color:
+            {/* Circle color: */}
             <input type="range" min="1" max="359" value={hueValue} className="slider" id="hue-range-slider" onChange={hueChangeHandler}/>
-            <h2 id="hue-output">Color: {hueValue}</h2>
+            <div className="canvas-hue-display" style={{backgroundColor: `hsl(${hueValue}, 100%, 80%)`, padding: "20px"}}></div>
+            {/* <h2 id="hue-output">Color: {hueValue}</h2> */}
         </div>
         <button id="save-data-button" onClick={saveDataFunction}>save data</button>
         <button id="update-data-button" onClick={updateDataFunction}>update data</button>

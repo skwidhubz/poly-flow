@@ -22,24 +22,36 @@ button:hover {
 
 .library-li {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background-color: antiquewhite;
   padding: 15px;
-  margin: 5px;
+  margin: 20px;
   border-radius: 10px;
   box-shadow: 10px 10px rgb(56, 105, 89);
 }
 
+#library-poly-id {
+  padding-left: 5px;
+  padding-right: 20px;
+}
+
 .library-load {
   background-color: rgb(56, 105, 89);
-  width: 150px;
+  width: 100px;
+}
+
+.library-load:hover {
+  background-color: rgb(69, 96, 231);
+  width: 100px;
 }
 
 #library-refresh-button {
   border-style: solid;
-  border-width: 3px;
+  border-width: 1px;
   border-color: black;
   background-color: cornflowerblue;
+  font-size: 20px;
+  padding: 10px;
 }
 
 #library-refresh-button:hover {
@@ -52,15 +64,28 @@ button:hover {
   align-items: center;
   justify-content: center;
   margin: 5px;
+  font-size: 20px;
+  border-radius: 8px;
 }
 
 .library-delete {
   background-color: rgb(56, 105, 89);
-  width: 150px;
+  width: 100px;
+  font-size: 15px;
+}
+
+.library-delete:hover {
+  background-color: rgb(167, 57, 53);
+  width: 100px;
+  font-size: 15px;
 }
 
   @media (max-width: 768px) {
     #nav-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .library-li {
       display: flex;
       flex-direction: column;
     }

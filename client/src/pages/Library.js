@@ -54,14 +54,14 @@ const authCheck = () => {
   return (
       <>
       <div className='library-container'>
-      <button id='library-refresh-button' onClick={()=>{window.location.reload()}}><h1>REFRESH USER LIBRARY</h1></button>
+      <button id='library-refresh-button' onClick={()=>{window.location.reload()}}>REFRESH USER LIBRARY</button>
         <div>
          <ul id="params-list">
          {
           savedData ? savedData.map((data, index) => {
             return (
             <li className="library-li" key={index}>
-              <p>Params: {JSON.stringify(data?.params)}</p>
+              <p id="library-poly-id">polyState: {JSON.stringify(data?._id)}</p>
               <Link className="library-load lib-button" to={`/canvas/${data?._id}`}>LOAD</Link>
               <Link className="library-delete lib-button" id={data?._id} onClick={deleteDataHandler}>DELETE</Link>
             </li>

@@ -57,8 +57,9 @@ const resolvers = {
       const matchedID = await savedDataObject.map(element => savedDataObject._id = dataID);
       console.log("arrayID", savedDataObject._id, "matchedID", matchedID);
       const user = await User.findByIdAndUpdate( 
+        // delete that dataset by ID and then replace it. 
         context.user._id,
-        {$push: {
+        {$push: { // mebe update instead of $push method in mongoose. 
           savedData: {
             _id: mongoose.Types.ObjectId(dataID),
             params: JSON.stringify(dataObject),

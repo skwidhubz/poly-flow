@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { LOAD_DATA } from "../utils/queries";
 // import { ReactSVG } from "react-svg";
 import Auth from '../utils/auth';
-import * as d3 from "d3";
+// import * as d3 from "d3";
 
 
 // react app component
@@ -50,8 +50,8 @@ setCirclesKeyProp(
 setHueValuesArray(
      [...hueValuesArray, hueValue]
 );
-let newCircle =  <circle key={circlesKeyProp} cx={pX} cy={pY} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
-// setCircles([...circlesArray, newCircle]);
+let newCircle =  <circle key={circlesKeyProp} cx={100} cy={100} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
+setCircles([...circlesArray, newCircle]);
 };
 
 
@@ -93,14 +93,14 @@ const updateDataFunction = () => {
 // 🎮🎮🎮 BEGIN SVG GAME FUNCTIONS 🎮🎮🎮 
 
     // 🧰 DOCUMENT VARIABLES 🧰
-        const svgW = 300; // SVG Width
-        const svgH = 300; // SVG Height
+        // const svgW = 300; // SVG Width
+        // const svgH = 300; // SVG Height
 
     // 🧰 PHYSICS VARIABLES 🧰
-        const [pX, setPx] = useState(Math.random()* 150)
-        const [pY, setPy] = useState(Math.random()* 200)
-        const [vX, setVx] = useState(1);
-        const [vY, setVy] = useState(2);
+        // const [pX, setPx] = useState(Math.random()* 150)
+        // const [pY, setPy] = useState(Math.random()* 200)
+        // const [vX, setVx] = useState(1);
+        // const [vY, setVy] = useState(2);
 
         // function updatePhysics(){ //legacy physics function
 
@@ -124,22 +124,22 @@ const updateDataFunction = () => {
         //         };
         //     };
 
-const [time, setTime] = useState();
-const [spanTestText, setSpanTestText] = useState(0);
+// const [time, setTime] = useState();
+// const [spanTestText, setSpanTestText] = useState(0);
 
-useEffect(() => {
-    setSpanTestText(spanTestText + 1)
-},[time]);
+// useEffect(() => {
+//     setSpanTestText(spanTestText + 1)
+// },[time]);
 
 
-const timerFunction = () => {
-    console.log("starting timer")
-    setInterval(() => {
-        setTime(time + 1);
-        console.log('interval 500ms');
-    }, 1000);
-};
-timerFunction();
+// const timerFunction = () => {
+//     console.log("starting timer")
+//     setInterval(() => {
+//         setTime(time + 1);
+//         console.log('interval 500ms');
+//     }, 1000);
+// };
+// timerFunction();
 
 // start game loop timer on mount
     // useEffect(() => {
@@ -270,7 +270,7 @@ return (
             ID from server load: {loadedID} 
         </div>
         <div>
-            <span className="span-tester">UEtest inc. : {spanTestText}</span>
+            <span className="span-tester">UEtest inc. : N/a</span>
         </div>
         <div className="canvas-svg-div">
             <svg className="canvas-svg" id="svg-main" style={{backgroundColor: "white"}} width="300" height="300">

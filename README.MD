@@ -1,5 +1,5 @@
 
-# polyFlow
+# polyFlow 
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue)          
 ## Table of Contents                      
 - [Project description](#description)
@@ -51,12 +51,16 @@ The dependencies required for this project are:
 The command line execution is: `npm run develop`
 
 ## Contributors
-Thomas Parker built this project.
+Thomas Parker built this project. 🦑💾
 
 ## Questions
 - My GitHub page: (https://github.com/skwidhubz)
 - Please contact me at: tommaxwellparker@gmail.com
 ## License
 MIT
+
+
+
+🤍 - skwidhubz 2023 - 🤍
 
 

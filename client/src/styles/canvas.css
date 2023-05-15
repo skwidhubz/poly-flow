@@ -37,6 +37,10 @@
     cursor: pointer; /* Cursor on hover */
   }
 
+.canvas-loaded-id {
+  font-size: small;
+}
+
 .canvas-svg {
   margin: 5px;
   background-color: var(--columbia-blue);
@@ -46,6 +50,13 @@ button {
   background-color: var(--coquelicot);
   padding: 5px;
   margin: 20px;
+}
+
+#save-data-button {
+  color: #04AA6D;
+}
+#update-data-button {
+  color: #04AA6D;
 }
 
 #add-circle {

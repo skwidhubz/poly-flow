@@ -24,6 +24,8 @@ const [isPlaying, setIsPlaying] = useState(false);
 //CIRCLES ARRAY
 const [circlesArray, setCircles] = useState([]); 
 const [circlesKeyProp, setCirclesKeyProp] = useState(1);
+const [cX, setCx] = useState(10);
+const [cY, setCy] = useState(20);
 
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
@@ -50,7 +52,10 @@ setCirclesKeyProp(
 setHueValuesArray(
      [...hueValuesArray, hueValue]
 );
-let newCircle =  <circle key={circlesKeyProp} cx={100} cy={100} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
+setCx(cX + Math.random() * 40);
+setCy(cY + Math.random() * 40);
+
+let newCircle =  <circle key={circlesKeyProp} cx={cX} cy={cY} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
 setCircles([...circlesArray, newCircle]);
 };
 
@@ -267,10 +272,10 @@ return (
 <>
     <div className="main-app-container">
         <div>
-            ID from server load: {loadedID} 
+           <p className="canvas-loaded-id">💾 loadedDataID : {loadedID} </p> 
         </div>
         <div>
-            <span className="span-tester">UEtest inc. : N/a</span>
+            {/* <span className="span-tester">UEtest inc. : N/a</span> */}
         </div>
         <div className="canvas-svg-div">
             <svg className="canvas-svg" id="svg-main" style={{backgroundColor: "white"}} width="300" height="300">
@@ -280,7 +285,7 @@ return (
         <div>
         <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
         <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
-        {/* <h2 id="circle-count">Circles: {circlesArray?.length}</h2> */}
+        <h2 id="circle-count">Circles: {circlesArray?.length}</h2>
         </div>
         <div className="slidecontainer">
             Circle color:

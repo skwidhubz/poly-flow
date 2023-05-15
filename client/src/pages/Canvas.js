@@ -51,7 +51,7 @@ setHueValuesArray(
      [...hueValuesArray, hueValue]
 );
 let newCircle =  <circle key={circlesKeyProp} cx={pX} cy={pY} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
-setCircles([...circlesArray, newCircle]);
+// setCircles([...circlesArray, newCircle]);
 };
 
 
@@ -102,53 +102,69 @@ const updateDataFunction = () => {
         const [vX, setVx] = useState(1);
         const [vY, setVy] = useState(2);
 
-        function updatePhysics(){
-        setPx(pX + 1);
-        setPy(pY + 1.5);
-        };
+        // function updatePhysics(){ //legacy physics function
+
+        // setPx(pX + 1);
+        // setPy(pY + 1.5);
+        // };
 
     // Add action for when passes boundry of SVG
-        function physicsConditions(){
+        // function physicsConditions(){
 
-            if (pX >= svgW - 40) {
-                setVx( -Math.abs(vX));
-                } else if (pX <= 40) {
-                setVx( Math.abs(vX));
-                };
+        //     if (pX >= svgW - 40) {
+        //         setVx( -Math.abs(vX));
+        //         } else if (pX <= 40) {
+        //         setVx( Math.abs(vX));
+        //         };
 
-            if (pY >= svgH - 40) {
-                setVy( -Math.abs(vY));
-                } else if (pY <= 40) {
-                setVy( Math.abs(vY));
-                };
-            };
+        //     if (pY >= svgH - 40) {
+        //         setVy( -Math.abs(vY));
+        //         } else if (pY <= 40) {
+        //         setVy( Math.abs(vY));
+        //         };
+        //     };
 
-            
-// start game loop timer on mount
+const [time, setTime] = useState();
+const [spanTestText, setSpanTestText] = useState(0);
+
 useEffect(() => {
-    const t = d3.timer(mainGameLoop)
-    return () => t.stop()
-  }, [])
+    setSpanTestText(spanTestText + 1)
+},[time]);
+
+
+const timerFunction = () => {
+    console.log("starting timer")
+    setInterval(() => {
+        setTime(time + 1);
+        console.log('interval 500ms');
+    }, 1000);
+};
+timerFunction();
+
+// start game loop timer on mount
+    // useEffect(() => {
+    //     const t = d3.timer()
+    //     console.log('use effect main');
+    //     setPx(pX + 1);
+    //     setPy(pY + 1.5);
+    //     if (pX >= svgW - 40) {
+    //         setVx( -Math.abs(vX));
+    //         } else if (pX <= 40) {
+    //         setVx( Math.abs(vX));
+    //         };
+
+    //     if (pY >= svgH - 40) {
+    //         setVy( -Math.abs(vY));
+    //         } else if (pY <= 40) {
+    //         setVy( Math.abs(vY));
+    //         };
+        
+    //     return () => t.stop()
+    // },[time])
+
+    // setTimeout(time, 60);
 
   
-// MAIN GAME LOOP 🎮 
-    const mainGameLoop = () => {
-            
-    // for (let i = 0; i < circlesArray.length; i++) {
-    //     let circleElement = circlesArray[i];   
-        physicsConditions();
-        updatePhysics();
-        console.log('loop?');
-        // setCirclePos(circleElement);
-        // };
-        // requestAnimationFrame(mainGameLoop);
-        // setTimeout(mainGameLoop, 1000)
-        };
-
-        // requestAnimationFrame(mainGameLoop);
-
-    // 🐛 🐛 🐛 => Destroy gameLoop in ReactLifeCycle or change to useEffect. 🐛 🐛 🐛
-
     // OSC funcs for add or remove circle 
     const oscillatorEventADD = () => {
         // instance of A.C (vanilla)
@@ -254,7 +270,7 @@ return (
             ID from server load: {loadedID} 
         </div>
         <div>
-            placeholder for SVG title
+            <span className="span-tester">UEtest inc. : {spanTestText}</span>
         </div>
         <div className="canvas-svg-div">
             <svg className="canvas-svg" id="svg-main" style={{backgroundColor: "white"}} width="300" height="300">
@@ -264,7 +280,7 @@ return (
         <div>
         <button id="add-circle" onClick={addCircleHandler}>+ circle</button>
         <button id="remove-circle" onClick={removeCircleHandler}>- circle</button>
-        <h2 id="circle-count">Circles: {circlesArray?.length}</h2>
+        {/* <h2 id="circle-count">Circles: {circlesArray?.length}</h2> */}
         </div>
         <div className="slidecontainer">
             Circle color:

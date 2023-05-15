@@ -48,7 +48,7 @@ The dependencies required for this project are:
 The command line execution is: `npm run develop`
 
 ## Contributors
-T Parker contributed to this project.
+Thomas Parker built this project.
 
 ## Questions
 - My GitHub page: (https://github.com/skwidhubz)

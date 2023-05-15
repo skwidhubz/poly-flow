@@ -43,7 +43,6 @@ The dependencies required for this project are:
   <li>Bcrypt</li>
   <li>React-dom</li>
   <li>React-router-dom</li>
-  <li>
 </ul>
  </html>
 

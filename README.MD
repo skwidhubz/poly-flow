@@ -19,9 +19,17 @@ The concept of this app is to facilitate a relaxing, interactive and creative ex
 ## Installation
 The dependencies required for this project are:
 <ul>
-  <li>react,</li>
- </ul>
- react, apollo, mongoose, graphQL, concurrently, express, jsonwebtoken, bcrypt, react-dom, react-router-dom.
+  <li>react</li>
+  <li>apollo</li>
+  <li>mongoose</li>
+  <li>graphQL</li>
+  <li>concurrently</li>
+  <li>express</li>
+  <li>jsonwebtoken</li>
+  <li>bcrypt</li>
+  <li>react-dom</li>
+  <li>react-router-dom</li>
+</ul>
 ## Command
 The command line execution is: npm run develop 
 ## Contributors

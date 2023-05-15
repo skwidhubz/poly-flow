@@ -3,7 +3,7 @@ import '../styles/canvas.css';
 import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
 import { useParams } from 'react-router-dom'
-import { LOAD_DATA } from "../utils/queries";
+import { CIRCLE_LOAD } from "../utils/queries";
 import Auth from '../utils/auth';
 // import * as d3 from "d3";
 
@@ -21,24 +21,68 @@ const [updateData] = useMutation(UPDATE_DATA);
 const [isPlaying, setIsPlaying] = useState(false);
 
 //CIRCLES ARRAY
-const [circlesArray, setCircles] = useState([]); 
+const [circlesArray, setCircles] = useState([]);  // circles array
 const [circlesKeyProp, setCirclesKeyProp] = useState(1);
 const [cX, setCx] = useState(10);
 const [cY, setCy] = useState(20);
 
 const { id } = useParams();
-const { data } = useQuery(LOAD_DATA);
+const { data } = useQuery(CIRCLE_LOAD,
+    {
+        variables: {
+            circleId: id
+        }
+    });
+console.log(data); // raw data from CIRCLE_LOAD  🏴󠁡󠁦󠁬󠁯󠁧󠁿
 
-// load dataSet from USER ID:
-const loadedData = data?.params.find(element => id === element._id);
-const loadedID = loadedData?._id;
-const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
-// console.log('loaded data', loadedData)
+//🚧🚧🚧 DECONSTRUCT THEN RECONSTRUCT THE DATA 🚧🚧🚧🚧
+// we need to access the individual params of circles, then stringify then send that string of data into the circles array
 
-useEffect(()=>{
-    // console.log("UE-setCircles");
-    setCircles(paramsObject?.circles || [] )
-},[]); // on mount, load circles from library or set circles array as empty array
+// useEffect(() =>{
+//     console.log(data?.circleLoad); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
+//     const parsedData = data?.circleLoad.map(circleEl => {
+//         return {
+//             params: JSON.parse(circleEl.params)
+//         }
+//     }) 
+//     console.log(parsedData); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
+//     console.log("parsed", parsedData[0]?.params); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
+//     const cds = parsedData[0]?.params;
+//     const object = {
+//         params: [
+//           {
+//             key: cds.key,
+//             props: { cx: cds.cx, cy: cds.cy, r: 20, fill: cds.fill },
+//             ref: null,
+//             type: cds.type,
+//             _owner: null,
+//             _store: {}
+//           },
+//         ]
+//       };
+//       console.log(object); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
+//       const circleElement = object?.params.map(({ key, props }) => {
+//         const { cx, cy, r, fill } = props;
+//         return `<circle key="${key}" cx="${cx}" cy="${cy}" r="${r}" fill="${fill}"></circle>`;
+//       });
+
+//     setCircles(circleElement);
+//     console.log(circlesArray); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
+// }, [data?.circleLoad])
+
+//🚧🚧🚧 DECONSTRUCT THEN RECONSTRUCT THE DATA 🚧🚧🚧🚧
+
+    // load dataSet from USER ID:
+    // const loadedData = data?.params.find(element => id === element._id);
+    // const loadedID = loadedData?._id;
+    // const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
+    // console.log('loaded data', paramsObject); // loaded correct data from library
+
+// useEffect(()=>{
+//     // console.log("UE-setCircles"); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
+//     setCircles(paramsObject?.circles || [] )
+//     console.log(circlesArray); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
+// },[]); // on mount, load circles from library or set circles array as empty array
 
 function randomValueBetween(min,max, rounded = false){
     const dif = max-min;
@@ -57,10 +101,8 @@ setCirclesKeyProp(
 setHueValuesArray(
      [...hueValuesArray, hueValue]
 );
-console.log("cX", cX, "cY", cY);
 setCx(randomValueBetween(20, 280));
 setCy(randomValueBetween(20, 280));
-console.log("cX", cX, "cY", cY);
 let newCircle =  <circle key={circlesKeyProp} cx={cX} cy={cY} r={20} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
 setCircles([...circlesArray, newCircle]);
 };
@@ -89,7 +131,7 @@ const saveDataFunction = () => {
 // update state of canvas function
 const updateDataFunction = () => {
     let dataObj = {
-        _id: loadedID,
+        _id: id,
         params: circlesArray
     };
     updateData({ 
@@ -283,7 +325,7 @@ return (
             {/* <span className="span-tester">UEtest inc. : N/a</span> */}
         </div>
         <div className="canvas-svg-div">
-            <svg className="canvas-svg" id="svg-main" style={{backgroundColor: "white"}} width="350" height="350">
+            <svg className="canvas-svg" id="svg-main" style={{backgroundColor: "white"}} width="350" height="350" onClick={addCircleHandler}>
                 {circlesArray}
             </svg>
         </div>

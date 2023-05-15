@@ -35,7 +35,7 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-    window.alert("You are now logged in 😊"); // alert window to confirm login successful
+    window.alert("Welcome, adventurer! 😊"); // alert window to confirm login successful
     window.location.assign('/library');
   }
 

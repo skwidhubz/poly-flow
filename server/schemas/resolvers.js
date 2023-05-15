@@ -26,7 +26,20 @@ const resolvers = {
         return userData.savedData;
       }
     },
-  },
+
+    circleLoad: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );{
+        const filteredData = await userData.savedData.filter(data => {
+            return data._id == args.circleId
+        })
+        return filteredData;
+      }
+    }},
+
+  }, // end queries
 
 
 

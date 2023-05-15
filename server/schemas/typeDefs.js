@@ -51,6 +51,10 @@ const typeDefs = gql`
     params: [Data]
   }
 
+  type Query {
+    circleLoad (circleId: String!) : [Data]
+  }
+
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth

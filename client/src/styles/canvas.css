@@ -27,7 +27,7 @@
     appearance: none;
     width: 100%; /* Full-width */
     height: 25px; /* Specified height */
-    background: #d3d3d3; /* Grey background */
+    background: var(--columbia-blue); /* Grey background */
     outline: none; /* Remove outline */
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
@@ -39,7 +39,7 @@
     -webkit-appearance: none; /* Override default look */
     appearance: none;
     width: 25px; /* Set a specific slider handle width */
-    height: 35px; /* Slider handle height */
+    height: 40px; /* Slider handle height */
     background: #04AA6D; /* Green background */
     cursor: pointer; /* Cursor on hover */
   }
@@ -57,6 +57,13 @@ button {
   background-color: var(--coquelicot);
   padding: 5px;
   margin: 20px;
+}
+
+#add-circle:hover {
+  background-color: var(--columbia-blue);
+}
+#remove-circle:hover {
+  background-color: var(--columbia-blue);
 }
 
 #save-data-button {

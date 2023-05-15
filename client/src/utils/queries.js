@@ -49,4 +49,13 @@ query Load {
     _id
   }
 }`
+
+
+export const CIRCLE_LOAD = gql`
+query Query($circleId: String!) {
+  circleLoad(circleId: $circleId) {
+    _id
+    params
+  }
+}`
 ;

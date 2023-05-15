@@ -37,7 +37,7 @@ The dependencies required for this project are:
   <li>Concurrently</li>
   <li>Express</li>
   <li>jsonwebtoken</li>
-  <li>JWT-decode
+  <li>JWT-decode</li>
   <li>Bcrypt</li>
   <li>React-dom</li>
   <li>React-router-dom</li>

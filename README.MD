@@ -10,7 +10,9 @@
 - [Contributors](#contributors)
 - [Questions](#questions)
 ## Description
-The concept of this app is to facilitate a relaxing, interactive and creative experience for the user. The main feature is an animated SVG canvas which can be manipulated by the user. The canvas can be saved to the users 'library' and recalled for further editing or deletion. The app requires the user to sign-up and also log in.
+The concept of this app is to facilitate a relaxing, interactive and creative experience for the user. The main feature is an animated SVG canvas which can be manipulated by the user. The canvas can be saved to the users 'library' and recalled for further editing or deletion. The app requires the user to sign-up and also login to access the Canvas and Library features.
+The 'Canvas' is designed to be intuitive and yet also rely on the users curiosity to access all features within the page.
+
 ## Deployed
 (https://poly-flow.herokuapp.com/)
 

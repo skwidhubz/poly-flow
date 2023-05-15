@@ -8,6 +8,12 @@
   font-size: larger;
   color: #47E5BC;
   font-weight: bold;
+  padding: 20px;
+  margin: 10px;
+}
+
+.home-secret-text {
+  color: #F15025;
 }
 
 .App {

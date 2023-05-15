@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-// TODO: Replace database name in url (b4 deployment turn into ENV secret)
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/polyFlowDB', {
+mongoose.connect(process.env.MONGODB_URI, { // string in .env
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

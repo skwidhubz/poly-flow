@@ -4,7 +4,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { SAVE_DATA, UPDATE_DATA } from "../utils/mutations";
 import { useParams } from 'react-router-dom'
 import { LOAD_DATA } from "../utils/queries";
-// import { ReactSVG } from "react-svg";
 import Auth from '../utils/auth';
 // import * as d3 from "d3";
 
@@ -29,7 +28,6 @@ const [cY, setCy] = useState(20);
 
 const { id } = useParams();
 const { data } = useQuery(LOAD_DATA);
-// console.log('raw data useQuery', data);
 
 // load dataSet from USER ID:
 const loadedData = data?.params.find(element => id === element._id);
@@ -40,21 +38,29 @@ const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded
 useEffect(()=>{
     // console.log("UE-setCircles");
     setCircles(paramsObject?.circles || [] )
-},[paramsObject.length]);
+},[]); // on mount, load circles from library or set circles array as empty array
 
+function randomValueBetween(min,max, rounded = false){
+    const dif = max-min;
+    let value = min + dif * Math.random();
+    if(rounded){
+        value = Math.round(value);
+    }
+    return value;
+    };
 
-// Function to ADD-CIRCLE onClick
+// Function to ADD-CIRCLE onClick. Assigns random cX & pX to new circle element.
 const addCircleHandler = (circle) => {
-// console.log('add circle');
 oscillatorEventADD();
 setCirclesKeyProp(
     circlesKeyProp+1)
 setHueValuesArray(
      [...hueValuesArray, hueValue]
 );
-setCx(cX + Math.random() * 40);
-setCy(cY + Math.random() * 40);
-
+console.log("cX", cX, "cY", cY);
+setCx(randomValueBetween(20, 280));
+setCy(randomValueBetween(20, 280));
+console.log("cX", cX, "cY", cY);
 let newCircle =  <circle key={circlesKeyProp} cx={cX} cy={cY} r={15} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
 setCircles([...circlesArray, newCircle]);
 };
@@ -62,7 +68,6 @@ setCircles([...circlesArray, newCircle]);
 
 // Function to REMOVE-CIRCLE onClick
 const removeCircleHandler = () => {
-// console.log('remove circle');
 setCircles(circlesArray?.slice(0,-1)) 
 oscillatorEventREMOVE();
 };

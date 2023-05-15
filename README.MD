@@ -14,10 +14,9 @@ The concept of this app is to facilitate a relaxing, interactive and creative ex
 ## Deployed
 (https://poly-flow.herokuapp.com/)
 
-
-<br>
 ![polyflow_deployed](https://github.com/skwidhubz/poly-flow/assets/81959922/a2d25a6e-5660-4b88-90bc-514f583d415e)
-<br>
+
+
 ## Installation
 The dependencies required for this project are:
 <html>

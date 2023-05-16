@@ -2,6 +2,8 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Data } = require("../models");
 const { signToken } = require("../utils/auth");
 const mongoose = require("mongoose");
+const Stripe = require('stripe');
+const stripeKey = Stripe('sk_test_51N8EIlCATkKpwtEr1psqtGmxDJ1ibgtWE8eKf3ncYWgOmtf3cXsfjO2WNGEYY8drWU3z4HzRkfHJShOv8jKejMzh00o8MEWuMK');
 
 
 const resolvers = {
@@ -149,6 +151,37 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
   },
+
+  donationMutationResolver: async (_, args) => {
+    try {
+      // Save the donation details to your MongoDB or any other database
+      const donation = new Donation({
+        amount: args.amount,
+        currency: args.currency,
+        token: args.token,
+        description: args.description
+      });
+      const savedDonation = await donation.save();
+  
+      // Perform additional logic, such as processing the payment with Stripe
+      // ...
+  
+      // Return the donation details
+      return {
+        success: true,
+        message: 'Donation successful!',
+        donationId: savedDonation._id.toString()
+      };
+    } catch (error) {
+      // Handle any errors that occur during the donation process
+      return {
+        success: false,
+        message: 'An error occurred during the donation process. Please try again later.',
+        error: error.message
+      };
+    }
+  }
+
 };
 
 module.exports = resolvers;

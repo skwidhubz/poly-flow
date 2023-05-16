@@ -65,6 +65,19 @@ const typeDefs = gql`
     updateData(input: DataObj): User
     deleteUser(input: ID): User
   }
+
+  type Donation {
+    success: Boolean!
+    message: String!
+    donationId: String
+    error: String
+  }
+  
+  type Mutation {
+    donate(amount: Int!, currency: String!, token: String!, description: String!): Donation!
+  }
+
+
 `;
 
 module.exports = typeDefs;

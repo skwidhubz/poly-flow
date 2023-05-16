@@ -85,4 +85,14 @@ export const REMOVE_POLY = gql`
         description
       }
     }
-  }`;
+  }`
+  
+  export const DONATE_MUTATION = gql`
+  mutation Donate($amount: Int!, $currency: String!, $token: String!, $description: String!) {
+    donate(amount: $amount, currency: $currency, token: $token, description: $description) {
+      success
+      message
+    }
+  }`
+  
+  ;

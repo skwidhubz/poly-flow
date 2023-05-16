@@ -23,7 +23,7 @@ The 'Canvas' is designed to be intuitive and yet also rely on the users curiosit
 
 ## Demonstration
 Video demonstration of application:
-(https://clipchamp.com/watch/6NnQpEqjKbS)
+(https://clipchamp.com/watch/aDWlzdy8OPA)
 
 ## Installation
 The dependencies required for this project are:

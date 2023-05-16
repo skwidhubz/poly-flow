@@ -29,13 +29,8 @@ const Library = () => {
     })
   };
 
-  
-
-  const { data } = useQuery(LOAD_PARAMS); // received new object. change syntax and handling. // query is the LOAD issue. 
-  console.log('loaded data', data);
+  const { data } = useQuery(LOAD_PARAMS); 
   const savedData = data?.params || "";
-  // console.log(savedData);
-
 
 // check if user is logged in to display page 🛡️  
 const authCheck = () => {
@@ -48,8 +43,6 @@ const authCheck = () => {
   }};
   
   authCheck();
-  
-
   
   return (
       <>

@@ -25,6 +25,8 @@ const [circlesArray, setCircles] = useState([]);  // circles array
 const [circlesKeyProp, setCirclesKeyProp] = useState(1);
 const [cX, setCx] = useState(10);
 const [cY, setCy] = useState(20);
+const [eventCx, setEventCx] = useState();
+const [eventCy, setEventCy] = useState();
 
 const { id } = useParams();
 const { data } = useQuery(CIRCLE_LOAD,
@@ -33,50 +35,92 @@ const { data } = useQuery(CIRCLE_LOAD,
             circleId: id
         }
     });
+console.log("======");
 console.log(data); // raw data from CIRCLE_LOAD  🏴󠁡󠁦󠁬󠁯󠁧󠁿
 
 //🚧🚧🚧 DECONSTRUCT THEN RECONSTRUCT THE DATA 🚧🚧🚧🚧
 // we need to access the individual params of circles, then stringify then send that string of data into the circles array
 
-// useEffect(() =>{
-//     console.log(data?.circleLoad); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
-//     const parsedData = data?.circleLoad.map(circleEl => {
-//         return {
-//             params: JSON.parse(circleEl.params)
-//         }
-//     }) 
-//     console.log(parsedData); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
-//     console.log("parsed", parsedData[0]?.params); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
-//     const cds = parsedData[0]?.params;
-//     const object = {
-//         params: [
-//           {
-//             key: cds.key,
-//             props: { cx: cds.cx, cy: cds.cy, r: 20, fill: cds.fill },
-//             ref: null,
-//             type: cds.type,
-//             _owner: null,
-//             _store: {}
-//           },
-//         ]
-//       };
-//       console.log(object); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
-//       const circleElement = object?.params.map(({ key, props }) => {
-//         const { cx, cy, r, fill } = props;
-//         return `<circle key="${key}" cx="${cx}" cy="${cy}" r="${r}" fill="${fill}"></circle>`;
-//       });
+useEffect(() =>{
+    console.log("--------");
+    console.log(data?.circleLoad); 
+    const parsedData = data?.circleLoad.map(circleEl => {
+        return {
+            params: JSON.parse(circleEl.params)
+        }
+    }) 
+    
+    console.log(parsedData); 
+    console.log(typeof parsedData); 
+    let arrayOfCircles = []
+    if(parsedData){
+        console.log(Object.keys(parsedData))
+        console.log(parsedData["0"])
+        console.log(parsedData["0"].params)
+        console.log(parsedData["0"].params.params)
+        arrayOfCircles = parsedData["0"].params.params;
+    }
 
-//     setCircles(circleElement);
-//     console.log(circlesArray); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
-// }, [data?.circleLoad])
+    console.log(arrayOfCircles)
+    
+
+
+    const circleElements = arrayOfCircles.map(circleData =>{
+        // console.log("??????")
+        // console.log(circleData);
+        const { cx, cy, r, fill } = circleData.props;
+        // return circleData;
+        // return `<circle key="${circleData.key}" cx="${cx}" cy="${cy}" r="${r}" fill="${fill}"></circle>`;
+
+        // let newCircle =  <circle key={circlesKeyProp} cx={newCircleX} cy={newCircleY} r={20} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
+        return  <circle key={circleData.key} cx={cx} cy={cy} r={20} fill={fill}/>;
+        
+    })
+
+
+    setCirclesKeyProp(circlesArray.length + circleElements.length + 1 )
+    // console.log('-----')
+
+    // console.log(circleElement);
+    // setCircles(circleElement);
+    setCircles([...circlesArray, ...circleElements]);
+    return
+    
+    // console.log(parsedData.params); 
+    // console.log(parsedData[0]); 
+    // console.log("parsed", parsedData[0]?.params.params); 
+    // const cds = parsedData[0]?.params;
+    // const object = {
+    //     params: [
+    //       {
+    //         key: cds.key,
+    //         props: { cx: cds.cx, cy: cds.cy, r: 20, fill: cds.fill },
+    //         ref: null,
+    //         type: cds.type,
+    //         _owner: null,
+    //         _store: {}
+    //       },
+    //     ]
+    //   };
+    //   console.log(object); 
+    //   const circleElement = object?.params.map(({ key, props }) => {
+    //     const { cx, cy, r, fill } = props;
+    //     return `<circle key="${key}" cx="${cx}" cy="${cy}" r="${r}" fill="${fill}"></circle>`;
+    //   });
+    // console.log("-------element");
+    // console.log(circleElement);
+    // setCircles(circleElement);
+    // console.log("---array");
+    // console.log(circlesArray); 
+}, [data?.circleLoad])
 
 //🚧🚧🚧 DECONSTRUCT THEN RECONSTRUCT THE DATA 🚧🚧🚧🚧
-
-    // load dataSet from USER ID:
-    // const loadedData = data?.params.find(element => id === element._id);
-    // const loadedID = loadedData?._id;
-    // const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
-    // console.log('loaded data', paramsObject); // loaded correct data from library
+        /// legacy filter now being done in the back-end resolver.
+                        // load dataSet from USER ID:
+                        // const loadedData = data?.params.find(element => id === element._id);
+                        // const loadedID = loadedData?._id;
+                        // const paramsObject = JSON.parse(loadedData?.params || '{}'); // parse the loaded data to access the SVG parameters
+                        // console.log('loaded data', paramsObject); // loaded correct data from library
 
 // useEffect(()=>{
 //     // console.log("UE-setCircles"); 🏴󠁡󠁦󠁬󠁯󠁧󠁿
@@ -94,19 +138,98 @@ function randomValueBetween(min,max, rounded = false){
     };
 
 // Function to ADD-CIRCLE onClick. Assigns random cX & pX to new circle element.
-const addCircleHandler = (circle) => {
-oscillatorEventADD();
-setCirclesKeyProp(
-    circlesKeyProp+1)
-setHueValuesArray(
-     [...hueValuesArray, hueValue]
-);
-setCx(randomValueBetween(20, 280));
-setCy(randomValueBetween(20, 280));
-let newCircle =  <circle key={circlesKeyProp} cx={cX} cy={cY} r={20} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
-setCircles([...circlesArray, newCircle]);
-};
+const addCircleHandler = (e) => {
 
+    function linearInterpolation(x0,x1,y0,y1,x){
+        console.log(x0,x1,y0,y1,x);
+        const m = (y1 - y0)/(x1 - x0);
+        const y = m * (x - x1) + y1 ;
+        return y;
+    }
+
+    let newCircleX;
+    let newCircleY;
+
+        console.log(e.target.toString().toLowerCase())
+        console.log(e.target.toString().toLowerCase().includes("svg"))
+
+        if(e.target.toString().toLowerCase().includes("svg")){
+            const getRect = e.target.getBoundingClientRect();
+
+            console.log("science")
+
+            //     console.log(getRect)
+            // return;
+        
+                const WIDTH = 300;
+                const HEIGHT = 300;
+        
+        
+        
+                const relativeX = linearInterpolation(getRect.x, getRect.x + getRect.width, 0, getRect.width    ,e.clientX);
+                const relativeY = linearInterpolation(getRect.y, getRect.y + getRect.height, 0, getRect.height  ,e.clientY);
+
+                newCircleX = relativeX;
+                newCircleY = relativeY;
+
+                
+                // newCircleX = 150;
+                // newCircleY = 150;
+        }else{
+            newCircleX = randomValueBetween(20, 280);
+            newCircleY = randomValueBetween(20, 280);
+            
+        }
+
+        // console.log(e.target.toString());
+        // console.log(Object.keys(e.target))
+
+        // return
+        // console.log(e.clientX - e.target.offsetLeft);
+        // console.log(e.clientY - e.target.offsetTop);
+        
+        // console.log(e.target.offsetLeft);
+        // console.log(e.target.offsetTop);
+
+       
+        
+
+        // console.log(relativeX,relativeY)
+        // console.log(e.movementX);
+        // console.log(e.movementY);
+        // console.log(e.pageX);
+        // console.log(e.pageY);
+        // console.log('=====');
+        // console.log(e.target);
+        
+        // return;
+        // console.log(e.screenX, e.screenY);
+    oscillatorEventADD();
+    setCirclesKeyProp(
+        circlesKeyProp+1)
+    setHueValuesArray(
+        [...hueValuesArray, hueValue]
+    ); 
+
+    setCx(newCircleX);
+    setCy(newCircleY);
+
+    // if (e !== null) {
+    //         setEventCx(e.clientX)
+    //         setEventCy(e.clientY)
+    //         setCx(eventCx);
+    //         setCy(eventCy); } 
+    //     else {
+    //         setCx(randomValueBetween(20, 280));
+    //         setCy(randomValueBetween(20, 280));
+    //     };
+
+    // setCx(randomValueBetween(20, 280));
+    // setCy(randomValueBetween(20, 280));
+
+    let newCircle =  <circle key={circlesKeyProp} cx={newCircleX} cy={newCircleY} r={20} fill={`hsl(${hueValue}, 100%, 80%)`}/>;
+    setCircles([...circlesArray, newCircle]);
+};
 
 // Function to REMOVE-CIRCLE onClick
 const removeCircleHandler = () => {

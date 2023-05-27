@@ -141,17 +141,17 @@ const saveDataFunction = () => {
     window.alert("Your creation has been saved 💾"); // alert window to confirm save 
 };
 
-// update state of canvas function
-const updateDataFunction = () => {
-    let dataObj = {
-        _id: id,
-        params: circlesArray
-    };
-    updateData({ 
-        variables: { Params: JSON.stringify(dataObj) } 
-        // add variable as ID
-    })
-};
+// // update state of canvas function
+// const updateDataFunction = () => {
+//     let dataObj = {
+//         _id: id,
+//         params: circlesArray
+//     };
+//     updateData({ 
+//         variables: { Params: JSON.stringify(dataObj) } 
+//         // add variable as ID
+//     })
+// };
 
 // 💾 END DATABASE FUNCTIONS 💾
 
@@ -353,7 +353,7 @@ return (
             {/* <h2 id="hue-output">Color: {hueValue}</h2> */}
         </div>
         <button id="save-data-button" onClick={saveDataFunction}>save data</button>
-        <button id="update-data-button" onClick={updateDataFunction}>update data</button>
+        {/* <button id="update-data-button" onClick={updateDataFunction}>update data</button> */}
     </div>
 </>
 )
